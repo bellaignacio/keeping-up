@@ -21,6 +21,15 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    followings = db.relationship(
+        "User",
+        secondary=follows,
+        primaryjoin=(follows.c.user_id == id),
+        secondaryjoin=(follows.c.following_id == id),
+        backref="followers"
+    )
+    lists = db.relationship("List", back_populates="user")
+
     @property
     def password(self):
         return self.hashed_password
@@ -35,6 +44,31 @@ class User(db.Model, UserMixin):
     def to_dict(self):
         return {
             'id': self.id,
+            'email': self.email,
             'username': self.username,
-            'email': self.email
+            'name': self.name,
+            'bio': self.bio,
+            'image_url': self.image_url,
+            'is_public': self.is_public,
+            'followings': [{
+                'id': f.id,
+                'email': f.email,
+                'username': f.username,
+                'name': f.name,
+                'bio': f.bio,
+                'image_url': f.image_url,
+                'is_public': f.is_public
+            } for f in self.followings],
+            'followers': [{
+                'id': f.id,
+                'email': f.email,
+                'username': f.username,
+                'name': f.name,
+                'bio': f.bio,
+                'image_url': f.image_url,
+                'is_public': f.is_public
+            } for f in self.followers],
+            'lists': [l.to_dict() for l in self.lists],
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

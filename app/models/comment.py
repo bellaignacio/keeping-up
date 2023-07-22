@@ -15,9 +15,23 @@ class Comment(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    user = db.relationship("User", back_populates="lists")
+
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'comment': self.comment,
+            'user_id': self.user_id,
+            'user': {
+                'id': self.user.id,
+                'email': self.user.email,
+                'username': self.user.username,
+                'name': self.user.name,
+                'bio': self.user.bio,
+                'image_url': self.user.image_url,
+                'is_public': self.user.is_public,
+            },
+            'list_id': self.list_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

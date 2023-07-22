@@ -33,6 +33,24 @@ class ListStyle(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'list_id': self.list_id,
+            'image_url': self.image_url,
+            'title_font': self.title_font,
+            'title_size': self.title_size,
+            'title_style': self.title_style,
+            'title_weight': self.title_weight,
+            'title_color': self.title_color,
+            'title_align': self.title_align,
+            'li_font': self.li_font,
+            'li_size': self.li_size,
+            'li_style': self.li_style,
+            'li_weight': self.li_weight,
+            'li_color': self.li_color,
+            'li_marker': self.li_marker,
+            'li_completed_style': self.li_completed_style,
+            'li_completed_weight': self.li_completed_weight,
+            'li_completed_color': self.li_completed_color,
+            'li_completed_decoration': self.li_completed_decoration,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

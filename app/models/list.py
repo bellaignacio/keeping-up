@@ -16,9 +16,32 @@ class List(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    user = db.relationship("User", back_populates="lists")
+    list_style = db.relationship("ListStyle")
+    list_items = db.relationship("ListItem")
+    comments = db.relationship("Comment")
+    likes = db.relationship("Like")
+
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'title': self.title,
+            'caption': self.caption,
+            'order': self.order,
+            'user_id': self.user_id,
+            'user': {
+                'id': self.user.id,
+                'email': self.user.email,
+                'username': self.user.username,
+                'name': self.user.name,
+                'bio': self.user.bio,
+                'image_url': self.user.image_url,
+                'is_public': self.user.is_public,
+            },
+            'list_style': self.list_style.to_dict(),
+            'list_items': [li.to_dict() for li in self.list_items],
+            'comments': [c.to_dict() for c in self.comments],
+            'likes': [lk.to_dict() for lk in self.likes],
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }

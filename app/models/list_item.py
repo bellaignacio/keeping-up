@@ -18,6 +18,9 @@ class ListItem(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'username': self.username,
-            'email': self.email
+            'description': self.description,
+            'list_id': self.list_id,
+            'is_complete': self.is_complete,
+            'created_at': self.created_at,
+            'updated_at': self.udpated_at
         }
