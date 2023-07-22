@@ -26,9 +26,9 @@ class User(db.Model, UserMixin):
         secondary=follows,
         primaryjoin=(follows.c.user_id == id),
         secondaryjoin=(follows.c.following_id == id),
-        backref="followers"
+        backref="followers",
     )
-    lists = db.relationship("List", back_populates="user")
+    lists = db.relationship("List", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

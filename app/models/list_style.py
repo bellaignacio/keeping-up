@@ -23,7 +23,7 @@ class ListStyle(db.Model):
     li_weight = db.Column(db.String(255), default="normal")
     li_color = db.Column(db.String(255), default="black")
     li_marker = db.Column(db.String(255), default="default")
-    li_completed_style = db.Column(db.String(255), default="italic")
+    li_completed_style = db.Column(db.String(255), default="normal")
     li_completed_weight = db.Column(db.String(255), default="normal")
     li_completed_color = db.Column(db.String(255), default="black")
     li_completed_decoration = db.Column(db.String(255), default="solid line-through red 3px")

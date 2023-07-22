@@ -17,10 +17,10 @@ class List(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship("User", back_populates="lists")
-    list_style = db.relationship("ListStyle")
-    list_items = db.relationship("ListItem")
-    comments = db.relationship("Comment")
-    likes = db.relationship("Like")
+    list_style = db.relationship("ListStyle", cascade="all, delete-orphan")
+    list_items = db.relationship("ListItem", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", cascade="all, delete-orphan")
+    likes = db.relationship("Like", cascade="all, delete-orphan")
 
     def to_dict(self):
         return {
