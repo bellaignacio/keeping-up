@@ -14,7 +14,8 @@ class Like(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship("User", back_populates="lists")
+    user = db.relationship("User", back_populates="likes")
+    list = db.relationship("List", back_populates="likes")
 
     def to_dict(self):
         return {

@@ -23,12 +23,21 @@ class User(db.Model, UserMixin):
 
     followings = db.relationship(
         "User",
-        secondary=follows,
-        primaryjoin=(follows.c.user_id == id),
-        secondaryjoin=(follows.c.following_id == id),
-        backref="followers",
+        secondary="follows",
+        primaryjoin="follows.c.user_id==User.id",
+        secondaryjoin="follows.c.following_id==User.id",
+        back_populates="followers",
+    )
+    followers = db.relationship(
+        "User",
+        secondary="follows",
+        primaryjoin="follows.c.following_id==User.id",
+        secondaryjoin="follows.c.user_id==User.id",
+        back_populates="followings",
     )
     lists = db.relationship("List", back_populates="user", cascade="all, delete-orphan")
+    comments = db.relationship("Comment", back_populates="user", cascade="all, delete-orphan")
+    likes = db.relationship("Like", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):

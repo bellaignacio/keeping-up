@@ -30,6 +30,8 @@ class ListStyle(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    list = db.relationship("List", back_populates="list_style")
+
     def to_dict(self):
         return {
             'id': self.id,
