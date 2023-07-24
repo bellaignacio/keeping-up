@@ -42,6 +42,8 @@ class List(db.Model):
             'list_items': [li.to_dict() for li in self.list_items],
             'comments': [c.to_dict() for c in self.comments],
             'likes': [lk.to_dict() for lk in self.likes],
+            'total_likes': len(self.likes),
+            'total_comments': len(self.comments),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

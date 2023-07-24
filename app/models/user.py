@@ -78,6 +78,9 @@ class User(db.Model, UserMixin):
                 'is_public': f.is_public
             } for f in self.followers],
             'lists': [l.to_dict() for l in self.lists],
+            'total_lists': len(self.lists),
+            'total_followings': len(self.followings),
+            'total_followers': len(self.followers),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
