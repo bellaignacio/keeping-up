@@ -14,16 +14,16 @@ class Follow(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-    user = db.relationship('User', foreign_keys=[user_id])
-    following = db.relationship('User', foreign_keys=[following_id])
+    # user = db.relationship('User', foreign_keys=[user_id])
+    # following = db.relationship('User', foreign_keys=[following_id])
 
     def to_dict(self):
         return {
             'id': self.id,
             'user_id': self.user_id,
             'following_id': self.following_id,
-            'user': self.user.to_dict(),
-            'following': self.following.to_dict(),
+            # 'user': self.user.to_dict(),
+            # 'following': self.following.to_dict(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

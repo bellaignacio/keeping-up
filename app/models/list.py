@@ -17,7 +17,7 @@ class List(db.Model):
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)
 
     user = db.relationship("User", back_populates="lists")
-    list_style = db.relationship("ListStyle", back_populates="list", cascade="all, delete-orphan")
+    list_style = db.relationship("ListStyle", back_populates="list", uselist=False, cascade="all, delete-orphan")
     list_items = db.relationship("ListItem", back_populates="list", cascade="all, delete-orphan")
     comments = db.relationship("Comment", back_populates="list", cascade="all, delete-orphan")
     likes = db.relationship("Like", back_populates="list", cascade="all, delete-orphan")
