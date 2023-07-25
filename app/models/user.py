@@ -43,9 +43,10 @@ class User(db.Model, UserMixin):
     #     back_populates="followings",
     # )
     followings = db.relationship(
-        'User', lambda: follows,
-        primaryjoin=lambda: User.id == follows.c.user_id,
-        secondaryjoin=lambda: User.id == follows.c.following_id,
+        'User',
+        secondary=follows,
+        primaryjoin=(id == follows.c.user_id),
+        secondaryjoin=(id == follows.c.following_id),
         backref='followers'
     )
 
