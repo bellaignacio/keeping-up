@@ -10,6 +10,12 @@ def seed_users():
     jane = User(email='jane@aa.io', username='jane_doe_oe', name='Jane Doe', bio='hi there', image_url='https://i.ibb.co/Jxh5ZGL/jane.jpg', password='password')
     tyler = User(email='tyler@aa.io', username='tyler_asdfg', image_url='https://i.ibb.co/sJ2RP0G/tyler.jpg', is_public=True, password='password')
 
+    demo.followings = [aurora, john, tyler]
+    aurora.followings = [demo, tyler]
+    john.followings = [aurora, jane, tyler]
+    jane.followings = [aurora]
+    tyler.followings = [demo, aurora]
+
     db.session.add_all([
         demo, aurora, john, jane, tyler
     ])
