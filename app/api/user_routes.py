@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
+from flask_login import current_user, login_required
 from app.models import User
+from app.api.auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
 
