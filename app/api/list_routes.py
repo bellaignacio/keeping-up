@@ -39,11 +39,6 @@ def following_lists():
     lists = List.query.filter(List.user_id.in_(following_ids)).all()
     return {'lists': [l.to_dict() for l in lists]}
 
-# @list_routes.route('/test')
-# @login_required
-# def test():
-#     last_li_id = (ListItem.query.order_by(ListItem.id.desc()).first()).id
-#     return [last_li_id, last_li_id+1, last_li_id+1+7]
 
 @list_routes.route('/', methods=['POST'])
 @login_required
@@ -99,10 +94,31 @@ def create_list():
         return new_list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-# @list_routes.route('/<int:list_id>', methods=['PUT'])
-# @login_required
-# def update_list(list_id):
 
-# @list_routes.route('/<int:list_id>', methods=['DELETE'])
-# @login_required
-# def delete_list(list_id):
+@list_routes.route('/<int:list_id>', methods=['PUT'])
+@login_required
+def update_list(list_id):
+    """
+    Updates a list
+    """
+    list = List.query.get(list_id)
+    list_style = ListStyle.query.filter(ListStyle.list_id == list_id).first()
+    list_items = ListItem.query.filter(ListItem.list_id == list_id).all()
+    form = ListForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        list.title=form.data['title']
+        list.caption=form.data['caption']
+        form.populate_obj(list_style)
+        db.session.commit()
+        return list.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@list_routes.route('/<int:list_id>', methods=['DELETE'])
+@login_required
+def delete_list(list_id):
+    list = List.query.get(list_id)
+    db.session.delete(list)
+    db.session.commit()
+    return {'message': 'Delete successful.'}
