@@ -122,6 +122,27 @@ def update_list(list_id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@list_routes.route('/items/<int:li_id>', methods=['PUT'])
+@login_required
+def update_li(li_id):
+    """
+    Updates a list item
+    """
+    list_item = ListItem.query.get(li_id)
+    if not list_item:
+        return {'errors': f"List item {li_id} does not exist."}, 400
+    list = List.query.get(list_item.list_id)
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list item {li_id}."}, 401
+    data = request.json
+    if 'is_complete' in data:
+        list_item.is_complete = data['is_complete']
+    if 'description' in data:
+        list_item.description = data['description']
+    db.session.commit()
+    return list_item.to_dict()
+
+
 @list_routes.route('/<int:list_id>', methods=['DELETE'])
 @login_required
 def delete_list(list_id):
