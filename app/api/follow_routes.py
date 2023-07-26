@@ -54,7 +54,7 @@ def remove_follower(user_id):
     follower_ids = [user.id for user in current_user.followers]
     existing_follower = User.query.filter(User.id.in_(follower_ids)).first()
     if not existing_follower:
-        return {'message': f"User {user_id} is not a follower of user {current_user.id}."}
+        return {'message': f"User {user_id} is already not a follower of user {current_user.id}."}
     current_user.followers.remove(user)
     db.session.commit()
     return current_user.to_dict()
