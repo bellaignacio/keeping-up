@@ -14,6 +14,8 @@ def l(list_id):
     Query for a list by id and returns that list in a dictionary
     """
     list = List.query.get(list_id)
+    if not list:
+        return {'errors': f"List {list_id} does not exist."}, 400
     return list.to_dict()
 
 
@@ -21,9 +23,10 @@ def l(list_id):
 @login_required
 def public_lists():
     """
-    Query for all public lists and returns them in a list of list dictionaries
+    Query for all lists of public users that the current user does not already follow and returns them in a list of list dictionaries
     """
-    users = User.query.filter(User.is_public == True).all()
+    following_ids = [user.id for user in current_user.followings]
+    users = User.query.filter((User.is_public == True) & (User.id.not_in([*following_ids, current_user.id]))).all()
     public_ids = [user.id for user in users]
     lists = List.query.filter(List.user_id.in_(public_ids)).all()
     return {'lists': [l.to_dict() for l in lists]}
@@ -92,7 +95,7 @@ def create_list():
 
         db.session.commit()
         return new_list.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @list_routes.route('/<int:list_id>', methods=['PUT'])
@@ -102,6 +105,10 @@ def update_list(list_id):
     Updates a list
     """
     list = List.query.get(list_id)
+    if not list:
+        return {'errors': f"List {list_id} does not exist."}, 400
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list {list_id}."}, 401
     list_style = ListStyle.query.filter(ListStyle.list_id == list_id).first()
     list_items = ListItem.query.filter(ListItem.list_id == list_id).all()
     form = ListForm()
@@ -112,7 +119,7 @@ def update_list(list_id):
         form.populate_obj(list_style)
         db.session.commit()
         return list.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 @list_routes.route('/<int:list_id>', methods=['DELETE'])
@@ -122,6 +129,10 @@ def delete_list(list_id):
     Deletes a list
     """
     list = List.query.get(list_id)
+    if not list:
+        return {'errors': f"List {list_id} does not exist."}, 400
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list {list_id}."}, 401
     db.session.delete(list)
     db.session.commit()
     return {'message': 'Delete successful.'}
