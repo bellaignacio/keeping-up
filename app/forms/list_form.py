@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
-from wtforms.validators import DataRequired, ValidationError
+from wtforms.validators import DataRequired, Optional, Regexp, ValidationError
 
 
 class ListForm(FlaskForm):
     title = StringField('title', validators=[DataRequired()])
     caption = StringField('caption', validators=[DataRequired()])
     list_items = TextAreaField('list_items', validators=[DataRequired()])
-    image_url = StringField('image_url')
+    image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
     title_font = StringField('title_font')
     title_size = StringField('title_size')
     title_style = StringField('title_style')
