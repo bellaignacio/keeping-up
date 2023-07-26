@@ -118,6 +118,9 @@ def update_list(list_id):
 @list_routes.route('/<int:list_id>', methods=['DELETE'])
 @login_required
 def delete_list(list_id):
+    """
+    Deletes a list
+    """
     list = List.query.get(list_id)
     db.session.delete(list)
     db.session.commit()
