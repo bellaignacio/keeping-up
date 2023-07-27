@@ -52,7 +52,6 @@ def unlike_list(list_id):
     existing_like = Like.query.filter((Like.user_id == current_user.id) & (Like.list_id == list_id)).first()
     if not existing_like:
         return {'message': f"User already does not like list {list_id}."}
-    like = Like.query.filter((Like.user_id == current_user.id) & (Like.list_id == list_id)).first()
-    db.session.delete(like)
+    db.session.delete(existing_like)
     db.session.commit()
     return {'message': 'Delete successful.'}

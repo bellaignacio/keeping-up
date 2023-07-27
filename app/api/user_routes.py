@@ -26,7 +26,7 @@ def public_users():
     """
     following_ids = [user.id for user in current_user.followings]
     users = User.query.filter((User.is_public == True) & (User.id.not_in([*following_ids, current_user.id]))).all()
-    return {'users': [user.to_dict()['id'] for user in users]}
+    return {'users': [user.to_dict() for user in users]}
 
 
 @user_routes.route('/followings')
@@ -35,8 +35,7 @@ def following_users():
     """
     Query for all users that the current user follows and returns them in a list of user dictionaries
     """
-    users = current_user.followings
-    return {'users': [user.to_dict() for user in users]}
+    return {'users': [user.to_dict() for user in current_user.followings]}
 
 
 @user_routes.route('/followers')
@@ -45,5 +44,4 @@ def follower_users():
     """
     Query for all users that follow the current user and returns them in a list of user dictionaries
     """
-    users = current_user.followers
-    return {'users': [user.to_dict() for user in users]}
+    return {'users': [user.to_dict() for user in current_user.followers]}
