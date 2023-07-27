@@ -8,6 +8,10 @@ function SignupFormModal() {
 	const dispatch = useDispatch();
 	const [email, setEmail] = useState("");
 	const [username, setUsername] = useState("");
+	const [name, setName] = useState(null);
+	const [bio, setBio] = useState(null);
+	const [imgUrl, setImgUrl] = useState(null);
+	const [isPublic, setIsPublic] = useState(false);
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
@@ -16,7 +20,7 @@ function SignupFormModal() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (password === confirmPassword) {
-			const data = await dispatch(signUp(username, email, password));
+			const data = await dispatch(signUp(email, username, name, bio, imgUrl, isPublic, password));
 			if (data) {
 				setErrors(data);
 			} else {
@@ -54,6 +58,38 @@ function SignupFormModal() {
 						value={username}
 						onChange={(e) => setUsername(e.target.value)}
 						required
+					/>
+				</label>
+				<label>
+					Name
+					<input
+						type="text"
+						value={name}
+						onChange={(e) => setName(e.target.value)}
+					/>
+				</label>
+				<label>
+					Bio
+					<input
+						type="text"
+						value={bio}
+						onChange={(e) => setBio(e.target.value)}
+					/>
+				</label>
+				<label>
+					Image URL
+					<input
+						type="text"
+						value={imgUrl}
+						onChange={(e) => setImgUrl(e.target.value)}
+					/>
+				</label>
+				<label>
+					Public
+					<input
+						type="checkbox"
+						checked={isPublic}
+						onChange={(e) => setIsPublic(!isPublic)}
 					/>
 				</label>
 				<label>
