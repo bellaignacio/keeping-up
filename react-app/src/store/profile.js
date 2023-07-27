@@ -1,16 +1,37 @@
 const SET_USER = "profile/SET_USER";
-const REMOVE_USER = "profile/REMOVE_USER";
-const SET_LISTS = "profile/SET_LISTS";
-const REMOVE_LISTS = "profile/REMOVE_LISTS";
 
 const initialState = { user: null, lists: null };
 
+const setUser = (user) => ({
+    type: SET_USER,
+    payload: user
+});
+
+export const getUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/users/${userId}`);
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setUser(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+		return ["An error occurred. Please try again."];
+    }
+};
+
 export default function profileReducer(state = initialState, action) {
+    let newState;
 	switch (action.type) {
 		case SET_USER:
-			return { user: action.payload };
-		case REMOVE_USER:
-			return { user: null };
+            const normalizedLists = action.payload.lists.reduce((result, listObj) => {
+                result[listObj.id] = listObj;
+                return result;
+            }, {});
+            newState = { ...state, user: action.payload, lists: normalizedLists };
+            return newState;
 		default:
 			return state;
 	}

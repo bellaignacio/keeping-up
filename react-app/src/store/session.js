@@ -5,25 +5,24 @@ const initialState = { user: null };
 
 const setUser = (user) => ({
 	type: SET_USER,
-	payload: user,
+	payload: user
 });
 
 const removeUser = () => ({
-	type: REMOVE_USER,
+	type: REMOVE_USER
 });
 
 export const authenticate = () => async (dispatch) => {
 	const response = await fetch("/api/auth/", {
 		headers: {
-			"Content-Type": "application/json",
-		},
+			"Content-Type": "application/json"
+		}
 	});
 	if (response.ok) {
 		const data = await response.json();
 		if (data.errors) {
 			return;
 		}
-
 		dispatch(setUser(data));
 	}
 };
@@ -32,14 +31,13 @@ export const login = (credentials, password) => async (dispatch) => {
 	const response = await fetch("/api/auth/login", {
 		method: "POST",
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({
 			credentials,
-			password,
-		}),
+			password
+		})
 	});
-
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
@@ -57,10 +55,9 @@ export const login = (credentials, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
 	const response = await fetch("/api/auth/logout", {
 		headers: {
-			"Content-Type": "application/json",
-		},
+			"Content-Type": "application/json"
+		}
 	});
-
 	if (response.ok) {
 		dispatch(removeUser());
 	}
@@ -70,7 +67,7 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
 		headers: {
-			"Content-Type": "application/json",
+			"Content-Type": "application/json"
 		},
 		body: JSON.stringify({
 			email,
@@ -80,9 +77,8 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 			...!!imgUrl && {image_url: imgUrl},
 			is_public: isPublic,
 			password
-		}),
+		})
 	});
-
 	if (response.ok) {
 		const data = await response.json();
 		dispatch(setUser(data));
