@@ -215,7 +215,7 @@ export default function userReducer(state = initialState, action) {
                     ...state.followings,
                 }
             };
-            delete newState.followings[action.payload.id]
+            delete newState.followings[action.payload.id];
             return newState;
         case DELETE_FOLLOWER:
             newState = {
@@ -224,7 +224,7 @@ export default function userReducer(state = initialState, action) {
                     ...state.followers,
                 }
             };
-            delete newState.followers[action.payload.id]
+            delete newState.followers[action.payload.id];
             return newState;
         default:
             return state;
