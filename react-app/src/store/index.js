@@ -1,16 +1,14 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import sessionReducer from './session'
-import profileReducer from './profile'
-import publicReducer from './public'
-import followingReducer from './following'
+import sessionReducer from './session';
+import userReducer from './user';
+import listReducer from './list';
 
 
 const rootReducer = combineReducers({
   session: sessionReducer,
-  profile: profileReducer,
-  public: publicReducer,
-  following: followingReducer
+  user: userReducer,
+  list: listReducer
 });
 
 
