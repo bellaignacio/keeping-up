@@ -1,7 +1,9 @@
-export const SET_FOLLOWINGS_LISTS = "list/SET_FOLLOWINGS_LISTS";
-export const SET_PUBLIC_LISTS = "list/SET_PUBLIC_LISTS";
-export const SET_PROFILE_LISTS = "list/SET_PROFILE_LISTS";
-const ADD_OR_DELETE_LIKE = "list/ADD_OR_DELETE_LIKE";
+import { REMOVE_USER } from "./session";
+
+const SET_FOLLOWINGS_LISTS = "list/SET_FOLLOWINGS_LISTS";
+const SET_PUBLIC_LISTS = "list/SET_PUBLIC_LISTS";
+const SET_PROFILE_LISTS = "list/SET_PROFILE_LISTS";
+const UPDATE_LIST = "list/UPDATE_LIST";
 
 const initialState = {
     followings: null,
@@ -24,8 +26,8 @@ const setProfileLists = (lists) => ({
     payload: lists
 });
 
-const addOrDeleteLike = (list) => ({
-    type: ADD_OR_DELETE_LIKE,
+const updateList = (list) => ({
+    type: UPDATE_LIST,
     payload: list
 });
 
@@ -80,7 +82,7 @@ export const likeList = (listId) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(addOrDeleteLike(data));
+        dispatch(updateList(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -97,7 +99,70 @@ export const unlikeList = (listId) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        dispatch(addOrDeleteLike(data));
+        dispatch(updateList(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const createComment = (listId, comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${listId}`, {
+        method: "POST",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			comment
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateList(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const editComment = (commentId, comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: "PUT",
+        headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			comment
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateList(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const removeComment = (commentId) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${commentId}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(updateList(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -118,6 +183,9 @@ function normalizeLists(listsList) {
 export default function listReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
+        case REMOVE_USER:
+            newState = { ...initialState };
+            return newState;
         case SET_FOLLOWINGS_LISTS:
             newState = { ...state, followings: normalizeLists(action.payload) };
 			return newState;
@@ -127,7 +195,7 @@ export default function listReducer(state = initialState, action) {
         case SET_PROFILE_LISTS:
             newState = { ...state, profile: normalizeLists(action.payload) };
 			return newState;
-        case ADD_OR_DELETE_LIKE:
+        case UPDATE_LIST:
             newState = {
                 ...state,
                 followings: {

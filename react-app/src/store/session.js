@@ -1,5 +1,5 @@
 const SET_USER = "session/SET_USER";
-const REMOVE_USER = "session/REMOVE_USER";
+export const REMOVE_USER = "session/REMOVE_USER";
 
 const initialState = { user: null };
 
@@ -94,11 +94,14 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 };
 
 export default function sessionReducer(state = initialState, action) {
+	let newState;
 	switch (action.type) {
 		case SET_USER:
-			return { user: action.payload };
+			newState = { ...state, user: action.payload };
+			return newState;
 		case REMOVE_USER:
-			return { user: null };
+			newState = { ...initialState };
+			return newState;
 		default:
 			return state;
 	}

@@ -1,4 +1,4 @@
-// import { SET_FOLLOWINGS_LISTS, SET_PUBLIC_LISTS, SET_PROFILE_LISTS } from './list';
+import { REMOVE_USER } from "./session";
 
 const SET_FOLLOWINGS = "user/SET_FOLLOWINGS";
 const SET_FOLLOWERS = "user/SET_FOLLOWERS";
@@ -178,6 +178,9 @@ function normalizeUsers(usersList) {
 export default function userReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
+        case REMOVE_USER:
+            newState = { ...initialState };
+            return newState;
         case SET_FOLLOWINGS:
             newState = { ...state, followings: normalizeUsers(action.payload) };
             return newState;
