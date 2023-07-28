@@ -1,9 +1,12 @@
-import { SET_FOLLOWINGS_LISTS, SET_PUBLIC_LISTS, SET_PROFILE_LISTS } from './list';
+// import { SET_FOLLOWINGS_LISTS, SET_PUBLIC_LISTS, SET_PROFILE_LISTS } from './list';
 
 const SET_FOLLOWINGS = "user/SET_FOLLOWINGS";
 const SET_FOLLOWERS = "user/SET_FOLLOWERS";
 const SET_PUBLIC = "user/SET_PUBLIC";
 const SET_PROFILE = "user/SET_PROFILE";
+const ADD_FOLLOW = "user/ADD_FOLLOW";
+const DELETE_FOLLOW = "user/DELETE_FOLLOW";
+const DELETE_FOLLOWER = "user/DELETE_FOLLOWER";
 
 const initialState = {
     followings: null,
@@ -29,6 +32,21 @@ const setPublic = (users) => ({
 
 const setProfile = (user) => ({
     type: SET_PROFILE,
+    payload: user
+});
+
+const addFollow = (user) => ({
+    type: ADD_FOLLOW,
+    payload: user
+});
+
+const deleteFollow = (user) => ({
+    type: DELETE_FOLLOW,
+    payload: user
+});
+
+const deleteFollower = (user) => ({
+    type: DELETE_FOLLOWER,
     payload: user
 });
 
@@ -92,6 +110,57 @@ export const getProfile = (userId) => async (dispatch) => {
     }
 };
 
+export const followUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/follows/${userId}`, {
+        method: "POST",
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(addFollow(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const unfollowUser = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/follows/${userId}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteFollow(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const removeFollower = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/follows/remove/${userId}`, {
+        method: "DELETE",
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteFollower(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
 function normalizeUsers(usersList) {
     return usersList.reduce((result, userObj) => {
         result[userObj.id] = userObj;
@@ -99,12 +168,12 @@ function normalizeUsers(usersList) {
     }, {});
 }
 
-function normalizeLists(listsList) {
-    return listsList.reduce((result, listObj) => {
-        result[listObj.id] = listObj;
-        return result;
-    }, {});
-}
+// function normalizeLists(listsList) {
+//     return listsList.reduce((result, listObj) => {
+//         result[listObj.id] = listObj;
+//         return result;
+//     }, {});
+// }
 
 export default function userReducer(state = initialState, action) {
     let newState;
@@ -130,6 +199,33 @@ export default function userReducer(state = initialState, action) {
         //         }
         //     };
         //     return newState;
+        case ADD_FOLLOW:
+            newState = {
+                ...state,
+                followings: {
+                    ...state.followings,
+                    [action.payload.id]: action.payload
+                }
+            };
+            return newState;
+        case DELETE_FOLLOW:
+            newState = {
+                ...state,
+                followings: {
+                    ...state.followings,
+                }
+            };
+            delete newState.followings[action.payload.id]
+            return newState;
+        case DELETE_FOLLOWER:
+            newState = {
+                ...state,
+                followers: {
+                    ...state.followers,
+                }
+            };
+            delete newState.followers[action.payload.id]
+            return newState;
         default:
             return state;
     }
