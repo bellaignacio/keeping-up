@@ -1,7 +1,7 @@
 const SET_USER = "session/SET_USER";
 export const REMOVE_USER = "session/REMOVE_USER";
 
-const initialState = { user: {} };
+const initialState = { user: null };
 
 const setUser = (user) => ({
 	type: SET_USER,
