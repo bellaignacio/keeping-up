@@ -20,7 +20,7 @@ def follow_user(user_id):
         return {'message': f"User already follows user {user_id}."}
     current_user.followings.append(user)
     db.session.commit()
-    return current_user.to_dict()
+    return user.to_dict()
 
 
 @follow_routes.route('/<int:user_id>', methods=['DELETE'])
@@ -37,7 +37,7 @@ def unfollow_user(user_id):
         return {'message': f"User already does not follow user {user_id}."}
     current_user.followings.remove(user)
     db.session.commit()
-    return current_user.to_dict()
+    return user.to_dict()
 
 
 @follow_routes.route('/remove/<int:user_id>', methods=['DELETE'])
@@ -54,4 +54,4 @@ def remove_follower(user_id):
         return {'message': f"User {user_id} is already not a follower of user {current_user.id}."}
     current_user.followers.remove(user)
     db.session.commit()
-    return current_user.to_dict()
+    return user.to_dict()

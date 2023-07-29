@@ -37,7 +37,7 @@ def like_list(list_id):
     )
     db.session.add(like)
     db.session.commit()
-    return like.to_dict()
+    return list.to_dict()
 
 
 @like_routes.route('/<int:list_id>', methods=['DELETE'])
@@ -54,4 +54,4 @@ def unlike_list(list_id):
         return {'message': f"User already does not like list {list_id}."}
     db.session.delete(existing_like)
     db.session.commit()
-    return {'message': 'Delete successful.'}
+    return list.to_dict()

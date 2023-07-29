@@ -32,47 +32,6 @@ function CreateListPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // console.log(listItems.toString());
-        // const response = await fetch("/api/lists", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         title,
-        //         caption,
-        //         list_items: listItems,
-        //         image_url: imgUrl,
-        //         title_font: titleFont,
-        //         title_size: titleSize,
-        //         title_style: titleStyle,
-        //         title_weight: titleWeight,
-        //         title_color: titleColor,
-        //         title_align: titleAlign,
-        //         li_font: liFont,
-        //         li_size: liSize,
-        //         li_style: liStyle,
-        //         li_weight: liWeight,
-        //         li_color: liColor,
-        //         li_marker: liMarker,
-        //         li_completed_style: liCompStyle,
-        //         li_completed_weight: liCompWeight,
-        //         li_completed_color: liCompColor,
-        //         li_completed_decoration: liCompDecor
-        //     }),
-        // });
-
-        // if (response.ok) {
-        //     const data = await response.json();
-        //     return data;
-        // } else if (response.status < 500) {
-        //     const data = await response.json();
-        //     if (data.errors) {
-        //         setErrors(data.errors);
-        //     }
-        // } else {
-        //     return ["An error occurred. Please try again."];
-        // }
     };
 
     return (
