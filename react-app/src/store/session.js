@@ -74,7 +74,7 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 			username,
 			name,
 			bio,
-			...!!imgUrl && {image_url: imgUrl},
+			...!!imgUrl && { image_url: imgUrl },
 			is_public: isPublic,
 			password
 		})
