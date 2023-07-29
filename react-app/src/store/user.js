@@ -9,10 +9,10 @@ const DELETE_FOLLOW = "user/DELETE_FOLLOW";
 const DELETE_FOLLOWER = "user/DELETE_FOLLOWER";
 
 const initialState = {
-    followings: null,
-    followers: null,
-    public: null,
-    profile: null
+    followings: {},
+    followers: {},
+    public: {},
+    profile: {}
 };
 
 const setFollowings = (users) => ({
@@ -168,13 +168,6 @@ function normalizeUsers(usersList) {
     }, {});
 }
 
-// function normalizeLists(listsList) {
-//     return listsList.reduce((result, listObj) => {
-//         result[listObj.id] = listObj;
-//         return result;
-//     }, {});
-// }
-
 export default function userReducer(state = initialState, action) {
     let newState;
     switch (action.type) {
@@ -193,15 +186,6 @@ export default function userReducer(state = initialState, action) {
         case SET_PROFILE:
             newState = { ...state, profile: action.payload };
             return newState;
-        // case SET_PROFILE_LISTS: // whenever listActions.getProfileLists(id) is called, it will load those lists into the current state.user.profile (even if it has a different user!)
-        //     newState = {
-        //         ...state,
-        //         profile: {
-        //             ...state.profile,
-        //             lists: normalizeLists(action.payload)
-        //         }
-        //     };
-        //     return newState;
         case ADD_FOLLOW:
             newState = {
                 ...state,

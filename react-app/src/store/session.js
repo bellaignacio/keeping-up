@@ -1,7 +1,7 @@
 const SET_USER = "session/SET_USER";
 export const REMOVE_USER = "session/REMOVE_USER";
 
-const initialState = { user: null };
+const initialState = { user: {} };
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -74,7 +74,7 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 			username,
 			name,
 			bio,
-			...!!imgUrl && { image_url: imgUrl },
+			...imgUrl != null && { image_url: imgUrl },
 			is_public: isPublic,
 			password
 		})

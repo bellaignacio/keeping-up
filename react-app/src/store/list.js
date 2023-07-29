@@ -8,10 +8,10 @@ const UPDATE_LIST = "list/UPDATE_LIST";
 const DELETE_LIST = "list/DELETE_LIST";
 
 const initialState = {
-    followings: null,
-    public: null,
-    profile: null,
-    current: null
+    followings: {},
+    public: {},
+    profile: {},
+    current: {}
 };
 
 const setFollowingsLists = (lists) => ({
@@ -372,7 +372,7 @@ export default function listReducer(state = initialState, action) {
         case DELETE_LIST:
             newState = { ...state };
             delete newState.profile[action.payload]
-            newState.current = null;
+            newState.current = {};
             return newState;
         default:
             return state;
