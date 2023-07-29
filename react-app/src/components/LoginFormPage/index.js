@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -11,7 +11,7 @@ function LoginFormPage() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to="/" />;
+  if (sessionUser) return <Redirect to={`/${sessionUser.username}`} />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,35 +22,42 @@ function LoginFormPage() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+    <div id="login-container">
+      <form id="login-form" onSubmit={handleSubmit}>
+        <NavLink to="/about">KeepingUp</NavLink>
+        {errors.length > 0 && <ul className="error-message-container">
           {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
+            <li className="error-message" key={idx}>{error}</li>
           ))}
-        </ul>
+        </ul>}
         <label>
-          Credentials
           <input
             type="text"
             value={credentials}
             onChange={(e) => setCredentials(e.target.value)}
+            placeholder="Username or Email"
             required
           />
         </label>
         <label>
-          Password
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button type="submit">Log in</button>
+        <button onClick={(e) => {
+          setCredentials('demo@aa.io');
+          setPassword('password');
+        }}>Demo User</button>
       </form>
-    </>
+      <div id="login-to-signup">
+        Don't have an account? <NavLink to="/signup">Sign up</NavLink>
+      </div>
+    </div>
   );
 }
 
