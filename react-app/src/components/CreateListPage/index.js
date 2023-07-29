@@ -28,7 +28,7 @@ function CreateListPage() {
     const [liCompDecor, setLiCompDecor] = useState(null);
     const [errors, setErrors] = useState([]);
 
-    //   if (sessionUser) return <Redirect to="/" />;
+    if (!sessionUser) return <Redirect to="/about" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
