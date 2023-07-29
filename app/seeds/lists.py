@@ -2,13 +2,7 @@ from app.models import db, List, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-demo = User.query.filter(User.email == 'demo@aa.io').first()
-aurora = User.query.filter(User.email == 'aurora@aa.io').first()
-john = User.query.filter(User.email == 'john@aa.io').first()
-jane = User.query.filter(User.email == 'jane@aa.io').first()
-tyler = User.query.filter(User.email == 'tyler@aa.io').first()
-
-def seed_lists():
+def seed_lists(demo, aurora, john, jane, tyler):
     list_1 = List(title='Coding Languages', caption='how long do you think this one will take me?', order='1,2,3,4,5', user_id=demo.id)
     list_2 = List(title='Become an Apple Master', caption='this one will take a while... $$$', order='6,7,8,9,10,11', user_id=demo.id)
     list_3 = List(title='Top SWE Applications', caption='hoping for the best! wish me luck.', order='12,13,14,15,16', user_id=demo.id)

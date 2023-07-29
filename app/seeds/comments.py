@@ -2,13 +2,7 @@ from app.models import db, Comment, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-demo = User.query.filter(User.email == 'demo@aa.io').first()
-aurora = User.query.filter(User.email == 'aurora@aa.io').first()
-john = User.query.filter(User.email == 'john@aa.io').first()
-jane = User.query.filter(User.email == 'jane@aa.io').first()
-tyler = User.query.filter(User.email == 'tyler@aa.io').first()
-
-def seed_comments():
+def seed_comments(demo, aurora, john, jane, tyler):
     comment_1 = Comment(user_id=aurora.id, list_id=2, comment='Apple products are so expensive though!')
     comment_2 = Comment(user_id=tyler.id, list_id=2, comment='i agree, but they connect so seamlessly with each other')
     comment_3 = Comment(user_id=demo.id, list_id=2, comment='i\'ve already made progress, can\'t turn back now lol')

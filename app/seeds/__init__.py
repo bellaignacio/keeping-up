@@ -26,13 +26,12 @@ def seed():
         undo_list_styles()
         undo_comments()
         undo_likes()
-    seed_users()
-    seed_lists()
+    (demo, aurora, john, jane, tyler) = seed_users()
+    seed_lists(demo, aurora, john, jane, tyler)
     seed_list_items()
     seed_list_styles()
-    seed_comments()
-    seed_likes()
-    # Add other seed functions here
+    seed_comments(demo, aurora, john, jane, tyler)
+    seed_likes(demo, aurora, john, jane, tyler)
 
 
 # Creates the `flask seed undo` command
@@ -44,4 +43,3 @@ def undo():
     undo_list_styles()
     undo_comments()
     undo_likes()
-    # Add other undo functions here
