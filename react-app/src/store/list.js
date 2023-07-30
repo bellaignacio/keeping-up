@@ -314,7 +314,6 @@ export const removeList = (listId) => async (dispatch) => {
         method: "DELETE"
     });
     if (response.ok) {
-        const data = await response.json();
         dispatch(deleteList(listId));
     } else if (response.status < 500) {
         const data = await response.json();

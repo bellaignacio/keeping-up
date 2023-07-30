@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { useParams } from "react-router";
+import ListTile from "../ListTile";
 import * as userActions from "../../store/user";
 import * as listActions from "../../store/list";
 import './Profile.css';
@@ -22,7 +23,7 @@ function ProfilePage() {
             .then(() => setIsProfileLoaded(true));
         dispatch(listActions.getProfileLists(user_id))
             .then(() => setIsProfileListsLoaded(true));
-    }, [dispatch]);
+    }, [dispatch, user_id]);
 
     if (!sessionUser) return <Redirect to="/about" />;
 
@@ -30,7 +31,7 @@ function ProfilePage() {
         <div id="profile-container">
             <div id="profile-header">
                 <div>
-                    <img id="profile-image" src={profileUser.image_url} />
+                    <img id="profile-image" src={profileUser.image_url} alt={profileUser.username} />
                 </div>
                 <div id="profile-info">
                     <div id="profile-info-header">
@@ -58,19 +59,28 @@ function ProfilePage() {
             <hr id="profile-hr"></hr>
             {isProfileListsLoaded &&
                 <div id="profile-content">
-                    {(!profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) &&
-                        <>
-                            <div>This Account is Private</div>
-                            <div>Follow to see their lists</div>
-                        </>
-                    }
+                    {(() => {
+                        if ((profileUser.id === sessionUser.id && profileUser.total_lists === 0)) {
+                            return (<button>Create a list</button>);
+
+                        } else if (!profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
+                            return (<>
+                                <div>This Account is Private</div>
+                                <div>Follow to see their lists.</div>
+                            </>);
+                        } else if (profileUser.total_lists === 0) {
+                            return (<div>This Account has no lists.</div>);
+                        }
+                    })()}
+                    <div id="list-tile-container">
                     {(profileUser.is_public || sessionFollowings.hasOwnProperty(profileUser.id) || profileUser.id === sessionUser.id) &&
                         profileLists.map(listObj => {
                             return (
-                                <p>{listObj.title}</p>
+                                <ListTile listOnly={true} listObj={listObj} />
                             );
                         })
                     }
+                    </div>
                 </div>
             }
         </div>
