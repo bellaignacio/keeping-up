@@ -4,8 +4,8 @@ import './About.css';
 
 function AboutPage() {
     const sessionUser = useSelector((state) => state.session.user);
-    
-    if (sessionUser) return <Redirect to={`/${sessionUser.username}`} />;
+
+    if (sessionUser) return <Redirect to={`/${sessionUser.id}`} />;
 
     return (
         <>

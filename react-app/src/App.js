@@ -50,10 +50,10 @@ function App() {
           <Route path="/lists/:list_id">
             <ListPage />
           </Route>
-          <Route path="/:username/edit">
+          <Route path="/:user_id/edit">
             <EditProfilePage />
           </Route>
-          <Route path="/:username">
+          <Route path="/:user_id">
             <ProfilePage />
           </Route>
         </Switch>

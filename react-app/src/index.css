@@ -1,8 +1,18 @@
 /* TODO Add site wide styles */
 
+html, body {
+    width: 100%;
+    min-width: 800px;
+}
+
 a {
     text-decoration: none;
     color: inherit;
+}
+
+ul {
+    padding-left: 25px;
+    margin: 10px 0px;
 }
 
 .error-message-container {
