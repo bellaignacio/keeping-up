@@ -14,8 +14,7 @@ function ListTile({ listObj, listOnly }) {
 
     function titleStyleSettings(list_style) {
         return {
-            padding: "5px",
-            margin: "2px 0",
+            margin: "5px",
             fontFamily: list_style.title_font,
             fontSize: list_style.title_size,
             fontStyle: list_style.title_style,
@@ -30,7 +29,7 @@ function ListTile({ listObj, listOnly }) {
             height: "75%",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "space-evenly",
+            rowGap: "10px",
             fontFamily: list_style.li_font,
             fontSize: list_style.li_size,
             fontStyle: list_style.li_style,
@@ -56,7 +55,7 @@ function ListTile({ listObj, listOnly }) {
                     <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                     <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
                         {listObj.list_items.map(li => (
-                            <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style): null}>{li.description}</li>
+                            <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                         ))}
                     </ul>
                 </div>
