@@ -128,7 +128,7 @@ function ListTile({ listObj, listOnly }) {
                             <i className="far fa-comment" onClick={() => history.push(`/lists/${listObj.id}`)} ></i>
                         </span>
                     </div>
-                    <div className="list-tile-likes">{listObj.total_likes} likes</div>
+                    {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> - {listObj.caption}</div>
                     {listObj.total_comments > 0 && <NavLink className="list-tile-view-comments" to={`/lists/${listObj.id}`}>View {listObj.total_comments > 1 && 'all'} {listObj.total_comments} comment{listObj.total_comments > 1 && 's'}</NavLink>}
                     <div className="list-tile-comment-form">
