@@ -41,7 +41,7 @@
     text-align: center;
 }
 
-#list-tile-container {
+#profile-container #list-tile-container {
     display: flex;
     flex-wrap: wrap;
     row-gap: 10px;

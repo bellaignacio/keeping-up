@@ -27,7 +27,7 @@ function SignupFormPage() {
         setErrors(data);
       }
     } else {
-      setErrors(['Password does not match.']);
+      setErrors(['Passwords do not match.']);
     }
   };
 

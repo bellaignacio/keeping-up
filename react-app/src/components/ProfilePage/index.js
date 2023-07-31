@@ -14,11 +14,13 @@ function ProfilePage() {
     const sessionFollowings = useSelector((state) => state.user.followings);
     const profileUser = useSelector((state) => state.user.profile);
     const profileLists = useSelector((state) => Object.values(state.list.profile));
+    const [isFollowingsLoaded, setIsFollowingsLoaded] = useState(false);
     const [isProfileLoaded, setIsProfileLoaded] = useState(false);
     const [isProfileListsLoaded, setIsProfileListsLoaded] = useState(false);
 
     useEffect(() => {
-        dispatch(userActions.getFollowings());
+        dispatch(userActions.getFollowings())
+            .then(() => setIsFollowingsLoaded(true));
         dispatch(userActions.getProfile(user_id))
             .then(() => setIsProfileLoaded(true));
         dispatch(listActions.getProfileLists(user_id))
@@ -27,7 +29,7 @@ function ProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    return (isProfileLoaded &&
+    return ((isProfileLoaded && isFollowingsLoaded) &&
         <div id="profile-container">
             <div id="profile-header">
                 <div>
@@ -38,7 +40,6 @@ function ProfilePage() {
                         <p>{profileUser.username}</p>
                         {(() => {
                             if (profileUser.id === sessionUser.id) {
-                                console.log(sessionFollowings);
                                 return (<button>Edit profile</button>);
                             } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {
                                 return (<button>Following</button>);
