@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { NavLink } from "react-router-dom";
@@ -8,7 +8,9 @@ import './ListTile.css';
 function ListTile({ listObj, listOnly }) {
     const history = useHistory();
     const dispatch = useDispatch();
+    const sessionUser = useSelector((state) => state.session.user);
     const [comment, setComment] = useState("");
+    const [isLiked, setIsLiked] = useState((listObj.likes.filter(likeObj => likeObj.user_id === sessionUser.id)).length > 0);
     const [errors, setErrors] = useState([]);
 
     function listStyleSettings(list_style) {
@@ -55,7 +57,21 @@ function ListTile({ listObj, listOnly }) {
         };
     }
 
-    const handleSubmit = async (e) => {
+    const handleLike = async () => {
+        let data;
+        if (isLiked) {
+            data = await dispatch(listActions.unlikeList(listObj.id));
+            setIsLiked(false)
+        } else {
+            data = await dispatch(listActions.likeList(listObj.id));
+            setIsLiked(true)
+        }
+        if (data) {
+            setErrors(data);
+        }
+    };
+
+    const handleComment = async (e) => {
         e.preventDefault();
         const data = await dispatch(listActions.createComment(listObj.id, comment));
         if (data) {
@@ -91,7 +107,7 @@ function ListTile({ listObj, listOnly }) {
             <div className="list-tile-wrapper">
                 <div className="list-tile-header">
                     <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
-                    <div className="list-tile-user-name">{listObj.user.username}</div>
+                    <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
                 </div>
                 <div className="list-tile" style={listStyleSettings(listObj.list_style)} onClick={() => history.push(`/lists/${listObj.id}`)} >
                     <div className="list-tile-content">
@@ -105,18 +121,18 @@ function ListTile({ listObj, listOnly }) {
                 </div>
                 <div className="list-tile-footer">
                     <div className="list-tile-icons">
-                        <span>
-                            <i className="far fa-heart"></i>
+                        <span className={isLiked ? "red-like-icon" : ""}>
+                            <i className={isLiked ? "fas fa-heart" : "far fa-heart"} onClick={handleLike}></i>
                         </span>
                         <span>
-                            <i className="far fa-comment"></i>
+                            <i className="far fa-comment" onClick={() => history.push(`/lists/${listObj.id}`)} ></i>
                         </span>
                     </div>
                     <div className="list-tile-likes">{listObj.total_likes} likes</div>
-                    <div className="list-tile-caption"><span className="list-tile-user-name">{listObj.user.username}</span> - {listObj.caption}</div>
+                    <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> - {listObj.caption}</div>
                     {listObj.total_comments > 0 && <NavLink className="list-tile-view-comments" to={`/lists/${listObj.id}`}>View {listObj.total_comments > 1 && 'all'} {listObj.total_comments} comment{listObj.total_comments > 1 && 's'}</NavLink>}
                     <div className="list-tile-comment-form">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleComment}>
                             <input
                                 type="text"
                                 value={comment}
@@ -129,7 +145,6 @@ function ListTile({ listObj, listOnly }) {
                                     <li className="error-message" key={idx}>{error}</li>
                                 ))}
                             </ul>}
-                            {/* <button></button> */}
                         </form>
                     </div>
                 </div>

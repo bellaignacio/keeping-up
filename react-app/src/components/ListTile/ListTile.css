@@ -74,3 +74,7 @@
     box-sizing: border-box;
     width: 100%;
 }
+
+.red-like-icon {
+    color: red;
+}
