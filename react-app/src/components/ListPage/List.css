@@ -1,0 +1,44 @@
+#list-page-wrapper {
+    display: flex;
+    width: min-content;
+    margin: 0 auto;
+}
+
+#list-page-wrapper .list-tile {
+    min-width: 500px;
+    width: 500px;
+    height: 500px;
+    border: 1px solid lightgrey;
+    position: relative;
+    color: white;
+    overflow: auto;
+}
+
+.list-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 0;
+    min-width: 400px;
+}
+
+
+.list-info > * {
+    box-sizing: border-box;
+    border: 1px solid lightgrey;
+    height: 100%;
+}
+
+.list-info .list-tile-header,
+.list-info .list-tile-footer {
+    height: min-content;
+}
+
+.list-tile-comments {
+    height: 348.5px;
+    padding: 5px;
+    overflow: scroll;
+}
+.list-tile-comments > * {
+    margin: 10px 0;
+}

@@ -44,16 +44,16 @@ function App() {
           <Route exact path="/lists/new">
             <CreateListPage />
           </Route>
-          <Route path="/lists/:list_id/edit">
+          <Route path="/lists/:listId/edit">
             <EditListPage />
           </Route>
-          <Route path="/lists/:list_id">
+          <Route path="/lists/:listId">
             <ListPage />
           </Route>
-          <Route path="/:user_id/edit">
+          <Route path="/:userId/edit">
             <EditProfilePage />
           </Route>
-          <Route path="/:user_id">
+          <Route path="/:userId">
             <ProfilePage />
           </Route>
         </Switch>
