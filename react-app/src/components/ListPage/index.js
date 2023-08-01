@@ -112,8 +112,11 @@ function ListPage() {
             </div>
             <div className="list-info">
                 <div className="list-tile-header">
-                    <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
-                    <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
+                    <div className="list-tile-subheader">
+                        <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
+                        <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
+                    </div>
+                    {listObj.user_id === sessionUser.id && <span><i className="fas fa-ellipsis-h"></i></span>}
                 </div>
                 <div className="list-tile-comments">
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
@@ -127,13 +130,14 @@ function ListPage() {
                             <i className={isLiked ? "fas fa-heart" : "far fa-heart"} onClick={handleLike}></i>
                         </span>
                         <span>
-                            <i className="far fa-comment"></i>
+                            <i className="far fa-comment" onClick={() => document.getElementById("comment-input").focus()}></i>
                         </span>
                     </div>
                     {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
                     <div className="list-tile-comment-form">
                         <form onSubmit={handleComment}>
                             <input
+                                id="comment-input"
                                 type="text"
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
