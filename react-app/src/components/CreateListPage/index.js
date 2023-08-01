@@ -284,6 +284,7 @@ function CreateListPage() {
                 </div>
 
                 <button type="submit">Post</button>
+                <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
             </form>
         </div>
     );
