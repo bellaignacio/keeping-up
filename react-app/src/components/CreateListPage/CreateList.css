@@ -12,3 +12,7 @@
     padding: 10px;
     row-gap: 10px;
 }
+
+#create-list-form * {
+    width: 400px;
+}
