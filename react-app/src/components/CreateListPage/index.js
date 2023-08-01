@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router";
+import * as listActions from "../../store/list";
 import './CreateList.css';
 
 function CreateListPage() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState("")
     const [caption, setCaption] = useState("")
@@ -32,15 +35,23 @@ function CreateListPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+        if (data.id) {
+            history.push(`/lists/${data}`);
+        } else {
+            setErrors(data);
+        }
     };
 
     return (
-        <>
-            <h1>CreateListPage</h1>
-            <form onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-                </ul>
+        <div id="create-list-container">
+            <form id="create-list-form" onSubmit={handleSubmit}>
+                <div>Create a list</div>
+                {errors.length > 0 && <ul className="error-message-container">
+                    {errors.map((error, idx) => (
+                        <li className="error-message" key={idx}>{error}</li>
+                    ))}
+                </ul>}
                 <label>
                     Title
                     <input
@@ -206,7 +217,7 @@ function CreateListPage() {
                 </label>
                 <button type="submit">Post</button>
             </form>
-        </>
+        </div>
     );
 }
 

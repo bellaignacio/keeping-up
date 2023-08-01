@@ -233,6 +233,7 @@ export const createList = (title, caption, listItems, imgUrl, titleFont, titleSi
     if (response.ok) {
         const data = await response.json();
         dispatch(setCurrentList(data));
+        return data;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

@@ -131,8 +131,8 @@ function ListTile({ listObj, listOnly }) {
                     {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
                     {listObj.total_comments > 0 && <NavLink className="list-tile-view-comments" to={`/lists/${listObj.id}`}>View {listObj.total_comments > 1 && 'all'} {listObj.total_comments} comment{listObj.total_comments > 1 && 's'}</NavLink>}
-                    <div className="list-tile-comment-form">
-                        <form onSubmit={handleComment}>
+                    <div>
+                        <form className="list-tile-comment-form" onSubmit={handleComment}>
                             <input
                                 type="text"
                                 value={comment}

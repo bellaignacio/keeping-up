@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { useParams, Redirect, NavLink } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import * as listActions from "../../store/list";
 import './List.css';
 
@@ -134,8 +134,8 @@ function ListPage() {
                         </span>
                     </div>
                     {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
-                    <div className="list-tile-comment-form">
-                        <form onSubmit={handleComment}>
+                    <div>
+                        <form className="list-tile-comment-form" onSubmit={handleComment}>
                             <input
                                 id="comment-input"
                                 type="text"
