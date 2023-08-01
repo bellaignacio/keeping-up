@@ -58,11 +58,15 @@
     display: flex;
     column-gap: 10px;
     align-items: center;
-    margin: 10px 5px;
+    padding: 10px 5px;
 }
 
-.list-tile-icons {
-    margin: 10px 5px;
+.list-tile-footer {
+    padding: 5px;
+}
+
+.list-tile-footer > * {
+    margin: 5px 0;
 }
 
 .list-tile-icons span {

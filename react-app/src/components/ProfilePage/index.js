@@ -8,7 +8,7 @@ import * as listActions from "../../store/list";
 import './Profile.css';
 
 function ProfilePage() {
-    const { user_id } = useParams();
+    const { userId } = useParams();
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const sessionFollowings = useSelector((state) => state.user.followings);
@@ -21,11 +21,11 @@ function ProfilePage() {
     useEffect(() => {
         dispatch(userActions.getFollowings())
             .then(() => setIsFollowingsLoaded(true));
-        dispatch(userActions.getProfile(user_id))
+        dispatch(userActions.getProfile(userId))
             .then(() => setIsProfileLoaded(true));
-        dispatch(listActions.getProfileLists(user_id))
+        dispatch(listActions.getProfileLists(userId))
             .then(() => setIsProfileListsLoaded(true));
-    }, [dispatch, user_id]);
+    }, [dispatch, userId]);
 
     if (!sessionUser) return <Redirect to="/about" />;
 
