@@ -19,7 +19,6 @@ function ListPage() {
     useEffect(() => {
         dispatch(listActions.getList(listId))
             .then(() => setIsListLoaded(true));
-        // .then(() => setIsLiked((listObj.likes.filter(likeObj => likeObj.user_id === sessionUser.id)).length > 0));
     }, [dispatch, listId]);
 
     function listStyleSettings(list_style) {
@@ -66,6 +65,13 @@ function ListPage() {
         };
     }
 
+    const handleLiToggle = async (li) => {
+        const data = await dispatch(listActions.editListItem(li.id, li.description, !li.is_complete));
+        if (data) {
+            setErrors(data);
+        }
+    };
+
     const handleLike = async () => {
         let data;
         if (isLiked) {
@@ -99,7 +105,7 @@ function ListPage() {
                     <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                     <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
                         {listObj.list_items.map(li => (
-                            <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
+                            <li key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                         ))}
                     </ul>
                 </div>
