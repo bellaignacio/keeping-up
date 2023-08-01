@@ -1,0 +1,64 @@
+#create-list-container {
+    width: 800px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#create-list-form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    margin: 10px;
+    padding: 30px;
+    row-gap: 10px;
+}
+
+#create-list-form input,
+#create-list-form textarea,
+#create-list-form > button {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#title-input {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
+    font-style: normal;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+#list-text-area {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12pt;
+    font-style: normal;
+    font-weight: normal;
+    color: black;
+    text-align: left;
+}
+
+#title-settings-container,
+#list-settings-container,
+#list-completed-settings-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    margin-top: 30px;
+}
+
+#title-settings-container > *,
+#list-settings-container > *,
+#list-completed-settings-container > * {
+    font-family: 'Times New Roman', Times, serif;
+    min-width: 30px;
+    height: 30px;
+}
+
+#title-settings-container > input,
+#list-settings-container > input,
+#list-completed-settings-container > input {
+    width: 50px;
+}
