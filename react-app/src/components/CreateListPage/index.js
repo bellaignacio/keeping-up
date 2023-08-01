@@ -35,39 +35,83 @@ function CreateListPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(titleWeight);
-        console.log(titleStyle);
-        console.log(titleAlign);
-        console.log(titleSize);
-        // const data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
-        // if (data.id) {
-        //     history.push(`/lists/${data}`);
-        // } else {
-        //     setErrors(data);
-        // }
+        const data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+        if (data.id) {
+            history.push(`/lists/${data.id}`);
+        } else {
+            setErrors(data);
+        }
     };
 
     return (
         <div id="create-list-container">
             <form id="create-list-form" onSubmit={handleSubmit}>
                 <div>Create a list</div>
+
                 {errors.length > 0 && <ul className="error-message-container">
                     {errors.map((error, idx) => (
                         <li className="error-message" key={idx}>{error}</li>
                     ))}
                 </ul>}
 
+                <label>
+                    <input
+                        type="text"
+                        value={caption}
+                        onChange={(e) => setCaption(e.target.value)}
+                        placeholder="Enter caption here"
+                        required
+                    />
+                </label>
+                <label>
+                    <input
+                        type="text"
+                        value={imgUrl}
+                        onChange={(e) => setImgUrl(e.target.value)}
+                        placeholder="Enter background image URL here"
+                    />
+                </label>
+
                 <div id="title-settings-container">
-                    {/* Font
-                        Size
-                        Color */}
+                    <select
+                        value={titleFont}
+                        onChange={(e) => {
+                            document.getElementById("title-input").style.fontFamily = e.target.value;
+                            setTitleFont(e.target.value);
+                        }}
+                        defaultValue="Arial"
+                        style={{ fontFamily: titleFont }}
+                    >
+                        <option value="Arial">Arial</option>
+                        <option value="Cambria">Cambria</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                    </select>
+                    <select
+                        value={titleSize}
+                        onChange={(e) => {
+                            document.getElementById("title-input").style.fontSize = e.target.value;
+                            setTitleSize(e.target.value);
+                        }}
+                        defaultValue="14pt"
+                    >
+                        <option value="12pt">12</option>
+                        <option value="14pt">14</option>
+                        <option value="18pt">18</option>
+                        <option value="24pt">24</option>
+                        <option value="36pt">36</option>
+                    </select>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
                             document.getElementById("title-input").style.fontWeight = ((titleWeight !== "normal" ? "normal" : "bold"));
                             setTitleWeight((titleWeight !== "normal" ? "normal" : "bold"));
                         }}
-                    >Bold
+                        style={{ fontWeight: "bold" }}
+                    >B
                     </button>
                     <button
                         onClick={(e) => {
@@ -75,7 +119,8 @@ function CreateListPage() {
                             document.getElementById("title-input").style.fontStyle = ((titleStyle !== "normal" ? "normal" : "italic"));
                             setTitleStyle((titleStyle !== "normal" ? "normal" : "italic"));
                         }}
-                    >Italic
+                        style={{ fontStyle: "italic" }}
+                    >I
                     </button>
                     <button
                         onClick={(e) => {
@@ -90,24 +135,25 @@ function CreateListPage() {
                             e.preventDefault();
                             document.getElementById("title-input").style.textAlign = "center";
                             setTitleAlign("center");
-                        }}>
-                        <i className="fas fa-align-center"></i>
+                        }}
+                    ><i className="fas fa-align-center"></i>
                     </button>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
                             document.getElementById("title-input").style.textAlign = "right";
                             setTitleAlign("right");
-                        }}>
-                        <i className="fas fa-align-right"></i>
+                        }}
+                    ><i className="fas fa-align-right"></i>
                     </button>
-                    <select value={titleSize} onChange={(e) =>setTitleSize(e.target.value)} defaultValue="14pt">
-                        <option value="12pt">12</option>
-                        <option value="14pt">14</option>
-                        <option value="18pt">18</option>
-                        <option value="24pt">24</option>
-                        <option value="36pt">36</option>
-                    </select>
+                    <input
+                        type="color"
+                        value={titleColor}
+                        onChange={(e) => {
+                            document.getElementById("title-input").style.color = e.target.value;
+                            setTitleColor(e.target.value);
+                        }}
+                    />
                 </div>
 
                 <div id="title-input-container">
@@ -116,35 +162,69 @@ function CreateListPage() {
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        placeholder="Title"
+                        placeholder="Enter list title here"
                         required
                     />
                 </div>
-                <label>
-                    <input
-                        type="text"
-                        value={caption}
-                        onChange={(e) => setCaption(e.target.value)}
-                        placeholder="Caption"
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        type="text"
-                        value={imgUrl}
-                        onChange={(e) => setImgUrl(e.target.value)}
-                        placeholder="Image URL"
-                    />
-                </label>
 
                 <div id="list-settings-container">
-                    {/* Font
-                        Size
-                        Style
-                        Weight
-                        Color
-                        Marker */}
+                    <select
+                        value={liFont}
+                        onChange={(e) => {
+                            document.getElementById("list-text-area").style.fontFamily = e.target.value;
+                            setLiFont(e.target.value);
+                        }}
+                        defaultValue="Arial"
+                        style={{ fontFamily: liFont }}
+                    >
+                        <option value="Arial">Arial</option>
+                        <option value="Cambria">Cambria</option>
+                        <option value="Comic Sans MS">Comic Sans MS</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                    </select>
+                    <select
+                        value={liSize}
+                        onChange={(e) => {
+                            document.getElementById("list-text-area").style.fontSize = e.target.value;
+                            setLiSize(e.target.value);
+                        }}
+                        defaultValue="14pt"
+                    >
+                        <option value="12pt">12</option>
+                        <option value="14pt">14</option>
+                        <option value="18pt">18</option>
+                        <option value="24pt">24</option>
+                        <option value="36pt">36</option>
+                    </select>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("list-text-area").style.fontWeight = ((liWeight !== "normal" ? "normal" : "bold"));
+                            setLiWeight((liWeight !== "normal" ? "normal" : "bold"));
+                        }}
+                        style={{ fontWeight: "bold" }}
+                    >B
+                    </button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("list-text-area").style.fontStyle = ((liStyle !== "normal" ? "normal" : "italic"));
+                            setLiStyle((liStyle !== "normal" ? "normal" : "italic"));
+                        }}
+                        style={{ fontStyle: "italic" }}
+                    >I
+                    </button>
+                    <input
+                        type="color"
+                        value={liColor}
+                        onChange={(e) => {
+                            document.getElementById("list-text-area").style.color = e.target.value;
+                            setLiColor(e.target.value);
+                        }}
+                    />
                 </div>
 
                 <div id="list-text-area-container">
@@ -152,148 +232,57 @@ function CreateListPage() {
                         id="list-text-area"
                         wrap="hard"
                         value={listItems}
-                        // rows="10"
-                        // cols="50"
                         onChange={(e) => setListItems(e.target.value)}
+                        placeholder="Enter list here"
                         required
                     />
                 </div>
 
                 <div id="list-completed-settings-container">
-                    {/* Style
-                        Weight
-                        Color
-                        Decor */}
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("list-completed-input").style.fontWeight = ((liCompWeight !== "normal" ? "normal" : "bold"));
+                            setLiCompWeight((liCompWeight !== "normal" ? "normal" : "bold"));
+                        }}
+                        style={{ fontWeight: "bold" }}
+                    >B
+                    </button>
+                    <button
+                        onClick={(e) => {
+                            e.preventDefault();
+                            document.getElementById("list-completed-input").style.fontStyle = ((liCompStyle !== "normal" ? "normal" : "italic"));
+                            setLiCompStyle((liCompStyle !== "normal" ? "normal" : "italic"));
+                        }}
+                        style={{ fontStyle: "italic" }}
+                    >I
+                    </button>
+                    <input
+                        type="color"
+                        value={liCompColor}
+                        onChange={(e) => {
+                            document.getElementById("list-completed-input").style.color = e.target.value;
+                            setLiCompColor(e.target.value);
+                        }}
+                    />
+                    <input
+                        type="color"
+                        onChange={(e) => {
+                            document.getElementById("list-completed-input").style.textDecoration = `solid line-through ${e.target.value} 3px`
+                            setLiCompDecor(`solid line-through ${e.target.value} 3px`);
+                        }}
+                    />
                 </div>
 
-                {/* <label>
-                    Title Font
+                <div id="list-completed-input-container">
                     <input
-                        type="text"
-                        value={titleFont}
-                        onChange={(e) => setTitleFont(e.target.value)}
+                        id="list-completed-input"
+                        readOnly={true}
+                        value="Set your completed style here"
+                        style={{fontFamily: liFont, fontSize: liSize, color: "gray"}}
                     />
-                </label>
-                <label>
-                    Title Size
-                    <input
-                        type="text"
-                        value={titleSize}
-                        onChange={(e) => setTitleSize(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Title Style
-                    <input
-                        type="text"
-                        value={titleStyle}
-                        onChange={(e) => setTitleStyle(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Title Weight
-                    <input
-                        type="text"
-                        value={titleWeight}
-                        onChange={(e) => setTitleWeight(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Title Color
-                    <input
-                        type="text"
-                        value={titleColor}
-                        onChange={(e) => setTitleColor(e.target.value)}
-                    />
-                </label>
-                <label>
-                    Title Align
-                    <input
-                        type="text"
-                        value={titleAlign}
-                        onChange={(e) => setTitleAlign(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Font
-                    <input
-                        type="text"
-                        value={liFont}
-                        onChange={(e) => setLiFont(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Size
-                    <input
-                        type="text"
-                        value={liSize}
-                        onChange={(e) => setLiSize(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Style
-                    <input
-                        type="text"
-                        value={liStyle}
-                        onChange={(e) => setLiStyle(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Weight
-                    <input
-                        type="text"
-                        value={liWeight}
-                        onChange={(e) => setLiWeight(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Color
-                    <input
-                        type="text"
-                        value={liColor}
-                        onChange={(e) => setLiColor(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Marker
-                    <input
-                        type="text"
-                        value={liMarker}
-                        onChange={(e) => setLiMarker(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Comp Style
-                    <input
-                        type="text"
-                        value={liCompStyle}
-                        onChange={(e) => setLiCompStyle(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Comp Weight
-                    <input
-                        type="text"
-                        value={liCompWeight}
-                        onChange={(e) => setLiCompWeight(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Comp Color
-                    <input
-                        type="text"
-                        value={liCompColor}
-                        onChange={(e) => setLiCompColor(e.target.value)}
-                    />
-                </label>
-                <label>
-                    List Comp Decoration
-                    <input
-                        type="text"
-                        value={liCompDecor}
-                        onChange={(e) => setLiCompDecor(e.target.value)}
-                    />
-                </label> */}
+                </div>
+
                 <button type="submit">Post</button>
             </form>
         </div>
