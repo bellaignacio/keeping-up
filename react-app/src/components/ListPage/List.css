@@ -28,9 +28,8 @@
     height: 100%;
 }
 
-.list-info .list-tile-header,
 .list-info .list-tile-footer {
-    height: min-content;
+    height: 95px;
 }
 
 .list-info .list-tile-header {
@@ -38,6 +37,7 @@
     justify-content: space-between;
     align-items: center;
     padding-right: 15px;
+    height: 80px;
 }
 
 .list-tile-subheader {
@@ -48,7 +48,7 @@
 }
 
 .list-tile-comments {
-    height: 328px;
+    height: 325px;
     padding: 5px;
     overflow: scroll;
 }
