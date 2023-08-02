@@ -40,7 +40,8 @@
     height: 80px;
 }
 
-.list-tile-header button {
+.list-tile-header button,
+.list-tile-comments button {
     border: none;
     background: none;
 }
