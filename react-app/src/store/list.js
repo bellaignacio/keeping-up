@@ -227,7 +227,7 @@ export const createList = (title, caption, listItems, imgUrl, titleFont, titleSi
             ...liCompStyle != null && { li_completed_style: liCompStyle },
             ...liCompWeight != null && { li_completed_weight: liCompWeight },
             ...liCompColor != null && { li_completed_color: liCompColor },
-            ...liCompDecor != null && { li_completed_decor: liCompDecor }
+            ...liCompDecor != null && { li_completed_decoration: liCompDecor }
         })
     });
     if (response.ok) {
@@ -270,12 +270,13 @@ export const editList = (listId, title, caption, listItems, imgUrl, titleFont, t
             ...liCompStyle != null && { li_completed_style: liCompStyle },
             ...liCompWeight != null && { li_completed_weight: liCompWeight },
             ...liCompColor != null && { li_completed_color: liCompColor },
-            ...liCompDecor != null && { li_completed_decor: liCompDecor }
+            ...liCompDecor != null && { li_completed_decoration: liCompDecor }
         })
     });
     if (response.ok) {
         const data = await response.json();
         dispatch(setCurrentList(data));
+        return data;
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

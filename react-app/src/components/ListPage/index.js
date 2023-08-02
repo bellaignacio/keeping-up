@@ -61,7 +61,7 @@ function ListPage() {
             fontStyle: list_style.li_completed_style,
             fontWeight: list_style.li_completed_weight,
             color: list_style.li_completed_color,
-            textDecoration: list_style.li_completed_decoration
+            textDecoration: `solid line-through ${list_style.li_completed_decoration} 3px`
         };
     }
 
