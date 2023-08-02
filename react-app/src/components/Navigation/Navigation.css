@@ -5,3 +5,23 @@
 .hidden {
   display: none;
 }
+
+#navigation-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: min-content;
+  height: 95vh;
+  position: absolute;
+  padding: 10px;
+  border-right: 1px solid lightgrey;
+  background-color: white;
+  z-index: 5;
+}
+
+#navigation-container i,
+#navigation-container img {
+  font-size: 24pt;
+  width: min-content;
+  height: 30px;
+}
