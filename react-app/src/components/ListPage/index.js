@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useParams, Redirect } from "react-router-dom";
+import OpenModalButton from "../OpenModalButton";
+import ListSettingsModal from "../ListSettingsModal";
 import * as listActions from "../../store/list";
 import './List.css';
 
@@ -116,7 +118,10 @@ function ListPage() {
                         <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
                         <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
                     </div>
-                    {listObj.user_id === sessionUser.id && <span><i className="fas fa-ellipsis-h"></i></span>}
+                    {listObj.user_id === sessionUser.id && <OpenModalButton
+                        buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
+                        modalComponent={<ListSettingsModal listObj={listObj} />}
+                    />}
                 </div>
                 <div className="list-tile-comments">
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
