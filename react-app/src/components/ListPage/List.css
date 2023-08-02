@@ -40,6 +40,11 @@
     height: 80px;
 }
 
+.list-tile-header button {
+    border: none;
+    background: none;
+}
+
 .list-tile-subheader {
     display: flex;
     column-gap: 10px;

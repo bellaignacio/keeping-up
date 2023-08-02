@@ -1,10 +1,29 @@
+import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
+import { useModal } from '../../context/Modal';
+import * as listActions from "../../store/list";
 import './DeleteList.css';
 
-function DeleteListModal() {
+function DeleteListModal({ listObj }) {
+    const { closeModal } = useModal();
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        dispatch(listActions.removeList(listObj.id));
+        history.push(`/${listObj.user_id}`);
+        closeModal();
+    };
+
     return (
-        <>
-            <h1>DeleteListModal</h1>
-        </>
+        <div id="delete-list-container">
+            <form id="delete-list-form">
+                <div>Are you sure you want to delete this list?</div>
+                <button onClick={handleDelete}>Delete</button>
+                <button onClick={closeModal}>Cancel</button>
+            </form>
+        </div>
     );
 }
 

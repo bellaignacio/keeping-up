@@ -5,37 +5,42 @@ import { useHistory } from "react-router";
 import * as listActions from "../../store/list";
 import './CreateList.css';
 
-function CreateListPage() {
+function CreateListPage({ listObj, isEdit }) {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
-    const [title, setTitle] = useState("")
-    const [caption, setCaption] = useState("")
-    const [listItems, setListItems] = useState("")
-    const [imgUrl, setImgUrl] = useState(null);
-    const [titleFont, setTitleFont] = useState("Arial");
-    const [titleSize, setTitleSize] = useState("14pt");
-    const [titleStyle, setTitleStyle] = useState("normal");
-    const [titleWeight, setTitleWeight] = useState("bold");
-    const [titleColor, setTitleColor] = useState("black");
-    const [titleAlign, setTitleAlign] = useState("center");
-    const [liFont, setLiFont] = useState("Arial");
-    const [liSize, setLiSize] = useState("12pt");
-    const [liStyle, setLiStyle] = useState("normal");
-    const [liWeight, setLiWeight] = useState("normal");
-    const [liColor, setLiColor] = useState("black");
-    const [liMarker, setLiMarker] = useState("default");
-    const [liCompStyle, setLiCompStyle] = useState("normal");
-    const [liCompWeight, setLiCompWeight] = useState("normal");
-    const [liCompColor, setLiCompColor] = useState("black");
-    const [liCompDecor, setLiCompDecor] = useState("solid line-through red 3px");
+    const [title, setTitle] = useState(isEdit ? listObj.title : "")
+    const [caption, setCaption] = useState(isEdit ? listObj.caption : "")
+    const [listItems, setListItems] = useState(isEdit ? (listObj.list_items.map(li => li.description)).join('\n') : "")
+    const [imgUrl, setImgUrl] = useState(isEdit ? listObj.list_style.image_url : null);
+    const [titleFont, setTitleFont] = useState(isEdit ? listObj.list_style.title_font : "Arial");
+    const [titleSize, setTitleSize] = useState(isEdit ? listObj.list_style.title_size : "14pt");
+    const [titleStyle, setTitleStyle] = useState(isEdit ? listObj.list_style.title_style : "normal");
+    const [titleWeight, setTitleWeight] = useState(isEdit ? listObj.list_style.title_weight : "bold");
+    const [titleColor, setTitleColor] = useState(isEdit ? listObj.list_style.title_color : "#000000");
+    const [titleAlign, setTitleAlign] = useState(isEdit ? listObj.list_style.title_align : "center");
+    const [liFont, setLiFont] = useState(isEdit ? listObj.list_style.li_font : "Arial");
+    const [liSize, setLiSize] = useState(isEdit ? listObj.list_style.li_size : "12pt");
+    const [liStyle, setLiStyle] = useState(isEdit ? listObj.list_style.li_style : "normal");
+    const [liWeight, setLiWeight] = useState(isEdit ? listObj.list_style.li_weight : "normal");
+    const [liColor, setLiColor] = useState(isEdit ? listObj.list_style.li_color : "#000000");
+    const [liMarker, setLiMarker] = useState(isEdit ? listObj.list_style.li_marker : "default");
+    const [liCompStyle, setLiCompStyle] = useState(isEdit ? listObj.list_style.li_completed_style : "normal");
+    const [liCompWeight, setLiCompWeight] = useState(isEdit ? listObj.list_style.li_completed_weight : "normal");
+    const [liCompColor, setLiCompColor] = useState(isEdit ? listObj.list_style.li_completed_color : "#000000");
+    const [liCompDecor, setLiCompDecor] = useState(isEdit ? listObj.list_style.li_completed_decoration : "#FF0000");
     const [errors, setErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/about" />;
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+        let data;
+        if (isEdit) {
+            data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+        } else {
+            data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+        }
         if (data.id) {
             history.push(`/lists/${data.id}`);
         } else {
@@ -46,7 +51,7 @@ function CreateListPage() {
     return (
         <div id="create-list-container">
             <form id="create-list-form" onSubmit={handleSubmit}>
-                <div>Create a list</div>
+                <div>{isEdit ? "Edit the list" : "Create a list"}</div>
 
                 {errors.length > 0 && <ul className="error-message-container">
                     {errors.map((error, idx) => (
@@ -79,7 +84,7 @@ function CreateListPage() {
                             document.getElementById("title-input").style.fontFamily = e.target.value;
                             setTitleFont(e.target.value);
                         }}
-                        defaultValue="Arial"
+                        defaultValue={titleFont}
                         style={{ fontFamily: titleFont }}
                     >
                         <option value="Arial">Arial</option>
@@ -96,7 +101,7 @@ function CreateListPage() {
                             document.getElementById("title-input").style.fontSize = e.target.value;
                             setTitleSize(e.target.value);
                         }}
-                        defaultValue="14pt"
+                        defaultValue={titleSize}
                     >
                         <option value="12pt">12</option>
                         <option value="14pt">14</option>
@@ -164,6 +169,14 @@ function CreateListPage() {
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder="Enter list title here"
                         required
+                        style={{
+                            fontFamily: titleFont,
+                            fontSize: titleSize,
+                            fontStyle: titleStyle,
+                            fontWeight: titleWeight,
+                            color: titleColor,
+                            textAlign: titleAlign
+                        }}
                     />
                 </div>
 
@@ -174,7 +187,7 @@ function CreateListPage() {
                             document.getElementById("list-text-area").style.fontFamily = e.target.value;
                             setLiFont(e.target.value);
                         }}
-                        defaultValue="Arial"
+                        defaultValue={liFont}
                         style={{ fontFamily: liFont }}
                     >
                         <option value="Arial">Arial</option>
@@ -191,7 +204,7 @@ function CreateListPage() {
                             document.getElementById("list-text-area").style.fontSize = e.target.value;
                             setLiSize(e.target.value);
                         }}
-                        defaultValue="14pt"
+                        defaultValue={liSize}
                     >
                         <option value="12pt">12</option>
                         <option value="14pt">14</option>
@@ -234,7 +247,15 @@ function CreateListPage() {
                         value={listItems}
                         onChange={(e) => setListItems(e.target.value)}
                         placeholder="Enter list here"
+                        readOnly={isEdit}
                         required
+                        style={{
+                            fontFamily: liFont,
+                            fontSize: liSize,
+                            fontStyle: liStyle,
+                            fontWeight: liWeight,
+                            color: liColor
+                        }}
                     />
                 </div>
 
@@ -267,9 +288,10 @@ function CreateListPage() {
                     />
                     <input
                         type="color"
+                        value={liCompDecor}
                         onChange={(e) => {
                             document.getElementById("list-completed-input").style.textDecoration = `solid line-through ${e.target.value} 3px`
-                            setLiCompDecor(`solid line-through ${e.target.value} 3px`);
+                            setLiCompDecor(e.target.value);
                         }}
                     />
                 </div>
@@ -279,11 +301,18 @@ function CreateListPage() {
                         id="list-completed-input"
                         readOnly={true}
                         value="Set your completed style here"
-                        style={{fontFamily: liFont, fontSize: liSize, color: "gray"}}
+                        style={{
+                            fontFamily: liFont,
+                            fontSize: liSize,
+                            fontStyle: liCompStyle,
+                            fontWeight: liCompWeight,
+                            color: liCompColor,
+                            textDecoration: `solid line-through ${liCompDecor} 3px`
+                        }}
                     />
                 </div>
 
-                <button type="submit">Post</button>
+                <button type="submit">{isEdit ? "Save" : "Post"}</button>
                 <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
             </form>
         </div>
