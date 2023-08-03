@@ -30,11 +30,11 @@ function HomePage() {
                 <FollowingBar users={followings}/>
                 {isFollowingsListsLoaded &&
                     <div id="list-tile-container">
-                        {followingsLists.map(listObj => {
+                        {followingsLists.length > 0 ? followingsLists.map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );
-                        })}
+                        }) : <div>There are no lists to show. Check again later!</div>}
                     </div>
                 }
             </div>

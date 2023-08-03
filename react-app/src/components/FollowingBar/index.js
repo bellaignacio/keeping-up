@@ -4,7 +4,7 @@ import './FollowingBar.css';
 function FollowingBar({ users }) {
     const history = useHistory();
 
-    return (
+    return (users.length > 0 &&
         <div id="following-bar-container">
             {users.map(user => {
                 return (

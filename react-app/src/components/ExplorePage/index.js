@@ -27,11 +27,11 @@ function ExplorePage() {
             <div id="explore-container">
                 {isPublicListsLoaded &&
                     <div id="list-tile-container">
-                        {publicLists.map(listObj => {
+                        {publicLists.length > 0 ? publicLists.map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );
-                        })}
+                        }) : <div>There are no lists to show. Check again later!</div>}
                     </div>
                 }
             </div>
