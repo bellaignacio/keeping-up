@@ -21,8 +21,8 @@ function UserListModal({ isSessionUser, title, users }) {
             <div id="user-list">
                 {users.map(user => {
                     return (
-                        <div className="user-list-item">
-                            <div key={user.id} className="list-tile-header" onClick={() => handleUserClick(user.id)}>
+                        <div className="user-list-item" key={user.id}>
+                            <div className="list-tile-header" onClick={() => handleUserClick(user.id)}>
                                 <img className="list-tile-user-image" src={user.image_url} alt={user.username} />
                                 <div>
                                     <div className="list-tile-user-name">{user.username}</div>
