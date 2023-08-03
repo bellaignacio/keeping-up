@@ -22,10 +22,14 @@ function FollowModal({ user, method }) {
     return (
         <div id="follow-modal-container">
             <form id="follow-form">
+                <div className="list-tile-header">
+                    <img className="list-tile-user-image" src={user.image_url} alt={user.username} />
+                    <div className="list-tile-user-name" >{user.username}</div>
+                </div>
                 <button onClick={handleClick}>
-                    {method === 'follow' && `Follow ${user.username}?`}
-                    {method === 'unfollow' && `Unfollow ${user.username}?`}
-                    {method === 'remove' && `Remove ${user.username} as a follower?`}
+                    {method === 'follow' && `Follow?`}
+                    {method === 'unfollow' && `Unfollow?`}
+                    {method === 'remove' && `Remove follower?`}
                 </button>
                 <button onClick={closeModal}>Cancel</button>
             </form>
