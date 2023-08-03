@@ -117,6 +117,7 @@ export const followUser = (userId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(addFollow(data));
+        dispatch(setProfile(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -134,6 +135,7 @@ export const unfollowUser = (userId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteFollow(data));
+        dispatch(setProfile(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {
@@ -151,6 +153,7 @@ export const removeFollower = (userId) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteFollower(data));
+        dispatch(setProfile(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

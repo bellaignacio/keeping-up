@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { useParams } from "react-router";
 import Navigation from "../Navigation";
 import ListTile from "../ListTile";
+import OpenModalButton from "../OpenModalButton";
+import FollowModal from "../FollowModal";
 import * as userActions from "../../store/user";
 import * as listActions from "../../store/list";
 import './Profile.css';
@@ -11,6 +13,7 @@ import './Profile.css';
 function ProfilePage() {
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const sessionFollowings = useSelector((state) => state.user.followings);
     const profileUser = useSelector((state) => state.user.profile);
@@ -44,11 +47,17 @@ function ProfilePage() {
                                 <p>{profileUser.username}</p>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
-                                        return (<button>Edit profile</button>);
+                                        return (<button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile</button>);
                                     } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {
-                                        return (<button>Following</button>);
+                                        return (<OpenModalButton
+                                            buttonText="Following"
+                                            modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
+                                        />);
                                     } else {
-                                        return (<button>Follow</button>);
+                                        return (<OpenModalButton
+                                            buttonText="Follow"
+                                            modalComponent={<FollowModal user={profileUser} method={"follow"} />}
+                                        />);
                                     }
                                 })()}
                             </div>
