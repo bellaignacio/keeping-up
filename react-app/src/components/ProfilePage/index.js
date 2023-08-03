@@ -66,10 +66,12 @@ function ProfilePage() {
                                 <OpenModalButton
                                     buttonText={`${profileUser.total_followers} followers`}
                                     modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Followers" users={profileUser.followers} />}
+                                    disabled={profileUser.total_followers === 0}
                                 />
                                 <OpenModalButton
                                     buttonText={`${profileUser.total_followings} following`}
                                     modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Following" users={profileUser.followings} />}
+                                    disabled={profileUser.total_followings === 0}
                                 />
                             </div>
                             <div>{profileUser.name}</div>

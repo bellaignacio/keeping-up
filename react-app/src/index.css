@@ -28,3 +28,7 @@ ul {
 .error-message::marker {
     content: none;
 }
+
+button {
+    color: black;
+}
