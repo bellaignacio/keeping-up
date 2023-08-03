@@ -6,6 +6,7 @@ import Navigation from "../Navigation";
 import ListTile from "../ListTile";
 import OpenModalButton from "../OpenModalButton";
 import FollowModal from "../FollowModal";
+import UserListModal from "../UserListModal";
 import * as userActions from "../../store/user";
 import * as listActions from "../../store/list";
 import './Profile.css';
@@ -44,7 +45,7 @@ function ProfilePage() {
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">
-                                <p>{profileUser.username}</p>
+                                <div>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
                                         return (<button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile</button>);
@@ -62,12 +63,18 @@ function ProfilePage() {
                                 })()}
                             </div>
                             <div id="profile-summary">
-                                <p>{profileUser.total_lists} lists</p>
-                                <p>{profileUser.total_followers} followers</p>
-                                <p>{profileUser.total_followings} following</p>
+                                <div>{profileUser.total_lists} lists</div>
+                                <OpenModalButton
+                                    buttonText={`${profileUser.total_followers} followers`}
+                                    modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Followers" users={profileUser.followers} />}
+                                />
+                                <OpenModalButton
+                                    buttonText={`${profileUser.total_followings} following`}
+                                    modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Following" users={profileUser.followings} />}
+                                />
                             </div>
-                            <p>{profileUser.name}</p>
-                            <p>{profileUser.bio}</p>
+                            <div>{profileUser.name}</div>
+                            <div>{profileUser.bio}</div>
                         </div>
                     </div>
                     <hr id="profile-hr"></hr>

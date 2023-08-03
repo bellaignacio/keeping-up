@@ -6,6 +6,7 @@
 
 #profile-header {
     display: flex;
+    padding-top: 30px;
 }
 
 #profile-image {
@@ -19,18 +20,28 @@
 #profile-info {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    padding: 10px 0;
     margin-left: 30px;
+    row-gap: 25px;
 }
 
 #profile-info-header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 #profile-summary {
     display: flex;
     justify-content: space-evenly;
-    column-gap: 10px;
+    column-gap: 15px;
+}
+
+#profile-summary button {
+    border: none;
+    background: none;
+    padding: 0;
 }
 
 #profile-hr {

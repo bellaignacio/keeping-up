@@ -1,3 +1,4 @@
+import { useHistory } from "react-router";
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as userActions from "../../store/user";
@@ -6,6 +7,7 @@ import './Follow.css';
 function FollowModal({ user, method }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     const handleClick = async (e) => {
         e.preventDefault();
@@ -16,6 +18,7 @@ function FollowModal({ user, method }) {
         } else if (method === 'remove') {
             dispatch(userActions.removeFollower(user.id));
         }
+        history.push(`/${user.id}`);
         closeModal();
     };
 

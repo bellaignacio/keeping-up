@@ -3,6 +3,7 @@
 html, body {
     width: 100%;
     min-width: 800px;
+    font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
 }
 
 a {
