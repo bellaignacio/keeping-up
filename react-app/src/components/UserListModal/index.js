@@ -1,4 +1,4 @@
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useModal } from '../../context/Modal';
 import OpenModalButton from "../OpenModalButton";
@@ -9,8 +9,6 @@ function UserListModal({ isSessionUser, title, users }) {
     const { closeModal } = useModal();
     const history = useHistory();
     const sessionFollowings = useSelector((state) => state.user.followings);
-    const sessionFollowers = useSelector((state) => state.user.followers);
-
 
     const handleUserClick = (userId) => {
         history.push(`/${userId}`);

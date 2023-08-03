@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect, useHistory } from "react-router-dom";
-import { useParams } from "react-router";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import ListTile from "../ListTile";
 import OpenModalButton from "../OpenModalButton";

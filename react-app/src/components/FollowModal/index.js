@@ -1,4 +1,4 @@
-import { useHistory } from "react-router";
+import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as userActions from "../../store/user";
