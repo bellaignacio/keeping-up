@@ -96,6 +96,7 @@ function ListPage() {
             setErrors(data);
         } else {
             setComment("");
+            document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
     };
 
@@ -145,7 +146,7 @@ function ListPage() {
                                     <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
                                 </div>
                             </div>
-                            {listObj.comments.map(commentObj => {
+                            {(listObj.comments.sort((e1, e2) => new Date(e1.created_at).getTime() - new Date(e2.created_at).getTime())).map(commentObj => {
                                 return (
                                     <div key={commentObj.id} className="list-tile-comment">
                                         <img className="list-tile-user-image" src={commentObj.user.image_url} alt={commentObj.user.username}

@@ -19,7 +19,11 @@ function UserListModal({ isSessionUser, title, users }) {
         <div id="user-list-modal-container">
             <div>{title}</div>
             <div id="user-list">
-                {users.map(user => {
+                {(users.sort((a, b) => {
+                    if (a.username.toLowerCase() < b.username.toLowerCase()) return -1;
+                    else if (a.username.toLowerCase() > b.username.toLowerCase()) return 1;
+                    else return 0;
+                })).map(user => {
                     return (
                         <div className="user-list-item" key={user.id}>
                             <div className="list-tile-header" onClick={() => handleUserClick(user.id)}>

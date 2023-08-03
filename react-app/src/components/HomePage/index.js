@@ -27,10 +27,10 @@ function HomePage() {
         <>
             <Navigation />
             <div id="home-container">
-                <FollowingBar users={followings}/>
+                <FollowingBar users={followings} />
                 {isFollowingsListsLoaded &&
                     <div id="list-tile-container">
-                        {followingsLists.length > 0 ? followingsLists.map(listObj => {
+                        {followingsLists.length > 0 ? (followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );

@@ -27,7 +27,7 @@ function ExplorePage() {
             <div id="explore-container">
                 {isPublicListsLoaded &&
                     <div id="list-tile-container">
-                        {publicLists.length > 0 ? publicLists.map(listObj => {
+                        {publicLists.length > 0 ? (publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );

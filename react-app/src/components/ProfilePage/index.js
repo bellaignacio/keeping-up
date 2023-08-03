@@ -87,10 +87,9 @@ function ProfilePage() {
                     {isProfileListsLoaded &&
                         <div id="profile-content">
                             {(() => {
-                                if ((profileUser.id === sessionUser.id && profileUser.total_lists === 0)) {
+                                if (profileUser.id === sessionUser.id && profileUser.total_lists === 0) {
                                     return (<button>Create a list</button>);
-
-                                } else if (!profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
+                                } else if (profileUser.id !== sessionUser.id && !profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
                                     return (<>
                                         <div>This Account is Private</div>
                                         <div>Follow to see their lists.</div>
@@ -101,7 +100,7 @@ function ProfilePage() {
                             })()}
                             <div id="list-tile-container">
                                 {(profileUser.is_public || sessionFollowings.hasOwnProperty(profileUser.id) || profileUser.id === sessionUser.id) &&
-                                    profileLists.map(listObj => {
+                                    (profileLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                                         return (
                                             <ListTile listOnly={true} listObj={listObj} />
                                         );
