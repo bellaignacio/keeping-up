@@ -7,7 +7,8 @@
     overflow: auto;
 }
 
-#home-container .list-tile {
+#home-container .list-tile,
+#explore-container .list-tile {
     width: 400px;
     height: 400px;
     border: 1px solid lightgrey;
@@ -59,10 +60,14 @@
     column-gap: 10px;
     align-items: center;
     padding: 10px 5px;
+    box-sizing: border-box;
+    width: 400px;
 }
 
 .list-tile-footer {
     padding: 5px;
+    box-sizing: border-box;
+    width: 400px;
 }
 
 .list-tile-footer > * {

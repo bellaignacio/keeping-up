@@ -55,6 +55,7 @@
 }
 
 .list-tile-comments {
+    width: 400px;
     height: 325px;
     padding: 5px;
     overflow: scroll;
@@ -62,6 +63,10 @@
 
 .list-tile-comments > * {
     margin: 10px 0;
+    display: flex;
+    column-gap: 10px;
+    padding: 5px;
+    align-items: center;
 }
 
 .fas.fa-ellipsis {

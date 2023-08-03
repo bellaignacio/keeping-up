@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
@@ -97,6 +96,7 @@ function ListPage() {
             setErrors(data);
         } else {
             setComment("");
+            document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
     };
 
@@ -121,7 +121,12 @@ function ListPage() {
                     <div className="list-info">
                         <div className="list-tile-header">
                             <div className="list-tile-subheader">
-                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
+                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
+                                    onError={(e) => {
+                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.onerror = null;
+                                    }}
+                                />
                                 <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
                             </div>
                             {listObj.user_id === sessionUser.id && <OpenModalButton
@@ -130,15 +135,33 @@ function ListPage() {
                             />}
                         </div>
                         <div className="list-tile-comments">
-                            <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
-                            {listObj.comments.map(commentObj => {
+                            <div className="list-tile-caption">
+                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
+                                    onError={(e) => {
+                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.onerror = null;
+                                    }}
+                                />
+                                <div>
+                                    <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
+                                </div>
+                            </div>
+                            {(listObj.comments.sort((e1, e2) => new Date(e1.created_at).getTime() - new Date(e2.created_at).getTime())).map(commentObj => {
                                 return (
-                                    <div key={commentObj.id}>
-                                        <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
-                                        {commentObj.user_id === sessionUser.id && <OpenModalButton
-                                            buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
-                                            modalComponent={<CommentSettingsModal commentObj={commentObj} />}
-                                        />}
+                                    <div key={commentObj.id} className="list-tile-comment">
+                                        <img className="list-tile-user-image" src={commentObj.user.image_url} alt={commentObj.user.username}
+                                            onError={(e) => {
+                                                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                                e.onerror = null;
+                                            }}
+                                        />
+                                        <div>
+                                            <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
+                                            {commentObj.user_id === sessionUser.id && <OpenModalButton
+                                                buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
+                                                modalComponent={<CommentSettingsModal commentObj={commentObj} />}
+                                            />}
+                                        </div>
                                     </div>
                                 );
                             })}

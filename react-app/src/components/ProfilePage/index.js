@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { useParams } from "react-router";
+import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import ListTile from "../ListTile";
+import OpenModalButton from "../OpenModalButton";
+import FollowModal from "../FollowModal";
+import UserListModal from "../UserListModal";
 import * as userActions from "../../store/user";
 import * as listActions from "../../store/list";
 import './Profile.css';
@@ -11,6 +13,7 @@ import './Profile.css';
 function ProfilePage() {
     const { userId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
     const sessionFollowings = useSelector((state) => state.user.followings);
     const profileUser = useSelector((state) => state.user.profile);
@@ -37,38 +40,56 @@ function ProfilePage() {
                 <div id="profile-container">
                     <div id="profile-header">
                         <div>
-                            <img id="profile-image" src={profileUser.image_url} alt={profileUser.username} />
+                            <img id="profile-image" src={profileUser.image_url} alt={profileUser.username}
+                                onError={(e) => {
+                                    e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                    e.onerror = null;
+                                }}
+                            />
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">
-                                <p>{profileUser.username}</p>
+                                <div>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
-                                        return (<button>Edit profile</button>);
+                                        return (<button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile</button>);
                                     } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {
-                                        return (<button>Following</button>);
+                                        return (<OpenModalButton
+                                            buttonText="Following"
+                                            modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
+                                        />);
                                     } else {
-                                        return (<button>Follow</button>);
+                                        return (<OpenModalButton
+                                            buttonText="Follow"
+                                            modalComponent={<FollowModal user={profileUser} method={"follow"} />}
+                                        />);
                                     }
                                 })()}
                             </div>
                             <div id="profile-summary">
-                                <p>{profileUser.total_lists} lists</p>
-                                <p>{profileUser.total_followers} followers</p>
-                                <p>{profileUser.total_followings} following</p>
+                                <div>{profileUser.total_lists} lists</div>
+                                <OpenModalButton
+                                    buttonText={`${profileUser.total_followers} followers`}
+                                    modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Followers" users={profileUser.followers} />}
+                                    disabled={profileUser.total_followers === 0}
+                                />
+                                <OpenModalButton
+                                    buttonText={`${profileUser.total_followings} following`}
+                                    modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Following" users={profileUser.followings} />}
+                                    disabled={profileUser.total_followings === 0}
+                                />
                             </div>
-                            <p>{profileUser.name}</p>
-                            <p>{profileUser.bio}</p>
+                            <div>{profileUser.name}</div>
+                            <div>{profileUser.bio}</div>
                         </div>
                     </div>
                     <hr id="profile-hr"></hr>
                     {isProfileListsLoaded &&
                         <div id="profile-content">
                             {(() => {
-                                if ((profileUser.id === sessionUser.id && profileUser.total_lists === 0)) {
+                                if (profileUser.id === sessionUser.id && profileUser.total_lists === 0) {
                                     return (<button>Create a list</button>);
-
-                                } else if (!profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
+                                } else if (profileUser.id !== sessionUser.id && !profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
                                     return (<>
                                         <div>This Account is Private</div>
                                         <div>Follow to see their lists.</div>
@@ -79,7 +100,7 @@ function ProfilePage() {
                             })()}
                             <div id="list-tile-container">
                                 {(profileUser.is_public || sessionFollowings.hasOwnProperty(profileUser.id) || profileUser.id === sessionUser.id) &&
-                                    profileLists.map(listObj => {
+                                    (profileLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                                         return (
                                             <ListTile listOnly={true} listObj={listObj} />
                                         );

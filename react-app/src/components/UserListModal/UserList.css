@@ -1,0 +1,11 @@
+#user-list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.user-list-item {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 50px;
+}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { useHistory } from "react-router";
+import { Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import * as listActions from "../../store/list";
 import './CreateList.css';

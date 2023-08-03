@@ -67,3 +67,9 @@
   font-size: 18pt;
   margin: 10px;
 }
+
+.profile-icon-image {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px double lightgrey;
+}
