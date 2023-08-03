@@ -15,7 +15,12 @@ function Navigation() {
 				<div id="home-icon" onClick={() => history.push('/')}><i className="fas fa-home"></i></div>
 				<div id="explore-icon" onClick={() => history.push('/explore')}><i className="far fa-compass"></i></div>
 				<div id="create-icon" onClick={() => history.push('/lists/new')}><i className="far fa-plus-square"></i></div>
-				<div id="profile-icon" onClick={() => history.push(`/${sessionUser?.id}`)}><img className="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username} /></div>
+				<div id="profile-icon" onClick={() => history.push(`/${sessionUser?.id}`)}><img className="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username}
+					onError={(e) => {
+						e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+						e.onerror = null;
+					}}
+				/></div>
 				<ProfileButton sessionUser={sessionUser} />
 			</div>
 		);

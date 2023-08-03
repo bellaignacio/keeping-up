@@ -120,7 +120,12 @@ function ListPage() {
                     <div className="list-info">
                         <div className="list-tile-header">
                             <div className="list-tile-subheader">
-                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
+                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
+                                    onError={(e) => {
+                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.onerror = null;
+                                    }}
+                                />
                                 <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
                             </div>
                             {listObj.user_id === sessionUser.id && <OpenModalButton
@@ -129,15 +134,31 @@ function ListPage() {
                             />}
                         </div>
                         <div className="list-tile-comments">
-                            <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
+                            <div className="list-tile-caption">
+                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
+                                    onError={(e) => {
+                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.onerror = null;
+                                    }}
+                                />
+                                <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
+                            </div>
                             {listObj.comments.map(commentObj => {
                                 return (
-                                    <div key={commentObj.id}>
-                                        <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
-                                        {commentObj.user_id === sessionUser.id && <OpenModalButton
-                                            buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
-                                            modalComponent={<CommentSettingsModal commentObj={commentObj} />}
-                                        />}
+                                    <div key={commentObj.id} className="list-tile-comment">
+                                        <img className="list-tile-user-image" src={commentObj.user.image_url} alt={commentObj.user.username}
+                                            onError={(e) => {
+                                                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                                e.onerror = null;
+                                            }}
+                                        />
+                                        <div>
+                                            <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
+                                            {commentObj.user_id === sessionUser.id && <OpenModalButton
+                                                buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
+                                                modalComponent={<CommentSettingsModal commentObj={commentObj} />}
+                                            />}
+                                        </div>
                                     </div>
                                 );
                             })}

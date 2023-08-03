@@ -23,7 +23,12 @@ function UserListModal({ isSessionUser, title, users }) {
                     return (
                         <div className="user-list-item" key={user.id}>
                             <div className="list-tile-header" onClick={() => handleUserClick(user.id)}>
-                                <img className="list-tile-user-image" src={user.image_url} alt={user.username} />
+                                <img className="list-tile-user-image" src={user.image_url} alt={user.username}
+                                    onError={(e) => {
+                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.onerror = null;
+                                    }}
+                                />
                                 <div>
                                     <div className="list-tile-user-name">{user.username}</div>
                                     {user.name !== null && <div>{user.name}</div>}

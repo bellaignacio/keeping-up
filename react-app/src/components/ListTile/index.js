@@ -105,7 +105,12 @@ function ListTile({ listObj, listOnly }) {
         return (
             <div className="list-tile-wrapper">
                 <div className="list-tile-header">
-                    <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
+                    <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
+                        onError={(e) => {
+                            e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                            e.onerror = null;
+                        }}
+                    />
                     <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
                 </div>
                 <div className="list-tile" style={listStyleSettings(listObj.list_style)} onClick={() => history.push(`/lists/${listObj.id}`)} >

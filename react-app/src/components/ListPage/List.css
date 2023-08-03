@@ -62,6 +62,10 @@
 
 .list-tile-comments > * {
     margin: 10px 0;
+    display: flex;
+    column-gap: 10px;
+    padding: 5px;
+    align-items: center;
 }
 
 .fas.fa-ellipsis {

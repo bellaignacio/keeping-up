@@ -40,7 +40,12 @@ function ProfilePage() {
                 <div id="profile-container">
                     <div id="profile-header">
                         <div>
-                            <img id="profile-image" src={profileUser.image_url} alt={profileUser.username} />
+                            <img id="profile-image" src={profileUser.image_url} alt={profileUser.username}
+                                onError={(e) => {
+                                    e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                    e.onerror = null;
+                                }}
+                            />
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">

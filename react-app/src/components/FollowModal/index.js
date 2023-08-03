@@ -26,7 +26,12 @@ function FollowModal({ user, method }) {
         <div id="follow-modal-container">
             <form id="follow-form">
                 <div className="list-tile-header">
-                    <img className="list-tile-user-image" src={user.image_url} alt={user.username} />
+                    <img className="list-tile-user-image" src={user.image_url} alt={user.username}
+                        onError={(e) => {
+                            e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                            e.onerror = null;
+                        }}
+                    />
                     <div className="list-tile-user-name" >{user.username}</div>
                 </div>
                 <button onClick={handleClick}>
