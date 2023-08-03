@@ -10,13 +10,13 @@ import './Home.css';
 function HomePage() {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
-    const publicLists = useSelector((state) => Object.values(state.list.public));
-    const [isPublicListsLoaded, setIsPublicListsLoaded] = useState(false)
+    const followingsLists = useSelector((state) => Object.values(state.list.followings));
+    const [isFollowingsListsLoaded, setIsFollowingsListsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(userActions.getFollowings());
-        dispatch(listActions.getPublicLists())
-            .then(() => setIsPublicListsLoaded(true));
+        dispatch(listActions.getFollowingsLists())
+            .then(() => setIsFollowingsListsLoaded(true));
     }, [dispatch]);
 
     if (!sessionUser) return <Redirect to="/about" />;
@@ -25,9 +25,9 @@ function HomePage() {
         <>
             <Navigation />
             <div id="home-container">
-                {isPublicListsLoaded &&
+                {isFollowingsListsLoaded &&
                     <div id="list-tile-container">
-                        {publicLists.map(listObj => {
+                        {followingsLists.map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );
