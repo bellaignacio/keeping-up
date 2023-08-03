@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { useParams, Redirect } from "react-router-dom";
+import Navigation from "../Navigation";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
 import CommentSettingsModal from "../CommentSettingsModal";
@@ -101,73 +102,79 @@ function ListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    return (isListLoaded &&
-        <div id="list-page-wrapper">
-            <div className="list-tile" style={listStyleSettings(listObj.list_style)}>
-                <div className="list-tile-content">
-                    <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
-                    <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                        {listObj.list_items.map(li => (
-                            <li key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <div className="list-info">
-                <div className="list-tile-header">
-                    <div className="list-tile-subheader">
-                        <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
-                        <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
-                    </div>
-                    {listObj.user_id === sessionUser.id && <OpenModalButton
-                        buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
-                        modalComponent={<ListSettingsModal listObj={listObj} />}
-                    />}
-                </div>
-                <div className="list-tile-comments">
-                    <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
-                    {listObj.comments.map(commentObj => {
-                        return (
-                            <div key={commentObj.id}>
-                                <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
-                                {commentObj.user_id === sessionUser.id && <OpenModalButton
-                                    buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
-                                    modalComponent={<CommentSettingsModal commentObj={commentObj} />}
-                                />}
-                            </div>
-                        );
-                    })}
-                </div>
-                <div className="list-tile-footer">
-                    <div className="list-tile-icons">
-                        <span className={isLiked ? "red-like-icon" : ""}>
-                            <i className={isLiked ? "fas fa-heart" : "far fa-heart"} onClick={handleLike}></i>
-                        </span>
-                        <span>
-                            <i className="far fa-comment" onClick={() => document.getElementById("comment-input").focus()}></i>
-                        </span>
-                    </div>
-                    {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
-                    <div>
-                        <form className="list-tile-comment-form" onSubmit={handleComment}>
-                            <input
-                                id="comment-input"
-                                type="text"
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                                placeholder="Add a comment..."
-                                required
-                            />
-                            {errors.length > 0 && <ul className="error-message-container">
-                                {errors.map((error, idx) => (
-                                    <li className="error-message" key={idx}>{error}</li>
+    return (
+        <>
+            <Navigation />
+
+            {isListLoaded &&
+                <div id="list-page-wrapper">
+                    <div className="list-tile" style={listStyleSettings(listObj.list_style)}>
+                        <div className="list-tile-content">
+                            <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
+                            <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
+                                {listObj.list_items.map(li => (
+                                    <li key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                                 ))}
-                            </ul>}
-                        </form>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="list-info">
+                        <div className="list-tile-header">
+                            <div className="list-tile-subheader">
+                                <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username} />
+                                <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
+                            </div>
+                            {listObj.user_id === sessionUser.id && <OpenModalButton
+                                buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
+                                modalComponent={<ListSettingsModal listObj={listObj} />}
+                            />}
+                        </div>
+                        <div className="list-tile-comments">
+                            <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
+                            {listObj.comments.map(commentObj => {
+                                return (
+                                    <div key={commentObj.id}>
+                                        <span className="list-tile-user-name" onClick={() => history.push(`/${commentObj.user.id}`)}>{commentObj.user.username}</span> {commentObj.comment}
+                                        {commentObj.user_id === sessionUser.id && <OpenModalButton
+                                            buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}
+                                            modalComponent={<CommentSettingsModal commentObj={commentObj} />}
+                                        />}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        <div className="list-tile-footer">
+                            <div className="list-tile-icons">
+                                <span className={isLiked ? "red-like-icon" : ""}>
+                                    <i className={isLiked ? "fas fa-heart" : "far fa-heart"} onClick={handleLike}></i>
+                                </span>
+                                <span>
+                                    <i className="far fa-comment" onClick={() => document.getElementById("comment-input").focus()}></i>
+                                </span>
+                            </div>
+                            {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
+                            <div>
+                                <form className="list-tile-comment-form" onSubmit={handleComment}>
+                                    <input
+                                        id="comment-input"
+                                        type="text"
+                                        value={comment}
+                                        onChange={(e) => setComment(e.target.value)}
+                                        placeholder="Add a comment..."
+                                        required
+                                    />
+                                    {errors.length > 0 && <ul className="error-message-container">
+                                        {errors.map((error, idx) => (
+                                            <li className="error-message" key={idx}>{error}</li>
+                                        ))}
+                                    </ul>}
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            }
+        </>
     );
 }
 

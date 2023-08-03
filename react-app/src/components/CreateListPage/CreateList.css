@@ -1,8 +1,9 @@
 #create-list-container {
     width: 800px;
-    margin: auto;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
+    padding-left: 40px;
 }
 
 #create-list-form {

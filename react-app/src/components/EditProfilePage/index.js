@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Navigation from "../Navigation";
 import './EditProfile.css';
 
 function EditProfilePage() {
@@ -9,7 +10,10 @@ function EditProfilePage() {
 
     return (
         <>
-            <h1>EditProfilePage</h1>
+            <Navigation />
+            <div id="edit-profile-container">
+                <div>EditProfilePage</div>
+            </div>
         </>
     );
 }
