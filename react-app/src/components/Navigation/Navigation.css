@@ -10,10 +10,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: min-content;
+  align-items: center;
+  width: 40px;
   height: 95vh;
-  position: absolute;
+  position: fixed;
   padding: 10px;
+  border-bottom: none;
   border-right: 1px solid lightgrey;
   background-color: white;
   z-index: 5;
@@ -24,4 +26,26 @@
   font-size: 24pt;
   width: min-content;
   height: 30px;
+}
+
+#navigation-container.logged-out {
+  flex-direction: row;
+  width: 95vw;
+  height: 50px;
+  position: static;
+  border-bottom: 1px solid lightgrey;
+  border-right: none;
+  margin-bottom: 50px;
+}
+
+#keeping-up-title {
+  font-size: 30pt;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+#account-buttons button {
+  font-size: 18pt;
+  margin: 10px;
 }
