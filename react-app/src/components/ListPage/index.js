@@ -141,7 +141,9 @@ function ListPage() {
                                         e.onerror = null;
                                     }}
                                 />
-                                <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
+                                <div>
+                                    <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
+                                </div>
                             </div>
                             {listObj.comments.map(commentObj => {
                                 return (
