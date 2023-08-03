@@ -4,22 +4,10 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
-function Navigation({ isLoaded }) {
+function Navigation() {
 	const history = useHistory();
 	const sessionUser = useSelector(state => state.session.user);
 
-	// return (
-	// 	<ul>
-	// 		<li>
-	// 			<NavLink exact to="/">Home</NavLink>
-	// 		</li>
-	// 		{isLoaded && (
-	// 			<li>
-	// 				<ProfileButton user={sessionUser} />
-	// 			</li>
-	// 		)}
-	// 	</ul>
-	// );
 	if (sessionUser) {
 		return (
 			<div id="navigation-container">
@@ -28,7 +16,7 @@ function Navigation({ isLoaded }) {
 				<div id="explore-icon" onClick={() => history.push('/explore')}><i className="far fa-compass"></i></div>
 				<div id="create-icon" onClick={() => history.push('/lists/new')}><i className="far fa-plus-square"></i></div>
 				<div id="profile-icon" onClick={() => history.push(`/${sessionUser?.id}`)}><img className="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username} /></div>
-				{isLoaded && <ProfileButton user={sessionUser} />}
+				<ProfileButton sessionUser={sessionUser} />
 			</div>
 		);
 	} else {

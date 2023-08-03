@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Navigation from "../Navigation";
 import './About.css';
 
 function AboutPage() {
@@ -9,7 +10,8 @@ function AboutPage() {
 
     return (
         <>
-            <h1>AboutPage</h1>
+            <Navigation />
+            <div>AboutPage</div>
         </>
     );
 }
