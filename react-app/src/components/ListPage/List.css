@@ -32,6 +32,14 @@
 
 .list-info .list-tile-footer {
     height: 95px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.list-info .list-tile-footer > div:last-child {
+    width: 100%;
 }
 
 .list-info .list-tile-header {
