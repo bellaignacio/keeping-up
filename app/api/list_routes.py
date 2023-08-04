@@ -140,7 +140,7 @@ def update_li(li_id):
     if 'description' in data:
         list_item.description = data['description']
     db.session.commit()
-    return list_item.to_dict()
+    return list.to_dict()
 
 
 @list_routes.route('/<int:list_id>', methods=['DELETE'])

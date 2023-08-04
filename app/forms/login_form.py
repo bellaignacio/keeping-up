@@ -17,9 +17,7 @@ def password_matches(form, field):
     password = field.data
     credentials = form.data['credentials']
     user = User.query.filter((User.email == credentials) | (User.username == credentials)).first()
-    if not user:
-        raise ValidationError('Credentials provided not found.')
-    if not user.check_password(password):
+    if not user or not user.check_password(password):
         raise ValidationError('Password was incorrect.')
 
 

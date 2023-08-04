@@ -39,7 +39,7 @@ def create_comment(list_id):
         )
         db.session.add(comment)
         db.session.commit()
-        return comment.to_dict()
+        return list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
@@ -54,12 +54,13 @@ def update_comment(comment_id):
         return {'errors': f"Comment {comment_id} does not exist."}, 400
     if comment.user_id != current_user.id:
         return {'errors': f"User is not the creator of comment {comment_id}."}, 401
+    list = List.query.get(comment.list_id)
     form = CommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         form.populate_obj(comment)
         db.session.commit()
-        return comment.to_dict()
+        return list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
@@ -77,4 +78,4 @@ def delete_comment(comment_id):
         return {'errors': f"User is not the creator of comment {comment_id} nor of list {list.id}."}, 401
     db.session.delete(comment)
     db.session.commit()
-    return {'message': 'Delete successful.'}
+    return list.to_dict()

@@ -1,0 +1,47 @@
+#create-list-container {
+    width: 800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    padding-left: 40px;
+}
+
+#create-list-form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgrey;
+    margin: 10px;
+    padding: 30px;
+    row-gap: 10px;
+}
+
+#create-list-form input,
+#create-list-form textarea,
+#create-list-form > button {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+#title-settings-container,
+#list-settings-container,
+#list-completed-settings-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    column-gap: 10px;
+    margin-top: 30px;
+}
+
+#title-settings-container > *,
+#list-settings-container > *,
+#list-completed-settings-container > * {
+    font-family: 'Times New Roman', Times, serif;
+    min-width: 30px;
+    height: 30px;
+}
+
+#title-settings-container > input,
+#list-settings-container > input,
+#list-completed-settings-container > input {
+    width: 50px;
+}

@@ -1,1 +1,40 @@
 /* TODO Add site wide styles */
+
+html, body {
+    width: 100%;
+    min-width: 800px;
+    font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+}
+
+ul {
+    padding-left: 25px;
+    margin: 10px 0px;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+button:hover,
+a:hover {
+    cursor: pointer;
+}
+
+.error-message-container {
+    padding: 0;
+    text-align: center;
+}
+
+.error-message {
+    color: red;
+}
+
+.error-message::marker {
+    content: none;
+}
