@@ -37,7 +37,7 @@ function SignupFormPage() {
       <Navigation />
       <div id="signup-container">
         <form id="signup-form" onSubmit={handleSubmit}>
-          <NavLink to="/about">KeepingUp</NavLink>
+          <NavLink to="/about">Keeping Up</NavLink>
           {errors.length > 0 && <ul className="error-message-container">
             {errors.map((error, idx) => (
               <li className="error-message" key={idx}>{error}</li>
