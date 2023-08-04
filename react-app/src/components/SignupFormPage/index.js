@@ -37,7 +37,7 @@ function SignupFormPage() {
       <Navigation />
       <div id="signup-container">
         <form id="signup-form" onSubmit={handleSubmit}>
-          <NavLink to="/about">Keeping Up</NavLink>
+          <NavLink id="signup-form-title" to="/about">Keeping Up</NavLink>
           {errors.length > 0 && <ul className="error-message-container">
             {errors.map((error, idx) => (
               <li className="error-message" key={idx}>{error}</li>
@@ -88,6 +88,7 @@ function SignupFormPage() {
           <label>
             Make Account Public?
             <input
+              id="checkbox"
               type="checkbox"
               checked={isPublic}
               onChange={(e) => setIsPublic(!isPublic)}

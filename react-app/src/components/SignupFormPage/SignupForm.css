@@ -13,6 +13,23 @@
     row-gap: 10px;
 }
 
+#signup-form-title {
+    padding: 10px;
+}
+
+#signup-form input {
+    width: 200px;
+}
+
+#signup-form input#checkbox {
+    width: min-content;
+}
+
+#signup-form button {
+    width: 100px;
+    border-radius: 5px;
+}
+
 #signup-to-login {
     text-align: center;
     border: 1px solid lightgrey;

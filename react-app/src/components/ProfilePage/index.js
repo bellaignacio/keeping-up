@@ -79,8 +79,10 @@ function ProfilePage() {
                                     disabled={profileUser.total_followings === 0}
                                 />
                             </div>
-                            <div>{profileUser.name}</div>
-                            <div>{profileUser.bio}</div>
+                            <div>
+                                {profileUser.name}
+                                <p>{profileUser.bio}</p>
+                            </div>
                         </div>
                     </div>
                     <hr id="profile-hr"></hr>

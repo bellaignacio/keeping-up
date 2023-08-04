@@ -13,6 +13,19 @@
     row-gap: 10px;
 }
 
+#login-form-title {
+    padding: 10px;
+}
+
+#login-form input {
+    width: 200px;
+}
+
+#login-form button {
+    width: 100px;
+    border-radius: 5px;
+}
+
 #login-to-signup {
     text-align: center;
     border: 1px solid lightgrey;
