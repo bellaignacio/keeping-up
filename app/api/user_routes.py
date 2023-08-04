@@ -1,6 +1,7 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from app.models import User
+from app.models import db, User
+from app.forms import ProfileForm
 from app.api.auth_routes import validation_errors_to_error_messages
 
 user_routes = Blueprint('users', __name__)
@@ -45,3 +46,27 @@ def follower_users():
     Query for all users that follow the current user and returns them in a list of user dictionaries
     """
     return {'users': [user.to_dict() for user in current_user.followers]}
+
+
+@user_routes.route('/<int:user_id>', methods=["PUT"])
+@login_required
+def update_user(user_id):
+    """
+    Updates a user
+    """
+    user = User.query.get(user_id)
+    if not user:
+        return {'errors': f"User {user_id} does not exist."}, 400
+    if user.id != current_user.id:
+        return {'errors': f"User can only edit their own profile."}, 401
+    form = ProfileForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        user.username = form.data['username']
+        user.name = form.data['name']
+        user.bio = form.data['bio']
+        user.image_url = form.data['image_url']
+        user.is_public = form.data['is_public']
+        db.session.commit()
+        return user.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
