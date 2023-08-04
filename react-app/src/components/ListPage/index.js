@@ -17,13 +17,17 @@ function ListPage() {
     const listObj = useSelector((state) => state.list.current);
     const [isListLoaded, setIsListLoaded] = useState(false);
     const [comment, setComment] = useState("");
-    const [isLiked, setIsLiked] = useState((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
+    const [isLiked, setIsLiked] = useState(null);
     const [errors, setErrors] = useState([]);
 
     useEffect(() => {
         dispatch(listActions.getList(listId))
             .then(() => setIsListLoaded(true));
     }, [dispatch, listId]);
+
+    useEffect(() => {
+        setIsLiked((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
+    }, [listObj])
 
     function listStyleSettings(list_style) {
         return {
