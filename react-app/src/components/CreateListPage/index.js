@@ -51,8 +51,6 @@ function CreateListPage({ listObj, isEdit }) {
     return (
         <>
             <Navigation />
-
-
             <div id="create-list-container">
                 <form id="create-list-form" onSubmit={handleSubmit}>
                     <div>{isEdit ? "Edit the list" : "Create a list"}</div>
