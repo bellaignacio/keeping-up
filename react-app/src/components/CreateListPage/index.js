@@ -79,6 +79,8 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </label>
 
+                    <br></br>
+
                     <div id="title-settings-container">
                         <select
                             value={titleFont}
@@ -182,6 +184,8 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </div>
 
+                    <br></br>
+
                     <div id="list-settings-container">
                         <select
                             value={liFont}
@@ -260,6 +264,8 @@ function CreateListPage({ listObj, isEdit }) {
                             }}
                         />
                     </div>
+
+                    <br></br>
 
                     <div id="list-completed-settings-container">
                         <button

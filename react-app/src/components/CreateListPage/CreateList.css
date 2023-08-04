@@ -16,10 +16,15 @@
 }
 
 #create-list-form input,
-#create-list-form textarea,
-#create-list-form > button {
+#create-list-form textarea {
     box-sizing: border-box;
     width: 100%;
+}
+
+#create-list-form > button {
+    box-sizing: border-box;
+    width: 100px;
+    align-self: center;
 }
 
 #title-settings-container,
@@ -29,7 +34,6 @@
     justify-content: flex-start;
     align-items: center;
     column-gap: 10px;
-    margin-top: 30px;
 }
 
 #title-settings-container > *,

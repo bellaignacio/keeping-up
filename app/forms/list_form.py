@@ -4,9 +4,9 @@ from wtforms.validators import DataRequired, Optional, Regexp, ValidationError
 
 
 class ListForm(FlaskForm):
-    title = StringField('title', validators=[DataRequired()])
-    caption = StringField('caption', validators=[DataRequired()])
-    list_items = TextAreaField('list_items', validators=[DataRequired()])
+    title = StringField('title', validators=[DataRequired(message='Title is required.')])
+    caption = StringField('caption', validators=[DataRequired(message='Caption is required.')])
+    list_items = TextAreaField('list_items', validators=[DataRequired(message='List is required.')])
     image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
     title_font = StringField('title_font')
     title_size = StringField('title_size')
