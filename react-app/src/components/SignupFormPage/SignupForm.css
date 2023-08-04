@@ -6,27 +6,30 @@
 #signup-form {
     display: flex;
     flex-direction: column;
-    align-items: center;
     border: 1px solid lightgrey;
     margin: 10px;
-    padding: 10px;
+    padding: 10px 70px;
     row-gap: 10px;
 }
 
 #signup-form-title {
     padding: 10px;
+    align-self: center;
 }
 
 #signup-form input {
-    width: 200px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 #signup-form input#checkbox {
     width: min-content;
+    align-self: start;
 }
 
 #signup-form button {
     width: 100px;
+    align-self: center;
 }
 
 #signup-to-login {

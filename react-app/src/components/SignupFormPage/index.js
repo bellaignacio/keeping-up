@@ -94,6 +94,7 @@ function SignupFormPage() {
               onChange={(e) => setIsPublic(!isPublic)}
             />
           </label>
+          <br></br>
           <label>
             <input
               type="password"

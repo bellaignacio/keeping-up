@@ -93,6 +93,35 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 	}
 };
 
+export const editProfile = (userId, username, name, bio, imgUrl, isPublic, password) => async (dispatch) => {
+	const response = await fetch(`/api/users/${userId}`, {
+		method: "PUT",
+		headers: {
+			"Content-Type": "application/json"
+		},
+		body: JSON.stringify({
+			username,
+			name,
+			bio,
+			image_url: imgUrl ,
+			is_public: isPublic,
+			password
+		})
+	});
+	if (response.ok) {
+		const data = await response.json();
+		dispatch(setUser(data));
+		return null;
+	} else if (response.status < 500) {
+		const data = await response.json();
+		if (data.errors) {
+			return data.errors;
+		}
+	} else {
+		return ["An error occurred. Please try again."];
+	}
+};
+
 export default function sessionReducer(state = initialState, action) {
 	let newState;
 	switch (action.type) {
