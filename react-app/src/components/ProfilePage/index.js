@@ -67,7 +67,7 @@ function ProfilePage() {
                                 })()}
                             </div>
                             <div id="profile-summary">
-                                <div>{profileUser.total_lists} list{profileUser.total_lists > 1 && 's'}</div>
+                                <div>{profileUser.total_lists} list{(profileUser.total_lists > 1 || profileUser.total_lists === 0) && 's'}</div>
                                 <OpenModalButton
                                     buttonText={`${profileUser.total_followers} follower${profileUser.total_followers > 1 ? 's' : ''}`}
                                     modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Followers" users={profileUser.followers} />}
