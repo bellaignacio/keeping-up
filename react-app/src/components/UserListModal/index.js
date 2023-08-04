@@ -1,15 +1,22 @@
+import { useEffect  } from "react";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useModal } from '../../context/Modal';
 import OpenModalButton from "../OpenModalButton";
 import FollowModal from "../FollowModal";
+import * as userActions from "../../store/user";
 import './UserList.css';
 
 function UserListModal({ isSessionUser, title, users }) {
     const { closeModal } = useModal();
     const history = useHistory();
+    const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const sessionFollowings = useSelector((state) => state.user.followings);
+
+    useEffect(() => {
+        dispatch(userActions.getFollowings());
+    }, [dispatch]);
 
     const handleUserClick = (userId) => {
         history.push(`/${userId}`);

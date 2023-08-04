@@ -5,6 +5,7 @@ import Navigation from "../Navigation";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
 import CommentSettingsModal from "../CommentSettingsModal";
+import UserListModal from "../UserListModal";
 import * as listActions from "../../store/list";
 import './List.css';
 
@@ -175,7 +176,10 @@ function ListPage() {
                                     <i className="far fa-comment" onClick={() => document.getElementById("comment-input").focus()}></i>
                                 </span>
                             </div>
-                            {listObj.total_likes > 0 && <div className="list-tile-likes">{listObj.total_likes} likes</div>}
+                            {listObj.total_likes > 0 && <OpenModalButton
+                                buttonText={`${listObj.total_likes} likes`}
+                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)}/>}
+                            />}
                             <div>
                                 <form className="list-tile-comment-form" onSubmit={handleComment}>
                                     <input

@@ -74,6 +74,15 @@
     margin: 5px 0;
 }
 
+.list-tile-footer button {
+    font-size: inherit;
+    font-family: inherit;
+    border: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
 .list-tile-icons span {
     font-size: 16pt;
     margin-right: 15px;
