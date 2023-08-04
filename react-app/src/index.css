@@ -6,14 +6,24 @@ html, body {
     font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
 }
 
+ul {
+    padding-left: 25px;
+    margin: 10px 0px;
+}
+
 a {
     text-decoration: none;
     color: inherit;
 }
 
-ul {
-    padding-left: 25px;
-    margin: 10px 0px;
+button {
+    border-radius: 5px;
+    border-width: 1px;
+}
+
+button:hover,
+a:hover {
+    cursor: pointer;
 }
 
 .error-message-container {
@@ -27,8 +37,4 @@ ul {
 
 .error-message::marker {
     content: none;
-}
-
-button {
-    color: black;
 }
