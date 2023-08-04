@@ -93,7 +93,7 @@ function ProfilePage() {
                                     return (<button onClick={() => history.push('/lists/new')}>Create a list</button>);
                                 } else if (profileUser.id !== sessionUser.id && !profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
                                     return (<>
-                                        <div>This Account is Private</div>
+                                        <div>This Account is Private.</div>
                                         <div>Follow to see their lists.</div>
                                     </>);
                                 } else if (profileUser.total_lists === 0) {
