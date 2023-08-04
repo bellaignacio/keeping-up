@@ -34,7 +34,10 @@ function HomePage() {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
                             );
-                        }) : <div>There are no lists to show. Check again later!</div>}
+                        }) : <div className="no-lists">
+                            <div>All Caught Up!</div>
+                            <div>There are no lists to show.</div>
+                        </div>}
                     </div>
                 }
             </div>

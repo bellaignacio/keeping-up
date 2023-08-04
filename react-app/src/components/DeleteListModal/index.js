@@ -18,8 +18,8 @@ function DeleteListModal({ listObj }) {
 
     return (
         <div id="delete-list-container">
+            <div id="modal-title">Are you sure you want to delete this list?</div>
             <form id="delete-list-form">
-                <div>Are you sure you want to delete this list?</div>
                 <button onClick={handleDelete}>Delete</button>
                 <button onClick={closeModal}>Cancel</button>
             </form>

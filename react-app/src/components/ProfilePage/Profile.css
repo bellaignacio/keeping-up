@@ -32,10 +32,19 @@
     justify-content: space-between;
 }
 
+#profile-info-header button {
+    padding: 5px;
+}
+
 #profile-summary {
     display: flex;
     justify-content: space-evenly;
     column-gap: 15px;
+}
+
+#profile-summary * {
+    font-size: inherit;
+    font-family: inherit;
 }
 
 #profile-summary button {

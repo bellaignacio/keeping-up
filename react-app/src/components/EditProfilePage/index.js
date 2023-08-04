@@ -13,6 +13,7 @@ function EditProfilePage() {
             <Navigation />
             <div id="edit-profile-container">
                 <div>EditProfilePage</div>
+                <div>Coming Soon...</div>
             </div>
         </>
     );

@@ -2,10 +2,15 @@
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    padding: 10px;
 }
 
 .user-list-item {
     display: flex;
     justify-content: space-between;
     column-gap: 50px;
+}
+
+.user-list-item button {
+    margin: 10px 0;
 }

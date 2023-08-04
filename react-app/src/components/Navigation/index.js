@@ -29,7 +29,7 @@ function Navigation() {
 			<div id="navigation-container" className="logged-out">
 				<div id="keeping-up-title" onClick={() => history.push('/about')}>
 					<i className="fas fa-tasks"></i>
-					<span>KeepingUp</span>
+					<span>Keeping Up</span>
 				</div>
 				<div id="account-buttons">
 					<button onClick={() => history.push("/login")}>Log in</button>
