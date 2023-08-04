@@ -135,7 +135,7 @@ function ListTile({ listObj, listOnly }) {
                         </span>
                     </div>
                     {listObj.total_likes > 0 && <OpenModalButton
-                        buttonText={`${listObj.total_likes} likes`}
+                        buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
                         modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)} />}
                     />}
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>

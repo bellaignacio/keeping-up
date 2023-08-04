@@ -177,7 +177,7 @@ function ListPage() {
                                 </span>
                             </div>
                             {listObj.total_likes > 0 && <OpenModalButton
-                                buttonText={`${listObj.total_likes} likes`}
+                                buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
                                 modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)}/>}
                             />}
                             <div>
