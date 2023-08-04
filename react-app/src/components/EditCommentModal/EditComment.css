@@ -1,0 +1,25 @@
+#edit-comment-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#edit-comment-container input {
+    width: 70%;
+    height: 25px;
+    margin: 10px 0;
+}
+
+#edit-comment-container button {
+    padding: 10px 0;
+    background: none;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+#edit-comment-container  button:last-child {
+    border-bottom: none;
+}

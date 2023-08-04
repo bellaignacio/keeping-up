@@ -8,6 +8,7 @@ import './UserList.css';
 function UserListModal({ isSessionUser, title, users }) {
     const { closeModal } = useModal();
     const history = useHistory();
+    const sessionUser = useSelector((state) => state.session.user);
     const sessionFollowings = useSelector((state) => state.user.followings);
 
     const handleUserClick = (userId) => {
@@ -17,7 +18,7 @@ function UserListModal({ isSessionUser, title, users }) {
 
     return (
         <div id="user-list-modal-container">
-            <div>{title}</div>
+            <div id="modal-title">{title}</div>
             <div id="user-list">
                 {(users.sort((a, b) => {
                     if (a.username.toLowerCase() < b.username.toLowerCase()) return -1;
@@ -38,7 +39,7 @@ function UserListModal({ isSessionUser, title, users }) {
                                     {user.name !== null && <div>{user.name}</div>}
                                 </div>
                             </div>
-                            <OpenModalButton
+                            {user.id !== sessionUser.id && <OpenModalButton
                                 buttonText={
                                     (isSessionUser && title === "Following") ? "Following"
                                         : (isSessionUser && title === "Followers") ? "Remove"
@@ -53,7 +54,7 @@ function UserListModal({ isSessionUser, title, users }) {
                                                 : "follow"
                                     }
                                 />}
-                            />
+                            />}
                         </div>
                     );
                 })}

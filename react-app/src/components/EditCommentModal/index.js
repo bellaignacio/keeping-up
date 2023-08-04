@@ -22,6 +22,7 @@ function EditCommentModal({ commentObj }) {
 
     return (
         <div id="edit-comment-container">
+            <div id="modal-title">Edit Comment</div>
             <form id="edit-comment-form">
                 {errors.length > 0 && <ul className="error-message-container">
                     {errors.map((error, idx) => (

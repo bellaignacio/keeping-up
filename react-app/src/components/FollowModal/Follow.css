@@ -1,0 +1,20 @@
+#modal-title.list-tile-header {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#follow-modal-container button {
+    padding: 10px 0;
+    background: none;
+    width: 100%;
+    border: 1px solid lightgrey;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+}
+
+#follow-modal-container button:last-child {
+    border-top: none;
+    border-bottom: none;
+}

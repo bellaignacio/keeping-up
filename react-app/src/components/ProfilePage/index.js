@@ -88,7 +88,7 @@ function ProfilePage() {
                         <div id="profile-content">
                             {(() => {
                                 if (profileUser.id === sessionUser.id && profileUser.total_lists === 0) {
-                                    return (<button>Create a list</button>);
+                                    return (<button onClick={() => history.push('/lists/new')}>Create a list</button>);
                                 } else if (profileUser.id !== sessionUser.id && !profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
                                     return (<>
                                         <div>This Account is Private</div>
