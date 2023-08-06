@@ -63,6 +63,7 @@ function CreateListPage({ listObj, isEdit }) {
                     </ul>}
 
                     <label>
+                        Caption
                         <input
                             type="text"
                             value={caption}
@@ -72,6 +73,7 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </label>
                     <label>
+                        Background Image URL
                         <input
                             type="text"
                             value={imgUrl}
@@ -82,6 +84,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
+                    <div>Title Text Editor</div>
                     <div id="title-settings-container">
                         <select
                             value={titleFont}
@@ -187,6 +190,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
+                    <div>List Text Editor</div>
                     <div id="list-settings-container">
                         <select
                             value={liFont}
@@ -268,6 +272,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
+                    <div>Completed Style Text Editor</div>
                     <div id="list-completed-settings-container">
                         <button
                             onClick={(e) => {
@@ -309,7 +314,7 @@ function CreateListPage({ listObj, isEdit }) {
                         <input
                             id="list-completed-input"
                             disabled={true}
-                            value="Set your completed style here"
+                            value="Completed Style Preview"
                             style={{
                                 fontFamily: liFont,
                                 fontSize: liSize,
