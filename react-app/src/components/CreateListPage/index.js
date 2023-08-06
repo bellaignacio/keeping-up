@@ -253,7 +253,7 @@ function CreateListPage({ listObj, isEdit }) {
                             value={listItems}
                             onChange={(e) => setListItems(e.target.value)}
                             placeholder="Enter list here"
-                            readOnly={isEdit}
+                            disabled={isEdit}
                             required
                             style={{
                                 fontFamily: liFont,
