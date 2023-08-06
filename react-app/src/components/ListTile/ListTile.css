@@ -83,6 +83,10 @@
     margin: 0;
 }
 
+.list-tile-icons > * {
+    cursor: pointer;
+}
+
 .list-tile-icons span {
     font-size: 16pt;
     margin-right: 15px;

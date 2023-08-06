@@ -38,6 +38,10 @@
     align-items: start;
 }
 
+.list-tile-icons > * {
+    cursor: pointer;
+}
+
 .list-info .list-tile-footer > div:last-child {
     width: 100%;
 }
