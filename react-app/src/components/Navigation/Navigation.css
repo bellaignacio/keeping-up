@@ -39,6 +39,10 @@
   z-index: 5;
 }
 
+#navigation-container > * {
+  cursor: pointer;
+}
+
 #navigation-container i,
 #navigation-container img {
   font-size: 24pt;
