@@ -308,7 +308,7 @@ function CreateListPage({ listObj, isEdit }) {
                     <div id="list-completed-input-container">
                         <input
                             id="list-completed-input"
-                            readOnly={true}
+                            disabled={true}
                             value="Set your completed style here"
                             style={{
                                 fontFamily: liFont,
