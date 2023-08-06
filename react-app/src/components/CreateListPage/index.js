@@ -39,11 +39,12 @@ function CreateListPage({ listObj, isEdit }) {
         if (isEdit) {
             data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
         } else {
-            data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+            const confirmed = window.confirm("The contents of this list cannot be changed once posted. Please select OK to confirm, or Cancel to continue editing.")
+            if (confirmed) data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
         }
-        if (data.id) {
+        if (data?.id) {
             history.push(`/lists/${data.id}`);
-        } else {
+        } else if (data) {
             setErrors(data);
         }
     };
