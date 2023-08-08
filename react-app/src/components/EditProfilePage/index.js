@@ -30,14 +30,14 @@ function EditProfilePage() {
         }
     };
 
-    if (!sessionUser.keys) {
-        return (
-            <>
-                <Navigation />
-                <UnavailablePage />
-            </>
-        );
-    }
+    // if (!sessionUser.keys) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     return (
         <>

@@ -108,14 +108,14 @@ function ListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (!listObj.keys) {
-        return (
-            <>
-                <Navigation />
-                <UnavailablePage />
-            </>
-        );
-    }
+    // if (!listObj.keys) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     return (
         <>

@@ -34,14 +34,14 @@ function ProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (!profileUser.keys) {
-        return (
-            <>
-                <Navigation />
-                <UnavailablePage />
-            </>
-        );
-    }
+    // if (!profileUser.keys) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     return (
         <>
