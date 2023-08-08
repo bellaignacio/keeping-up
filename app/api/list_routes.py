@@ -65,11 +65,12 @@ def create_list():
         db.session.commit()
 
         for li in list_items:
-            item = ListItem(
-                list_id=new_list.id,
-                description=li
-            )
-            db.session.add(item)
+            if len(li) > 0:
+                item = ListItem(
+                    list_id=new_list.id,
+                    description=li
+                )
+                db.session.add(item)
 
         list_style = ListStyle(
             list_id=new_list.id,
