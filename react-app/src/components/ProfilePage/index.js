@@ -65,7 +65,7 @@ function ProfilePage() {
                                         return (
                                             <button
                                                 className="normal"
-                                                onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile
+                                                onClick={() => history.push(`/edit`)}>Edit profile
                                             </button>
                                         );
                                     } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {

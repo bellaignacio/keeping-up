@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect, useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { editProfile } from "../../store/session";
 import Navigation from "../Navigation";
-import UnavailablePage from "../UnavailablePage";
 import './EditProfile.css';
 
 function EditProfilePage() {
-    const { userId } = useParams();
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector((state) => state.session.user);
@@ -20,15 +18,6 @@ function EditProfilePage() {
     const [errors, setErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/about" />;
-
-    // if (userId !== sessionUser.id || Object.keys(sessionUser).length === 0) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
 
     const handleEdit = async (e) => {
         e.preventDefault();

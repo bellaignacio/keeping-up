@@ -38,7 +38,7 @@ function ProfileButton({ sessionUser }) {
         {sessionUser ? (
           <>
             <div>
-              <button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Settings</button>
+              <button onClick={() => history.push(`/edit`)}>Settings</button>
             </div>
             <div>
               <button onClick={handleLogout}>Log Out</button>
