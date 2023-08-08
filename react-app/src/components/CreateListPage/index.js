@@ -326,8 +326,8 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </div>
 
-                    <button type="submit">{isEdit ? "Save" : "Post"}</button>
-                    <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
+                    <button className="accent" type="submit">{isEdit ? "Save" : "Post"}</button>
+                    <button className="normal" onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
                 </form>
             </div>
         </>

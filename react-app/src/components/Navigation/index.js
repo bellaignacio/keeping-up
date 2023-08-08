@@ -32,8 +32,8 @@ function Navigation() {
 					<span>Keeping Up</span>
 				</div>
 				<div id="account-buttons">
-					<button onClick={() => history.push("/login")}>Log in</button>
-					<button onClick={() => history.push("/signup")}>Sign up</button>
+					<button className="primary" onClick={() => history.push("/login")}>Log in</button>
+					<button className="accent" onClick={() => history.push("/signup")}>Sign up</button>
 				</div>
 			</div>
 		);

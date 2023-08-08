@@ -99,11 +99,11 @@
 #list-demo-popup {
     width: 300px;
     margin: 50px auto;
-    background: #00bfb6;
+    background: rgb(0, 149, 246);;
     padding: 20px;
     text-align: center;
     font-weight: 900;
-    color: #fff;
+    color: white;
     font-family: arial;
     position: relative;
     left: 100px;
@@ -114,9 +114,9 @@
     width: 0px;
     height: 0px;
     position: absolute;
-    border-left: 10px solid #00bfb6;
+    border-left: 10px solid rgb(0, 149, 246);;
     border-right: 10px solid transparent;
-    border-top: 10px solid #00bfb6;
+    border-top: 10px solid rgb(0, 149, 246);;
     border-bottom: 10px solid transparent;
     right: -20px;
     top: 6px;

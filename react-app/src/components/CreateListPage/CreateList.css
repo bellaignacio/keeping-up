@@ -23,7 +23,7 @@
 
 #create-list-form > button {
     box-sizing: border-box;
-    width: 100px;
+    width: 100%;
     align-self: center;
 }
 

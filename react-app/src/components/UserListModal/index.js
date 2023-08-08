@@ -61,6 +61,12 @@ function UserListModal({ isSessionUser, title, users }) {
                                                 : "follow"
                                     }
                                 />}
+                                className={
+                                    (isSessionUser && title === "Following") ? "normal"
+                                        : (isSessionUser && title === "Followers") ? "normal"
+                                            : (user.id in sessionFollowings) ? "normal"
+                                                : "accent"
+                                }
                             />}
                         </div>
                     );

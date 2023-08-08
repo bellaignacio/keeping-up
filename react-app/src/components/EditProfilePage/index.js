@@ -21,14 +21,14 @@ function EditProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (userId !== sessionUser.id || Object.keys(sessionUser).length === 0) {
-        return (
-            <>
-                <Navigation />
-                <UnavailablePage />
-            </>
-        );
-    }
+    // if (userId !== sessionUser.id || Object.keys(sessionUser).length === 0) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     const handleEdit = async (e) => {
         e.preventDefault();
@@ -123,8 +123,8 @@ function EditProfilePage() {
                             required
                         />
                     </label>
-                    <button type="submit">Save</button>
-                    <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
+                    <button className="accent" type="submit">Save</button>
+                    <button className="normal" onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
                 </form>
             </div>
         </>

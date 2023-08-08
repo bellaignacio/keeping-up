@@ -113,7 +113,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          <button type="submit">Sign up</button>
+          <button className="accent" type="submit">Sign up</button>
         </form>
         <div id="signup-to-login">
           Have an account? <NavLink to="/login">Log in</NavLink>

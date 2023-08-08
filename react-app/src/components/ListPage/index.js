@@ -222,7 +222,7 @@ function ListPage() {
                                     placeholder="Add a comment..."
                                     required
                                 />
-                                <button className="primary" type="submit">Post</button>
+                                <button className="primary" type="submit" disabled={comment.length < 1}>Post</button>
                                 {errors.length > 0 && <ul className="error-message-container">
                                     {errors.map((error, idx) => (
                                         <li className="error-message" key={idx}>{error}</li>

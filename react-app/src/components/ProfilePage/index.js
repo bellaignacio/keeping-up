@@ -62,17 +62,26 @@ function ProfilePage() {
                                 <div>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
-                                        return (<button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile</button>);
+                                        return (
+                                            <button
+                                                className="normal"
+                                                onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile
+                                            </button>
+                                        );
                                     } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {
-                                        return (<OpenModalButton
-                                            buttonText="Following"
-                                            modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
-                                        />);
+                                        return (
+                                            <OpenModalButton
+                                                buttonText="Following"
+                                                modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
+                                                className="normal"
+                                            />);
                                     } else {
-                                        return (<OpenModalButton
-                                            buttonText="Follow"
-                                            modalComponent={<FollowModal user={profileUser} method={"follow"} />}
-                                        />);
+                                        return (
+                                            <OpenModalButton
+                                                buttonText="Follow"
+                                                modalComponent={<FollowModal user={profileUser} method={"follow"} />}
+                                                className="accent"
+                                            />);
                                     }
                                 })()}
                             </div>
