@@ -1,5 +1,4 @@
 import { useDispatch } from 'react-redux';
-import { useHistory } from "react-router-dom";
 import { useModal } from '../../context/Modal';
 import * as listActions from "../../store/list";
 import './DeleteComment.css';
@@ -7,7 +6,6 @@ import './DeleteComment.css';
 function DeleteCommentModal({ commentObj }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const history = useHistory();
 
     const handleDelete = async (e) => {
         e.preventDefault();

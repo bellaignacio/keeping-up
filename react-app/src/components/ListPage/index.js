@@ -28,7 +28,18 @@ function ListPage() {
 
     useEffect(() => {
         setIsLiked((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
-    }, [listObj])
+    }, [listObj, sessionUser.id])
+
+    if (!sessionUser) return <Redirect to="/about" />;
+
+    if (Object.keys(listObj).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     function listStyleSettings(list_style) {
         return {
@@ -105,17 +116,6 @@ function ListPage() {
             document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
     };
-
-    if (!sessionUser) return <Redirect to="/about" />;
-
-    // if (!listObj.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
 
     return (
         <>

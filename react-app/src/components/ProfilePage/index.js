@@ -34,14 +34,14 @@ function ProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    // if (!profileUser.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
+    if (Object.keys(profileUser).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     return (
         <>
@@ -85,7 +85,7 @@ function ProfilePage() {
                                 />
                                 <OpenModalButton
                                     buttonText={`${profileUser.total_followings} following`}
-                                    modalComponent={<UserListModal isSessionUser={profileUser.id == sessionUser.id} title="Following" users={profileUser.followings} />}
+                                    modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Following" users={profileUser.followings} />}
                                     disabled={profileUser.total_followings === 0}
                                 />
                             </div>

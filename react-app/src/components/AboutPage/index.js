@@ -28,7 +28,7 @@ function AboutPage() {
                 </div>
                 <div id="list-demo-wrapper">
                     <div id="list-demo-header">
-                        <img id="list-demo-user-image" src="https://i.ibb.co/jTrn4Vc/default.png" alt="demo-user-image" />
+                        <img id="list-demo-user-image" src="https://i.ibb.co/jTrn4Vc/default.png" alt="demo-user" />
                         <div className="list-demo-user-name">awesome_user_xoxo</div>
                     </div>
                     <div id="list-demo">

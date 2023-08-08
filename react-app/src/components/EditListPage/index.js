@@ -21,14 +21,14 @@ function EditListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    // if (!listObj.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
+    if (Object.keys(listObj).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     return (isListLoaded ?
         <CreateListPage listObj={listObj} isEdit={true} />
