@@ -22,7 +22,15 @@ function EditProfilePage() {
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(editProfile(sessionUser.id, username, (name.length > 0 ? name : null), (bio.length > 0 ? bio : null), (imgUrl.length > 0 ? imgUrl : "https://i.ibb.co/jTrn4Vc/default.png"), isPublic, password));
+        const data = await dispatch(editProfile(
+            sessionUser.id,
+            username,
+            (name?.length > 0 ? name : null),
+            (bio?.length > 0 ? bio : null),
+            (imgUrl?.length > 0 ? imgUrl : "https://i.ibb.co/jTrn4Vc/default.png"),
+            isPublic,
+            password
+        ));
         if (data) {
             setErrors(data);
         } else {
