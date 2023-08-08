@@ -26,6 +26,13 @@ a:hover {
     cursor: pointer;
 }
 
+button.primary {
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: rgb(0, 149, 246);
+}
+
 .error-message-container {
     padding: 0;
     text-align: center;

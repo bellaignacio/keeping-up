@@ -28,7 +28,7 @@ function ListPage() {
 
     useEffect(() => {
         setIsLiked((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
-    }, [listObj, sessionUser.id])
+    }, [listObj, sessionUser])
 
     if (!sessionUser) return <Redirect to="/about" />;
 
@@ -191,9 +191,9 @@ function ListPage() {
                             </div>
                             {listObj.total_likes > 0 && <OpenModalButton
                                 buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
-                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)}/>}
+                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)} />}
                             />}
-                            <div>
+                            {/* <div>
                                 <form className="list-tile-comment-form" onSubmit={handleComment}>
                                     <input
                                         id="comment-input"
@@ -203,13 +203,32 @@ function ListPage() {
                                         placeholder="Add a comment..."
                                         required
                                     />
+                                    <button type="submit">Post</button>
                                     {errors.length > 0 && <ul className="error-message-container">
                                         {errors.map((error, idx) => (
                                             <li className="error-message" key={idx}>{error}</li>
                                         ))}
                                     </ul>}
                                 </form>
-                            </div>
+                            </div> */}
+                        </div>
+                        <div className="list-tile-comment-form-container">
+                            <form className="list-tile-comment-form" onSubmit={handleComment}>
+                                <input
+                                    id="comment-input"
+                                    type="text"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder="Add a comment..."
+                                    required
+                                />
+                                <button className="primary" type="submit">Post</button>
+                                {errors.length > 0 && <ul className="error-message-container">
+                                    {errors.map((error, idx) => (
+                                        <li className="error-message" key={idx}>{error}</li>
+                                    ))}
+                                </ul>}
+                            </form>
                         </div>
                     </div>
                 </div>

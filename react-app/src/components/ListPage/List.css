@@ -31,10 +31,10 @@
 }
 
 .list-info .list-tile-footer {
-    height: 95px;
+    height: 70px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     align-items: flex-start;
 }
 
@@ -69,7 +69,7 @@
 
 .list-tile-comments {
     width: 400px;
-    height: 325px;
+    height: 300px;
     padding: 5px;
     overflow-y: scroll;
 }
@@ -94,4 +94,20 @@
 
 .fas.fa-ellipsis {
     color: red;
+}
+
+.list-tile-comment-form-container {
+    height: min-content;
+    padding: 10px;
+}
+
+.list-tile-comment-form {
+    width: 100%;
+    display: flex;
+}
+
+.list-tile-comment-form input {
+    border: none;
+    padding: 5px 0;
+    font-size: inherit;
 }
