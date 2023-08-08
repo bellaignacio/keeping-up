@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
+import UnavailablePage from "../UnavailablePage";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
 import CommentSettingsModal from "../CommentSettingsModal";
@@ -107,10 +108,18 @@ function ListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
+    if (!listObj.keys) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
+
     return (
         <>
             <Navigation />
-
             {isListLoaded &&
                 <div id="list-page-wrapper">
                     <div className="list-tile" style={listStyleSettings(listObj.list_style)}>

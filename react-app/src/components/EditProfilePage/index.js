@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { editProfile } from "../../store/session";
 import Navigation from "../Navigation";
+import UnavailablePage from "../UnavailablePage";
 import './EditProfile.css';
 
 function EditProfilePage() {
@@ -28,6 +29,15 @@ function EditProfilePage() {
             history.push(`/${sessionUser.id}`);
         }
     };
+
+    if (!sessionUser.keys) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     return (
         <>
