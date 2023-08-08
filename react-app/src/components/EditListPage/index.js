@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import CreateListPage from "../CreateListPage";
+import Navigation from "../Navigation";
+import UnavailablePage from "../UnavailablePage";
 import * as listActions from "../../store/list";
 import './EditList.css';
 
@@ -18,6 +20,15 @@ function EditListPage() {
     }, [dispatch, listId]);
 
     if (!sessionUser) return <Redirect to="/about" />;
+
+    // if (!listObj.keys) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     return (isListLoaded ?
         <CreateListPage listObj={listObj} isEdit={true} />

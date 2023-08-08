@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
+import UnavailablePage from "../UnavailablePage";
 import ListTile from "../ListTile";
 import OpenModalButton from "../OpenModalButton";
 import FollowModal from "../FollowModal";
@@ -32,6 +33,15 @@ function ProfilePage() {
     }, [dispatch, userId]);
 
     if (!sessionUser) return <Redirect to="/about" />;
+
+    // if (!profileUser.keys) {
+    //     return (
+    //         <>
+    //             <Navigation />
+    //             <UnavailablePage />
+    //         </>
+    //     );
+    // }
 
     return (
         <>
