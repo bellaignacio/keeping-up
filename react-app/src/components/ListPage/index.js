@@ -223,12 +223,12 @@ function ListPage() {
                                     required
                                 />
                                 <button className="primary" type="submit" disabled={comment.length < 1}>Post</button>
-                                {errors.length > 0 && <ul className="error-message-container">
-                                    {errors.map((error, idx) => (
-                                        <li className="error-message" key={idx}>{error}</li>
-                                    ))}
-                                </ul>}
                             </form>
+                            {errors.length > 0 && <ul className="error-message-container">
+                                {errors.map((error, idx) => (
+                                    <li className="error-message" key={idx}>{error}</li>
+                                ))}
+                            </ul>}
                         </div>
                     </div>
                 </div>

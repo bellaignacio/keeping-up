@@ -71,7 +71,8 @@ button.primary:disabled {
 
 .error-message-container {
     padding: 0;
-    text-align: center;
+    margin: 3px 0;
+    text-align: left;
 }
 
 .error-message {

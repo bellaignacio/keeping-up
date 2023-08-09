@@ -65,14 +65,11 @@ def create_list():
         db.session.commit()
 
         for li in list_items:
-            if 0 < len(li) < 256:
-                item = ListItem(
-                    list_id=new_list.id,
-                    description=li
-                )
-                db.session.add(item)
-            elif len(li) > 255:
-                return {'errors': ['List items cannot be longer than 255 characters.']}, 400
+            item = ListItem(
+                list_id=new_list.id,
+                description=li
+            )
+            db.session.add(item)
 
         list_style = ListStyle(
             list_id=new_list.id,
