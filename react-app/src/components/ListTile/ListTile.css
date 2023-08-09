@@ -71,6 +71,7 @@
     padding: 5px;
     box-sizing: border-box;
     width: 400px;
+    border-bottom: 1px solid lightgrey;
 }
 
 .list-tile-footer > * {
