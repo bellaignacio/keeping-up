@@ -58,6 +58,7 @@
 .list-tile-comments button {
     border: none;
     background: none;
+    padding: 0 5px 0 10px;
 }
 
 .list-tile-subheader {
