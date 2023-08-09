@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import UnavailablePage from "../UnavailablePage";
+import LoadingPage from "../LoadingPage";
 import ListTile from "../ListTile";
 import OpenModalButton from "../OpenModalButton";
 import FollowModal from "../FollowModal";
@@ -34,7 +35,7 @@ function ProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (Object.keys(profileUser).length === 0) {
+    if (isProfileLoaded && Object.keys(profileUser).length === 0) {
         return (
             <>
                 <Navigation />
@@ -46,7 +47,7 @@ function ProfilePage() {
     return (
         <>
             <Navigation />
-            {(isProfileLoaded && isFollowingsLoaded) &&
+            {(isProfileLoaded && isFollowingsLoaded) ?
                 <div id="profile-container">
                     <div id="profile-header">
                         <div>
@@ -131,6 +132,7 @@ function ProfilePage() {
                         </div>
                     }
                 </div>
+                : <LoadingPage />
             }
         </>
     );

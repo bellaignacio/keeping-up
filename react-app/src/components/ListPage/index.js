@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import UnavailablePage from "../UnavailablePage";
+import LoadingPage from "../LoadingPage";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
 import CommentSettingsModal from "../CommentSettingsModal";
@@ -32,7 +33,7 @@ function ListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (Object.keys(listObj).length === 0) {
+    if (isListLoaded && Object.keys(listObj).length === 0) {
         return (
             <>
                 <Navigation />
@@ -120,7 +121,7 @@ function ListPage() {
     return (
         <>
             <Navigation />
-            {isListLoaded &&
+            {isListLoaded ?
                 <div id="list-page-wrapper">
                     <div className="list-tile" style={listStyleSettings(listObj.list_style)}>
                         <div className="list-tile-content">
@@ -232,6 +233,7 @@ function ListPage() {
                         </div>
                     </div>
                 </div>
+                : <LoadingPage />
             }
         </>
     );

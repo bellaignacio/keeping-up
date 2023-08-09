@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Navigation from "../Navigation";
 import NoListsPage from "../NoListsPage";
+import LoadingPage from "../LoadingPage";
 import FollowingBar from "../FollowingBar";
 import ListTile from "../ListTile";
 import * as userActions from "../../store/user";
@@ -24,7 +25,7 @@ function HomePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    if (followingsLists.length <= 0) {
+    if (isFollowingsListsLoaded && followingsLists.length <= 0) {
         return (
             <>
                 <Navigation />
@@ -36,9 +37,9 @@ function HomePage() {
     return (
         <>
             <Navigation />
-            <div id="home-container">
-                <FollowingBar users={followings} />
-                {isFollowingsListsLoaded &&
+            {isFollowingsListsLoaded ?
+                <div id="home-container">
+                    <FollowingBar users={followings} />
                     <div id="list-tile-container">
                         {(followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                             return (
@@ -46,8 +47,9 @@ function HomePage() {
                             )
                         })}
                     </div>
-                }
-            </div>
+                </div>
+                : <LoadingPage />
+            }
         </>
     );
 }
