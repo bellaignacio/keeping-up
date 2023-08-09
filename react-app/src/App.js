@@ -42,14 +42,14 @@ function App() {
           <Route exact path="/lists/new">
             <CreateListPage />
           </Route>
+          <Route exact path="/edit">
+            <EditProfilePage />
+          </Route>
           <Route path="/lists/:listId/edit">
             <EditListPage />
           </Route>
           <Route path="/lists/:listId">
             <ListPage />
-          </Route>
-          <Route path="/:userId/edit">
-            <EditProfilePage />
           </Route>
           <Route path="/:userId">
             <ProfilePage />

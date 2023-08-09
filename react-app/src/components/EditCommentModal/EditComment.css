@@ -8,6 +8,9 @@
     width: 90%;
     height: 25px;
     margin: 10px 0;
+    border: none;
+    border-bottom: 1px solid lightgrey;
+    font-size: inherit;
 }
 
 #edit-comment-container button {

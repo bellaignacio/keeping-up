@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import CreateListPage from "../CreateListPage";
 import Navigation from "../Navigation";
 import UnavailablePage from "../UnavailablePage";
+import LoadingPage from "../LoadingPage";
 import * as listActions from "../../store/list";
 import './EditList.css';
 
@@ -21,18 +22,18 @@ function EditListPage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    // if (!listObj.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
+    if (isListLoaded && Object.keys(listObj).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     return (isListLoaded ?
         <CreateListPage listObj={listObj} isEdit={true} />
-        : null
+        : <LoadingPage />
     );
 }
 

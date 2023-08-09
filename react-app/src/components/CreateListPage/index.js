@@ -54,7 +54,7 @@ function CreateListPage({ listObj, isEdit }) {
             <Navigation />
             <div id="create-list-container">
                 <form id="create-list-form" onSubmit={handleSubmit}>
-                    <div>{isEdit ? "Edit the list" : "Create a list"}</div>
+                    <div id="list-form-title">{isEdit ? "Edit the list" : "Create a list"}</div>
 
                     {errors.length > 0 && <ul className="error-message-container">
                         {errors.map((error, idx) => (
@@ -84,7 +84,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>Title Text Editor</div>
+                    <div>Title Editor</div>
                     <div id="title-settings-container">
                         <select
                             value={titleFont}
@@ -190,7 +190,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>List Text Editor</div>
+                    <div>List Editor</div>
                     <div id="list-settings-container">
                         <select
                             value={liFont}
@@ -272,7 +272,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>Completed Style Text Editor</div>
+                    <div>Completed Style Editor</div>
                     <div id="list-completed-settings-container">
                         <button
                             onClick={(e) => {
@@ -326,8 +326,8 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </div>
 
-                    <button type="submit">{isEdit ? "Save" : "Post"}</button>
-                    <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
+                    <button className="accent" type="submit">{isEdit ? "Save" : "Post"}</button>
+                    <button className="normal" onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
                 </form>
             </div>
         </>

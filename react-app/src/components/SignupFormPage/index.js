@@ -52,31 +52,41 @@ function SignupFormPage() {
               required
             />
           </label>
-          <label>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
-              required
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Name"
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              value={bio}
-              onChange={(e) => setBio(e.target.value)}
-              placeholder="Bio"
-            />
-          </label>
+          <div>
+            <label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Username"
+                required
+              />
+            </label>
+            <div className={`character-counter ${username?.length > 50 ? 'character-counter-red' : ''}`}>{username !== null ? username.length : 0} / 50</div>
+          </div>
+          <div>
+            <label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name"
+              />
+            </label>
+            <div className={`character-counter ${name?.length > 50 ? 'character-counter-red' : ''}`}>{name !== null ? name.length : 0} / 50</div>
+          </div>
+          <div>
+            <label>
+              <input
+                type="text"
+                value={bio}
+                onChange={(e) => setBio(e.target.value)}
+                placeholder="Bio"
+              />
+            </label>
+            <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
+          </div>
+
           <label>
             <input
               type="text"
@@ -113,7 +123,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          <button type="submit">Sign up</button>
+          <button className="accent" type="submit">Sign up</button>
         </form>
         <div id="signup-to-login">
           Have an account? <NavLink to="/login">Log in</NavLink>

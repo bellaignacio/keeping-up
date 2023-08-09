@@ -16,9 +16,15 @@ a {
     color: inherit;
 }
 
+input, textarea {
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+
 button {
     border-radius: 5px;
     border-width: 1px;
+    padding: 10px 20px;
 }
 
 button:hover,
@@ -26,9 +32,47 @@ a:hover {
     cursor: pointer;
 }
 
+button.primary {
+    border: none;
+    background: none;
+    font-weight: bold;
+    color: rgb(0, 149, 246);
+}
+
+button.accent {
+    border: none;
+    background: rgb(0, 149, 246);
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+
+button.normal {
+    border: none;
+    background: rgb(239, 239, 239);
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+}
+
+button.primary:hover {
+    color: rgb(24, 119, 246);
+}
+
+button.accent:hover {
+    background: rgb(24, 119, 246);
+}
+
+button.normal:hover {
+    background: rgb(202, 202, 202);
+}
+
+button.primary:disabled {
+    color: rgb(169, 219, 255);
+}
+
 .error-message-container {
     padding: 0;
-    text-align: center;
+    margin: 3px 0;
+    text-align: left;
 }
 
 .error-message {
@@ -37,4 +81,14 @@ a:hover {
 
 .error-message::marker {
     content: none;
+}
+
+.character-counter {
+    margin: 3px 0;
+    font-size: 10pt;
+    color: darkgrey;
+}
+
+.character-counter-red {
+    color: red;
 }

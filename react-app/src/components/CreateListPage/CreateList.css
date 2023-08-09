@@ -15,6 +15,11 @@
     row-gap: 10px;
 }
 
+#list-form-title {
+    font-size: 16pt;
+    margin-bottom: 10px;
+}
+
 #create-list-form input,
 #create-list-form textarea {
     box-sizing: border-box;
@@ -23,7 +28,7 @@
 
 #create-list-form > button {
     box-sizing: border-box;
-    width: 100px;
+    width: 100%;
     align-self: center;
 }
 
@@ -42,6 +47,7 @@
     font-family: 'Times New Roman', Times, serif;
     min-width: 30px;
     height: 30px;
+    padding: 0;
 }
 
 #title-settings-container > input,

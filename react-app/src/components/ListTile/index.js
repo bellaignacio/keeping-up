@@ -149,12 +149,13 @@ function ListTile({ listObj, listOnly }) {
                                 placeholder="Add a comment..."
                                 required
                             />
-                            {errors.length > 0 && <ul className="error-message-container">
+
+                        </form>
+                        {errors.length > 0 && <ul className="error-message-container">
                                 {errors.map((error, idx) => (
                                     <li className="error-message" key={idx}>{error}</li>
                                 ))}
                             </ul>}
-                        </form>
                     </div>
                 </div>
             </div>

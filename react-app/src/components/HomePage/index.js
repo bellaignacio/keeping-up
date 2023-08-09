@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Navigation from "../Navigation";
+import NoListsPage from "../NoListsPage";
+import LoadingPage from "../LoadingPage";
 import FollowingBar from "../FollowingBar";
 import ListTile from "../ListTile";
 import * as userActions from "../../store/user";
@@ -23,24 +25,31 @@ function HomePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
+    if (isFollowingsListsLoaded && followingsLists.length <= 0) {
+        return (
+            <>
+                <Navigation />
+                <NoListsPage />
+            </>
+        );
+    }
+
     return (
         <>
             <Navigation />
-            <div id="home-container">
-                <FollowingBar users={followings} />
-                {isFollowingsListsLoaded &&
+            {isFollowingsListsLoaded ?
+                <div id="home-container">
+                    <FollowingBar users={followings} />
                     <div id="list-tile-container">
-                        {followingsLists.length > 0 ? (followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                        {(followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
                             return (
                                 <ListTile listOnly={false} listObj={listObj} />
-                            );
-                        }) : <div className="no-lists">
-                            <div>All Caught Up!</div>
-                            <div>There are no lists to show.</div>
-                        </div>}
+                            )
+                        })}
                     </div>
-                }
-            </div>
+                </div>
+                : <LoadingPage />
+            }
         </>
     );
 }

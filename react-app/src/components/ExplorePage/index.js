@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Navigation from "../Navigation";
+import NoListsPage from "../NoListsPage";
+import LoadingPage from "../LoadingPage";
 import ListTile from "../ListTile";
 import * as userActions from "../../store/user";
 import * as listActions from "../../store/list";
@@ -21,23 +23,28 @@ function ExplorePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
+    if (isPublicListsLoaded && publicLists.length <= 0) {
+        return (
+            <>
+                <Navigation />
+                <NoListsPage />
+            </>
+        );
+    }
+
     return (
         <>
             <Navigation />
-            <div id="explore-container">
-                {isPublicListsLoaded &&
-                    <div id="list-tile-container">
-                        {publicLists.length > 0 ? (publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
-                            return (
-                                <ListTile listOnly={false} listObj={listObj} />
-                            );
-                        }) : <div className="no-lists">
-                            <div>All Caught Up!</div>
-                            <div>There are no lists to show.</div>
-                        </div>}
-                    </div>
-                }
-            </div>
+            {isPublicListsLoaded ?
+                <div id="list-tile-container">
+                    {(publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                        return (
+                            <ListTile listOnly={false} listObj={listObj} />
+                        )
+                    })}
+                </div>
+                : <LoadingPage />
+            }
         </>
     );
 }

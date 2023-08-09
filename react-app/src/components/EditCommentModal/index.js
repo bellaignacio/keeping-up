@@ -36,7 +36,7 @@ function EditCommentModal({ commentObj }) {
                     placeholder="Add comment here"
                     required
                 />
-                <button onClick={handleEdit}>Save</button>
+                <button className="primary" onClick={handleEdit}>Save</button>
                 <button onClick={closeModal}>Cancel</button>
             </form>
         </div>

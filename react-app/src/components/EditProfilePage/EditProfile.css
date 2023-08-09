@@ -12,12 +12,12 @@
     flex-direction: column;
     border: 1px solid lightgrey;
     margin: 10px;
-    padding: 10px 75px;
+    padding: 30px 75px;
     row-gap: 10px;
 }
 
 #edit-profile-form-title {
-    padding: 5px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     column-gap: 10px;
@@ -31,7 +31,7 @@
 
 #edit-profile-form button {
     box-sizing: border-box;
-    width: 100px;
+    width: 100%;
     align-self: center;
 }
 

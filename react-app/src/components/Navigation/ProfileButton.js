@@ -31,14 +31,14 @@ function ProfileButton({ sessionUser }) {
 
   return (
     <>
-      <div title="Menu" onClick={openMenu}>
+      <div title="Menu" className="nav-icon" onClick={openMenu}>
         <i className="fas fa-bars" />
       </div>
       <div className={ulClassName}>
         {sessionUser ? (
           <>
             <div>
-              <button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Settings</button>
+              <button onClick={() => history.push(`/edit`)}>Settings</button>
             </div>
             <div>
               <button onClick={handleLogout}>Log Out</button>

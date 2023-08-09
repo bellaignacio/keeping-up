@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import UnavailablePage from "../UnavailablePage";
+import LoadingPage from "../LoadingPage";
 import ListTile from "../ListTile";
 import OpenModalButton from "../OpenModalButton";
 import FollowModal from "../FollowModal";
@@ -34,19 +35,19 @@ function ProfilePage() {
 
     if (!sessionUser) return <Redirect to="/about" />;
 
-    // if (!profileUser.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
+    if (isProfileLoaded && Object.keys(profileUser).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     return (
         <>
             <Navigation />
-            {(isProfileLoaded && isFollowingsLoaded) &&
+            {(isProfileLoaded && isFollowingsLoaded) ?
                 <div id="profile-container">
                     <div id="profile-header">
                         <div>
@@ -59,27 +60,36 @@ function ProfilePage() {
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">
-                                <div>{profileUser.username}</div>
+                                <div style={{fontSize: "16pt"}}>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
-                                        return (<button onClick={() => history.push(`/${sessionUser.id}/edit`)}>Edit profile</button>);
+                                        return (
+                                            <button
+                                                className="normal"
+                                                onClick={() => history.push(`/edit`)}>Edit profile
+                                            </button>
+                                        );
                                     } else if (sessionFollowings.hasOwnProperty(profileUser.id)) {
-                                        return (<OpenModalButton
-                                            buttonText="Following"
-                                            modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
-                                        />);
+                                        return (
+                                            <OpenModalButton
+                                                buttonText="Following"
+                                                modalComponent={<FollowModal user={profileUser} method={"unfollow"} />}
+                                                className="normal"
+                                            />);
                                     } else {
-                                        return (<OpenModalButton
-                                            buttonText="Follow"
-                                            modalComponent={<FollowModal user={profileUser} method={"follow"} />}
-                                        />);
+                                        return (
+                                            <OpenModalButton
+                                                buttonText="Follow"
+                                                modalComponent={<FollowModal user={profileUser} method={"follow"} />}
+                                                className="accent"
+                                            />);
                                     }
                                 })()}
                             </div>
                             <div id="profile-summary">
                                 <div>{profileUser.total_lists} list{(profileUser.total_lists > 1 || profileUser.total_lists === 0) && 's'}</div>
                                 <OpenModalButton
-                                    buttonText={`${profileUser.total_followers} follower${profileUser.total_followers > 1 ? 's' : ''}`}
+                                    buttonText={`${profileUser.total_followers} follower${(profileUser.total_followers > 1 || profileUser.total_followers === 0) ? 's' : ''}`}
                                     modalComponent={<UserListModal isSessionUser={profileUser.id === sessionUser.id} title="Followers" users={profileUser.followers} />}
                                     disabled={profileUser.total_followers === 0}
                                 />
@@ -89,10 +99,10 @@ function ProfilePage() {
                                     disabled={profileUser.total_followings === 0}
                                 />
                             </div>
-                            <div>
+                            <div style={{fontWeight: "bold"}}>
                                 {profileUser.name}
-                                <p>{profileUser.bio}</p>
-                            </div>
+                                <p style={{fontWeight: "normal", marginTop: "5px"}}>{profileUser.bio}</p>
+                            </div >
                         </div>
                     </div>
                     <hr id="profile-hr"></hr>
@@ -100,7 +110,7 @@ function ProfilePage() {
                         <div id="profile-content">
                             {(() => {
                                 if (profileUser.id === sessionUser.id && profileUser.total_lists === 0) {
-                                    return (<button onClick={() => history.push('/lists/new')}>Create a list</button>);
+                                    return (<button className="normal" onClick={() => history.push('/lists/new')}>Create a list</button>);
                                 } else if (profileUser.id !== sessionUser.id && !profileUser.is_public && !sessionFollowings.hasOwnProperty(profileUser.id)) {
                                     return (<>
                                         <div>This Account is Private.</div>
@@ -122,6 +132,7 @@ function ProfilePage() {
                         </div>
                     }
                 </div>
+                : <LoadingPage />
             }
         </>
     );

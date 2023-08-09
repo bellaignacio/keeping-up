@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import { editProfile } from "../../store/session";
 import Navigation from "../Navigation";
-import UnavailablePage from "../UnavailablePage";
 import './EditProfile.css';
 
 function EditProfilePage() {
@@ -22,22 +21,21 @@ function EditProfilePage() {
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(editProfile(sessionUser.id, username, (name.length > 0 ? name : null), (bio.length > 0 ? bio : null), (imgUrl.length > 0 ? imgUrl : "https://i.ibb.co/jTrn4Vc/default.png"), isPublic, password));
+        const data = await dispatch(editProfile(
+            sessionUser.id,
+            username,
+            (name?.length > 0 ? name : null),
+            (bio?.length > 0 ? bio : null),
+            (imgUrl?.length > 0 ? imgUrl : "https://i.ibb.co/jTrn4Vc/default.png"),
+            isPublic,
+            password
+        ));
         if (data) {
             setErrors(data);
         } else {
             history.push(`/${sessionUser.id}`);
         }
     };
-
-    // if (!sessionUser.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
 
     return (
         <>
@@ -58,34 +56,44 @@ function EditProfilePage() {
                             <li className="error-message" key={idx}>{error}</li>
                         ))}
                     </ul>}
-                    <label>
-                        Username
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Username"
-                            required
-                        />
-                    </label>
-                    <label>
-                        Name
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Name"
-                        />
-                    </label>
-                    <label>
-                        Bio
-                        <input
-                            type="text"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            placeholder="Bio"
-                        />
-                    </label>
+                    <div>
+                        <label>
+                            Username
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Username"
+                                required
+                            />
+                            <div className={`character-counter ${username?.length > 50 ? 'character-counter-red' : ''}`}>{username !== null ? username.length : 0} / 50</div>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Name
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Name"
+                            />
+                            <div className={`character-counter ${name?.length > 50 ? 'character-counter-red' : ''}`}>{name !== null ? name.length : 0} / 50</div>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Bio
+                            <input
+                                type="text"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                placeholder="Bio"
+                            />
+                        </label>
+                        <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
+                    </div>
+
                     <label>
                         Profile Image URL
                         <input
@@ -114,8 +122,8 @@ function EditProfilePage() {
                             required
                         />
                     </label>
-                    <button type="submit">Save</button>
-                    <button onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
+                    <button className="accent" type="submit">Save</button>
+                    <button className="normal" onClick={() => history.push(`/${sessionUser.id}`)}>Cancel</button>
                 </form>
             </div>
         </>

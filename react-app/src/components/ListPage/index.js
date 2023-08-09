@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
 import UnavailablePage from "../UnavailablePage";
+import LoadingPage from "../LoadingPage";
 import OpenModalButton from "../OpenModalButton";
 import ListSettingsModal from "../ListSettingsModal";
 import CommentSettingsModal from "../CommentSettingsModal";
@@ -28,7 +29,18 @@ function ListPage() {
 
     useEffect(() => {
         setIsLiked((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
-    }, [listObj])
+    }, [listObj, sessionUser])
+
+    if (!sessionUser) return <Redirect to="/about" />;
+
+    if (isListLoaded && Object.keys(listObj).length === 0) {
+        return (
+            <>
+                <Navigation />
+                <UnavailablePage />
+            </>
+        );
+    }
 
     function listStyleSettings(list_style) {
         return {
@@ -106,21 +118,10 @@ function ListPage() {
         }
     };
 
-    if (!sessionUser) return <Redirect to="/about" />;
-
-    // if (!listObj.keys) {
-    //     return (
-    //         <>
-    //             <Navigation />
-    //             <UnavailablePage />
-    //         </>
-    //     );
-    // }
-
     return (
         <>
             <Navigation />
-            {isListLoaded &&
+            {isListLoaded ?
                 <div id="list-page-wrapper">
                     <div className="list-tile" style={listStyleSettings(listObj.list_style)}>
                         <div className="list-tile-content">
@@ -191,9 +192,9 @@ function ListPage() {
                             </div>
                             {listObj.total_likes > 0 && <OpenModalButton
                                 buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
-                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)}/>}
+                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)} />}
                             />}
-                            <div>
+                            {/* <div>
                                 <form className="list-tile-comment-form" onSubmit={handleComment}>
                                     <input
                                         id="comment-input"
@@ -203,16 +204,36 @@ function ListPage() {
                                         placeholder="Add a comment..."
                                         required
                                     />
+                                    <button type="submit">Post</button>
                                     {errors.length > 0 && <ul className="error-message-container">
                                         {errors.map((error, idx) => (
                                             <li className="error-message" key={idx}>{error}</li>
                                         ))}
                                     </ul>}
                                 </form>
-                            </div>
+                            </div> */}
+                        </div>
+                        <div className="list-tile-comment-form-container">
+                            <form className="list-tile-comment-form" onSubmit={handleComment}>
+                                <input
+                                    id="comment-input"
+                                    type="text"
+                                    value={comment}
+                                    onChange={(e) => setComment(e.target.value)}
+                                    placeholder="Add a comment..."
+                                    required
+                                />
+                                <button className="primary" type="submit" disabled={comment.length < 1}>Post</button>
+                            </form>
+                            {errors.length > 0 && <ul className="error-message-container">
+                                {errors.map((error, idx) => (
+                                    <li className="error-message" key={idx}>{error}</li>
+                                ))}
+                            </ul>}
                         </div>
                     </div>
                 </div>
+                : <LoadingPage />
             }
         </>
     );

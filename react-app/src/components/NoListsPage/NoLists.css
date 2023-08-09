@@ -1,8 +1,7 @@
-#home-container #list-tile-container {
+#no-lists-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    row-gap: 10px;
     margin: 0 auto;
     padding-left: 40px;
 }
