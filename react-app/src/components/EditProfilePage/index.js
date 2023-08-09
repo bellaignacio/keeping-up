@@ -56,34 +56,44 @@ function EditProfilePage() {
                             <li className="error-message" key={idx}>{error}</li>
                         ))}
                     </ul>}
-                    <label>
-                        Username
-                        <input
-                            type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Username"
-                            required
-                        />
-                    </label>
-                    <label>
-                        Name
-                        <input
-                            type="text"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                            placeholder="Name"
-                        />
-                    </label>
-                    <label>
-                        Bio
-                        <input
-                            type="text"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)}
-                            placeholder="Bio"
-                        />
-                    </label>
+                    <div>
+                        <label>
+                            Username
+                            <input
+                                type="text"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Username"
+                                required
+                            />
+                            <div className={`character-counter ${username?.length > 50 ? 'character-counter-red' : ''}`}>{username !== null ? username.length : 0} / 50</div>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Name
+                            <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Name"
+                            />
+                            <div className={`character-counter ${name?.length > 50 ? 'character-counter-red' : ''}`}>{name !== null ? name.length : 0} / 50</div>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            Bio
+                            <input
+                                type="text"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)}
+                                placeholder="Bio"
+                            />
+                        </label>
+                        <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
+                    </div>
+
                     <label>
                         Profile Image URL
                         <input

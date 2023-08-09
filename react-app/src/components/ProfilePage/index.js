@@ -59,7 +59,7 @@ function ProfilePage() {
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">
-                                <div>{profileUser.username}</div>
+                                <div style={{fontSize: "16pt"}}>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
                                         return (
@@ -98,10 +98,10 @@ function ProfilePage() {
                                     disabled={profileUser.total_followings === 0}
                                 />
                             </div>
-                            <div>
+                            <div style={{fontWeight: "bold"}}>
                                 {profileUser.name}
-                                <p>{profileUser.bio}</p>
-                            </div>
+                                <p style={{fontWeight: "normal", marginTop: "5px"}}>{profileUser.bio}</p>
+                            </div >
                         </div>
                     </div>
                     <hr id="profile-hr"></hr>

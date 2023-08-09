@@ -34,7 +34,6 @@
     height: 70px;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     align-items: flex-start;
 }
 
@@ -83,6 +82,7 @@
     align-items: center;
 }
 
+.list-tile-caption > img,
 .list-tile-comment > img {
     align-self: flex-start;
 }
