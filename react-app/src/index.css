@@ -23,7 +23,7 @@ input, textarea {
 button {
     border-radius: 5px;
     border-width: 1px;
-    padding: 5px;
+    padding: 10px 20px;
 }
 
 button:hover,
@@ -47,9 +47,9 @@ button.accent {
 
 button.normal {
     border: none;
-    background: rgb(159, 155, 155);
+    background: rgb(239, 239, 239);
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 button.primary:hover {
@@ -61,7 +61,7 @@ button.accent:hover {
 }
 
 button.normal:hover {
-    background: rgb(118, 116, 116);
+    background: rgb(202, 202, 202);
 }
 
 button.primary:disabled {
