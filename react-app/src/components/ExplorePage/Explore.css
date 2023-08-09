@@ -7,13 +7,3 @@
     padding-left: 40px;
     padding-top: 25px;
 }
-
-.no-lists {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    font-size: 24pt;
-    width: 900px;
-    margin: 30px auto;
-    text-align: center;
-}
