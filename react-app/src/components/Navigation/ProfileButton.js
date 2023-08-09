@@ -31,7 +31,7 @@ function ProfileButton({ sessionUser }) {
 
   return (
     <>
-      <div title="Menu" onClick={openMenu}>
+      <div title="Menu" className="nav-icon" onClick={openMenu}>
         <i className="fas fa-bars" />
       </div>
       <div className={ulClassName}>

@@ -41,6 +41,12 @@
 
 #navigation-container > * {
   cursor: pointer;
+  padding: 10px;
+}
+
+#navigation-container > .nav-icon:hover {
+  background-color: lightgrey;
+  border-radius: 5px;
 }
 
 #navigation-container i,
