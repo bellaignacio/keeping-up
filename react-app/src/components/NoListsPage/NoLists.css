@@ -5,3 +5,8 @@
     margin: 0 auto;
     padding-left: 40px;
 }
+
+#no-lists-container a {
+    font-weight: bold;
+    color: rgb(0, 149, 246);
+}

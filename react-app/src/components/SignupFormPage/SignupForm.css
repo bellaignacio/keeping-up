@@ -15,6 +15,15 @@
 #signup-form-title {
     padding-bottom: 10px;
     align-self: center;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 16px;
+}
+
+#signup-form-title img {
+    width: 30px;
+    height: 30px;
 }
 
 #signup-form input {

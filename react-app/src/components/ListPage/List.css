@@ -37,7 +37,7 @@
     align-items: flex-start;
 }
 
-.list-tile-icons > * {
+.list-tile-icons > span {
     cursor: pointer;
 }
 

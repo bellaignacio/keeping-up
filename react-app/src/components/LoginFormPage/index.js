@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, NavLink } from "react-router-dom";
 import Navigation from "../Navigation";
+import logo from './keepingup-logo.png';
 import './LoginForm.css';
 
 function LoginFormPage() {
@@ -27,7 +28,7 @@ function LoginFormPage() {
       <Navigation />
       <div id="login-container">
         <form id="login-form" onSubmit={handleSubmit}>
-          <NavLink id="login-form-title" to="/about">Keeping Up</NavLink>
+          <NavLink id="login-form-title" to="/about"><img src={logo} alt="keeping-up-logo" />Keeping Up</NavLink>
           {errors.length > 0 && <ul className="error-message-container">
             {errors.map((error, idx) => (
               <li className="error-message" key={idx}>{error}</li>

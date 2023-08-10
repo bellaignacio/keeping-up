@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    text-align: center;
+    text-align: start;
 }
 
 #list-demo {
@@ -90,6 +90,7 @@
 #list-demo-icons span {
     font-size: 20pt;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .red-like-icon {
