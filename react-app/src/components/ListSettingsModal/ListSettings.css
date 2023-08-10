@@ -11,6 +11,7 @@
     border-left: none;
     border-right: none;
     border-top: none;
+    border-radius: 0;
 }
 
 #list-settings-modal-container button:last-child {

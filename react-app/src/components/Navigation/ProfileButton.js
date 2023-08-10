@@ -27,14 +27,14 @@ function ProfileButton({ sessionUser }) {
     history.push('/about');
   };
 
-  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  // const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
       <div title="Menu" className="nav-icon" onClick={openMenu}>
         <i className="fas fa-bars" />
       </div>
-      <div className={ulClassName}>
+      <div id="profile-dropdown" className={showMenu ? "" : " hidden"}>
         {sessionUser ? (
           <>
             <div>
