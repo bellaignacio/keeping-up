@@ -20,10 +20,6 @@
   background-color: lightgrey;
 }
 
-.hidden {
-  display: none;
-}
-
 #navigation-container {
   display: flex;
   flex-direction: column;

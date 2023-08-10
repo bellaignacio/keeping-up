@@ -149,7 +149,7 @@ function ListTile({ listObj, listOnly }) {
                                 placeholder="Add a comment..."
                                 required
                             />
-
+                            <button className={`primary ${comment.length < 1 ? 'invisible' : ''}`} type="submit">Post</button>
                         </form>
                         {errors.length > 0 && <ul className="error-message-container">
                                 {errors.map((error, idx) => (
