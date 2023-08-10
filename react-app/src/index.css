@@ -4,6 +4,7 @@ html, body {
     width: 100%;
     min-width: 800px;
     font-family: 'Segoe UI', 'Roboto', Helvetica, Arial, sans-serif;
+    font-size: 14px;
 }
 
 ul {
@@ -17,8 +18,12 @@ a {
 }
 
 input, textarea {
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     border-radius: 3px;
+    line-height: 18px;
+    padding: 7px;
+    text-overflow: ellipsis;
+    background-color: rgb(250, 250, 250);
 }
 
 button {
@@ -93,11 +98,9 @@ button.primary:disabled {
     color: red;
 }
 
-
 .hidden {
     display: none;
 }
-
 
 .invisible {
     visibility: hidden;

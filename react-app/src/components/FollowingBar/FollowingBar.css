@@ -11,7 +11,7 @@
     height: 60px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px double lightgrey;
+    border: 3px double rgb(202, 202, 202);
 }
 
 .following-username {

@@ -17,7 +17,7 @@
 #list-demo {
     width: 400px;
     height: 400px;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     background-position: center;
     background-size: cover;
     background-image: linear-gradient(to bottom,
@@ -46,7 +46,7 @@
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px double lightgrey;
+    border: 3px double rgb(202, 202, 202);
 }
 
 .list-demo-user-name {

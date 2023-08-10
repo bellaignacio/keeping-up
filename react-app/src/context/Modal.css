@@ -32,6 +32,6 @@
 #modal-title {
   font-weight: bold;
   text-align: center;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid rgb(202, 202, 202);
   padding: 10px 0;
 }

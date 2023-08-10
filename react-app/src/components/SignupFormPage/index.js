@@ -86,7 +86,6 @@ function SignupFormPage() {
             </label>
             <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
           </div>
-
           <label>
             <input
               type="text"
@@ -104,7 +103,6 @@ function SignupFormPage() {
               onChange={(e) => setIsPublic(!isPublic)}
             />
           </label>
-          <br></br>
           <label>
             <input
               type="password"
