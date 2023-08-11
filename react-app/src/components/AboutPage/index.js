@@ -17,7 +17,7 @@ function AboutPage() {
                         Tired of seeing countless photos on social media? Tired of comparing yourself to others? Tired of feeling unproductive and lazy? Instead of posting about your one-off Saturday mimosas or touristy photo ops, post about your goals and ambitions!
                     </p>
                     <p>
-                        Keeping Up, an Instagram-style clone, is a website for users to share their current activities in the form of to-do/bucket lists, creating an environment of accountability and encouragement among their peers.
+                        Keeping Up, an Instagram-inspired site, is for users to share their current activities in the form of to-do / bucket lists, creating an environment of accountability and encouragement among their followers.
                     </p>
                     <p>
                         Share YOUR reality with friends and family. Inspire and be inspired to keep up with your ambitions - no matter how big or small.
