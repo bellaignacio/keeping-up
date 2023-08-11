@@ -10,10 +10,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 20px;
+    padding: 10px;
     text-align: start;
     font-family: 'Cookie', cursive;
     font-size: 25px;
+}
+
+#site-description > * {
+    margin: 10px 0;
 }
 
 #list-demo {
@@ -107,9 +111,11 @@
     text-align: center;
     font-weight: 900;
     color: white;
-    font-family: arial;
+    font-family: "Baskerville";
+    font-size: 25px;
     position: relative;
-    left: 100px;
+    left: 80px;
+    bottom: 50px;
 }
 
 #list-demo-popup:before {
