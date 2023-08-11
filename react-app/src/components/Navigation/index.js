@@ -28,11 +28,7 @@ function Navigation() {
 	} else {
 		return (
 			<div id="navigation-container-logged-out">
-				<NavLink id="keeping-up-title" to="/about"><img src={logo} alt="keeping-up-logo"/>KeepingUp</NavLink>
-				{/* <div id="keeping-up-title" onClick={() => history.push('/about')}>
-					<img src={logo} alt="keeping-up-logo"/>
-					<span>Keeping Up</span>
-				</div> */}
+				<NavLink className="keeping-up" id="keeping-up-title" to="/about"><img src={logo} alt="keeping-up-logo"/>Keeping Up</NavLink>
 				<div id="account-buttons">
 					<button className="primary" onClick={() => history.push("/login")}>Log in</button>
 					<button className="accent" onClick={() => history.push("/signup")}>Sign up</button>

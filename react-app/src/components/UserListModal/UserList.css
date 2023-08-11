@@ -14,3 +14,9 @@
 .user-list-item button {
     margin: 10px 0;
 }
+
+.user-list-item .list-tile-header {
+    width: 200px;
+    overflow: visible;
+    cursor: pointer;
+}

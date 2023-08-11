@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+#delete-list-container #modal-title {
+    font-size: 25px;
+}
+
 #delete-list-container button {
     padding: 10px 0;
     background: none;

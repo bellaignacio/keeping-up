@@ -5,6 +5,7 @@
     position: relative;
     color: white;
     overflow: auto;
+    cursor: pointer;
 }
 
 #home-container .list-tile,
@@ -15,6 +16,7 @@
     position: relative;
     color: white;
     overflow: auto;
+    cursor: pointer;
 }
 
 /*.list-tile:hover .list-tile-info,
@@ -64,7 +66,8 @@
     align-items: center;
     padding: 10px 5px;
     box-sizing: border-box;
-    width: 400px;
+    width: 200px;
+    cursor: pointer;
 }
 
 .list-tile-footer {

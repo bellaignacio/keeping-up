@@ -128,21 +128,21 @@ function ListPage() {
                             <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                             <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
                                 {listObj.list_items.map(li => (
-                                    <li key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
+                                    <li className={listObj.user_id === sessionUser.id ? 'clickable-li' : ''} key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                                 ))}
                             </ul>
                         </div>
                     </div>
                     <div className="list-info">
                         <div className="list-tile-header">
-                            <div className="list-tile-subheader">
+                            <div className="list-tile-subheader" onClick={() => history.push(`/${listObj.user.id}`)}>
                                 <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                                     onError={(e) => {
                                         e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
                                         e.onerror = null;
                                     }}
                                 />
-                                <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
+                                <div className="list-tile-user-name">{listObj.user.username}</div>
                             </div>
                             {listObj.user_id === sessionUser.id && <OpenModalButton
                                 buttonText={<span><i className="fas fa-ellipsis-h"></i></span>}

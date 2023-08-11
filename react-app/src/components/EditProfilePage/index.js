@@ -43,7 +43,7 @@ function EditProfilePage() {
             <div id="edit-profile-container">
                 <form id="edit-profile-form" onSubmit={handleEdit}>
                     <div id="edit-profile-form-title">Edit Profile</div>
-                    <div id="edit-profile-form-user-image">
+                    <div id="edit-profile-form-user-image" onClick={() => history.push(`/${sessionUser.id}`)}>
                         <img className="list-tile-user-image" src={sessionUser.image_url} alt={sessionUser.username}
                             onError={(e) => {
                                 e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";

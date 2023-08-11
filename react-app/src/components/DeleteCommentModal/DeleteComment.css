@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+#delete-comment-container #modal-title {
+    font-size: 25px;
+}
+
 #delete-comment-container button {
     padding: 10px 0;
     background: none;

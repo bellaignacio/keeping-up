@@ -4,6 +4,10 @@
     align-items: center;
 }
 
+#edit-comment-container #modal-title {
+    font-size: 25px;
+}
+
 #edit-comment-container input {
     width: 90%;
     height: 25px;

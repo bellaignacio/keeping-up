@@ -35,27 +35,27 @@ function AboutPage() {
                         <div id="list-demo-content">
                             <p id="list-demo-title">How to Keep Up</p>
                             <ul id="list-demo-list">
-                                <li id="list-demo-li-1" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-1" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-1").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-1").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-1").style.textDecoration = "";
                                 }}>Create a Keeping Up Account</li>
-                                <li id="list-demo-li-2" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-2" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-2").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-2").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-2").style.textDecoration = "";
                                 }}>Create your 1st List</li>
-                                <li id="list-demo-li-3" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-3" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-3").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-3").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-3").style.textDecoration = "";
                                 }}>Follow other Keeping Up Users</li>
-                                <li id="list-demo-li-4" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-4" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-4").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-4").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-4").style.textDecoration = "";
                                 }}>Complete your lists (show off that progress!)</li>
-                                <li id="list-demo-li-5" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-5" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-5").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-5").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-5").style.textDecoration = "";

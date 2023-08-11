@@ -54,7 +54,7 @@ function CreateListPage({ listObj, isEdit }) {
             <Navigation />
             <div id="create-list-container">
                 <form id="create-list-form" onSubmit={handleSubmit}>
-                    <div id="list-form-title">{isEdit ? "Edit the list" : "Create a list"}</div>
+                    <div id="list-form-title">{isEdit ? "Edit this list" : "Create a list"}</div>
 
                     {errors.length > 0 && <ul className="error-message-container">
                         {errors.map((error, idx) => (

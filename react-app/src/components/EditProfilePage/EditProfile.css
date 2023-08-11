@@ -17,7 +17,8 @@
 }
 
 #edit-profile-form-title {
-    font-size: 24px;
+    font-family: 'Cookie', cursive;
+    font-size: 45px;
     margin-bottom: 10px;
 }
 
@@ -26,7 +27,8 @@
     display: flex;
     align-items: center;
     column-gap: 10px;
-    align-self: flex-start;
+    align-self: center;
+    cursor: pointer;
 }
 
 #edit-profile-form input {
