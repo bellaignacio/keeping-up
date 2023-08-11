@@ -96,12 +96,26 @@ function CreateListPage({ listObj, isEdit }) {
                             style={{ fontFamily: titleFont }}
                         >
                             <option value="Arial">Arial</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="American Typewriter">American Typewriter</option>
+                            <option value="Baskerville">Baskerville</option>
+                            <option value="Bradley Hand">Bradley Hand</option>
+                            <option value="Brush Script MT">Brush Script MT</option>
                             <option value="Cambria">Cambria</option>
                             <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Cookie">Cookie</option>
                             <option value="Courier New">Courier New</option>
+                            <option value="Didot">Didot</option>
+                            <option value="Garamond">Garamond</option>
                             <option value="Georgia">Georgia</option>
+                            <option value="Gill Sans">Gill Sans</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Luminari">Luminari</option>
+                            <option value="Palatino">Palatino</option>
+                            <option value="Tahoma">Tahoma</option>
                             <option value="Times New Roman">Times New Roman</option>
                             <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Verdana">Verdana</option>
                         </select>
                         <select
                             value={titleSize}
@@ -202,12 +216,26 @@ function CreateListPage({ listObj, isEdit }) {
                             style={{ fontFamily: liFont }}
                         >
                             <option value="Arial">Arial</option>
+                            <option value="Arial Black">Arial Black</option>
+                            <option value="American Typewriter">American Typewriter</option>
+                            <option value="Baskerville">Baskerville</option>
+                            <option value="Bradley Hand">Bradley Hand</option>
+                            <option value="Brush Script MT">Brush Script MT</option>
                             <option value="Cambria">Cambria</option>
                             <option value="Comic Sans MS">Comic Sans MS</option>
+                            <option value="Cookie">Cookie</option>
                             <option value="Courier New">Courier New</option>
+                            <option value="Didot">Didot</option>
+                            <option value="Garamond">Garamond</option>
                             <option value="Georgia">Georgia</option>
+                            <option value="Gill Sans">Gill Sans</option>
+                            <option value="Impact">Impact</option>
+                            <option value="Luminari">Luminari</option>
+                            <option value="Palatino">Palatino</option>
+                            <option value="Tahoma">Tahoma</option>
                             <option value="Times New Roman">Times New Roman</option>
                             <option value="Trebuchet MS">Trebuchet MS</option>
+                            <option value="Verdana">Verdana</option>
                         </select>
                         <select
                             value={liSize}
