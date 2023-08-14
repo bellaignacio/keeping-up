@@ -6,15 +6,24 @@
 #signup-form {
     display: flex;
     flex-direction: column;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     margin: 10px;
-    padding: 10px 70px;
+    padding: 30px 70px;
     row-gap: 10px;
 }
 
 #signup-form-title {
-    padding: 10px;
+    padding-bottom: 10px;
     align-self: center;
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    font-size: 30px;
+}
+
+#signup-form-title img {
+    width: 30px;
+    height: 30px;
 }
 
 #signup-form input {
@@ -34,11 +43,12 @@
 
 #signup-to-login {
     text-align: center;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     margin: 10px;
-    padding: 10px;
+    padding: 20px;
 }
 
 #signup-to-login a {
     color: rgb(0, 149, 246);
+    font-weight: bold;
 }

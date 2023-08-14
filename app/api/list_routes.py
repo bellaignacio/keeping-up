@@ -53,18 +53,19 @@ def create_list():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         list_items = form.data['list_items'].split('\n')
+        filtered_list_items = list(filter(lambda li: len(li) > 0, list_items))
         last_li_id = (ListItem.query.order_by(ListItem.id.desc()).first()).id
 
         new_list = List(
             title=form.data['title'],
             caption=form.data['caption'],
-            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(list_items)))),
+            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(filtered_list_items)))),
             user_id=current_user.id
         )
         db.session.add(new_list)
         db.session.commit()
 
-        for li in list_items:
+        for li in filtered_list_items:
             item = ListItem(
                 list_id=new_list.id,
                 description=li

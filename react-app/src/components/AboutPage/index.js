@@ -17,7 +17,7 @@ function AboutPage() {
                         Tired of seeing countless photos on social media? Tired of comparing yourself to others? Tired of feeling unproductive and lazy? Instead of posting about your one-off Saturday mimosas or touristy photo ops, post about your goals and ambitions!
                     </p>
                     <p>
-                        Keeping Up, an Instagram-style clone, is a website for users to share their current activities in the form of to-do/bucket lists, creating an environment of accountability and encouragement among their peers.
+                        Keeping Up, an Instagram-inspired site, is for users to share their current activities in the form of to-do / bucket lists, creating an environment of accountability and encouragement among their followers.
                     </p>
                     <p>
                         Share YOUR reality with friends and family. Inspire and be inspired to keep up with your ambitions - no matter how big or small.
@@ -35,27 +35,27 @@ function AboutPage() {
                         <div id="list-demo-content">
                             <p id="list-demo-title">How to Keep Up</p>
                             <ul id="list-demo-list">
-                                <li id="list-demo-li-1" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-1" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-1").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-1").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-1").style.textDecoration = "";
                                 }}>Create a Keeping Up Account</li>
-                                <li id="list-demo-li-2" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-2" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-2").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-2").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-2").style.textDecoration = "";
                                 }}>Create your 1st List</li>
-                                <li id="list-demo-li-3" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-3" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-3").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-3").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-3").style.textDecoration = "";
                                 }}>Follow other Keeping Up Users</li>
-                                <li id="list-demo-li-4" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-4" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-4").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-4").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-4").style.textDecoration = "";
                                 }}>Complete your lists (show off that progress!)</li>
-                                <li id="list-demo-li-5" onClick={() => {
+                                <li className="clickable-li" id="list-demo-li-5" onClick={() => {
                                     let currentStyle = document.getElementById("list-demo-li-5").style.textDecoration;
                                     if (currentStyle === "") document.getElementById("list-demo-li-5").style.textDecoration = "solid line-through red 3px";
                                     else document.getElementById("list-demo-li-5").style.textDecoration = "";

@@ -1,51 +1,52 @@
-.profile-dropdown {
-  position: absolute;
-  border: 1px solid lightgrey;
-  border-radius: 10%;
-  bottom: 0;
-  left: 55px;
-  padding: 10px;
-  background-color: white;
-}
-
-.profile-dropdown button {
-  border: none;
-  border-radius: 10%;
-  background: none;
-  padding: 15px;
-  font-size: 14pt;
-}
-
-.profile-dropdown button:hover {
-  background-color: lightgrey;
-}
-
-.hidden {
-  display: none;
-}
-
 #navigation-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  width: 40px;
-  height: 95vh;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: min-content;
+  height: 100vh;
   position: fixed;
-  padding: 10px;
+  padding: 5px;
   border-bottom: none;
-  border-right: 1px solid lightgrey;
+  border-right: 1px solid rgb(202, 202, 202);
   background-color: white;
   z-index: 5;
 }
 
-#navigation-container > * {
+.nav-icon {
+  width: 100px;
+  height: 40px;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+}
+
+.nav-icon > div:first-child {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-icon-label {
+  font-family: 'Cookie', cursive;
+  font-size: 25px;
+  width: min-content;
+}
+
+#navigation-container > *:not(:last-child) {
   cursor: pointer;
   padding: 10px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
 }
 
 #navigation-container > .nav-icon:hover {
-  background-color: lightgrey;
+  background-color: rgb(202, 202, 202);
   border-radius: 5px;
 }
 
@@ -56,31 +57,114 @@
   height: 30px;
 }
 
-#navigation-container.logged-out {
+#account-buttons {
+  padding: 10px 20px;
+}
+
+#account-buttons button {
+  font-size: 16pt;
+  margin: 0 5px;
+  padding: 10px 20px;
+}
+
+.profile-icon-image {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px double rgb(202, 202, 202);
+}
+
+#profile-dropdown {
+  position: absolute;
+  border: 1px solid rgb(202, 202, 202);
+  border-radius: 12px;
+  bottom: 30px;
+  left: 125px;
+  padding: 8px;
+  background-color: white;
+  width: 150px;
+}
+
+#profile-dropdown button {
+  border: none;
+  border-radius: 12px;
+  background: none;
+  padding: 16px;
+  font-size: 16px;
+  width: 100%;
+  text-align: start;
+}
+
+#profile-dropdown button:hover {
+  background-color: rgb(202, 202, 202);
+}
+
+#keeping-up-icon img {
+  width: 35px;
+  height: 35px;
+}
+
+#navigation-container-logged-out {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  background-color: white;
   flex-direction: row;
-  width: 95vw;
+  width: 100vw;
   height: 50px;
   position: static;
-  border-bottom: 1px solid lightgrey;
+  border-bottom: 1px solid rgb(202, 202, 202);
   border-right: none;
   margin-bottom: 20px;
 }
 
 #keeping-up-title {
-  font-size: 30pt;
+  font-size: 50px;
   display: flex;
   align-items: center;
   column-gap: 10px;
 }
 
-#account-buttons button {
-  font-size: 16pt;
-  margin: 0px 5px;
-  padding: 10px 20px;
+#keeping-up-title img {
+  height: 50px;
+  width: 50px;
 }
 
-.profile-icon-image {
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px double lightgrey;
+@media screen and (max-width: 1000px) {
+
+  .nav-icon {
+    width: 40px;
+  }
+
+  .nav-icon-label {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #profile-dropdown {
+    left: 65px;
+  }
+
+}
+
+@media screen and (min-width: 1001px) {
+
+  .nav-icon {
+    justify-content: flex-start;
+  }
+
+  #keeping-up-icon img {
+    display: none;
+    width: 0;
+    height: 0;
+  }
+
+  #keeping-up-icon .nav-icon-label {
+    width: 100px;
+    text-align: center;
+  }
+
 }

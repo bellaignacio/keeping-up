@@ -2,7 +2,7 @@ from app.models import db, Like, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-def seed_likes(demo, aurora, john, jane, tyler):
+def seed_likes(demo, aurora, john, jane, tyler, amelia, marc, sadie, lisa, caleb):
     like_1 = Like(user_id=aurora.id, list_id=1)
     like_2 = Like(user_id=tyler.id, list_id=1)
     like_3 = Like(user_id=jane.id, list_id=1)

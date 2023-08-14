@@ -2,7 +2,7 @@ from app.models import db, Comment, User, environment, SCHEMA
 from sqlalchemy.sql import text
 
 
-def seed_comments(demo, aurora, john, jane, tyler):
+def seed_comments(demo, aurora, john, jane, tyler, amelia, marc, sadie, lisa, caleb):
     comment_1 = Comment(user_id=aurora.id, list_id=2, comment='Apple products are so expensive though!')
     comment_2 = Comment(user_id=tyler.id, list_id=2, comment='i agree, but they connect so seamlessly with each other')
     comment_3 = Comment(user_id=demo.id, list_id=2, comment='i\'ve already made progress, can\'t turn back now lol')

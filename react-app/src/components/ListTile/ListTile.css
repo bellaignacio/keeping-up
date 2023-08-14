@@ -1,20 +1,22 @@
 #profile-container .list-tile {
     width: 250px;
     height: 250px;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     position: relative;
     color: white;
     overflow: auto;
+    cursor: pointer;
 }
 
 #home-container .list-tile,
 #explore-container .list-tile {
     width: 400px;
     height: 400px;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     position: relative;
     color: white;
     overflow: auto;
+    cursor: pointer;
 }
 
 /*.list-tile:hover .list-tile-info,
@@ -55,7 +57,7 @@
     height: 30px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px double lightgrey;
+    border: 3px double rgb(202, 202, 202);
 }
 
 .list-tile-header {
@@ -64,14 +66,15 @@
     align-items: center;
     padding: 10px 5px;
     box-sizing: border-box;
-    width: 400px;
+    width: 200px;
+    cursor: pointer;
 }
 
 .list-tile-footer {
     padding: 5px;
     box-sizing: border-box;
     width: 400px;
-    border-bottom: 1px solid lightgrey;
+    border-bottom: 1px solid rgb(202, 202, 202);
 }
 
 .list-tile-footer > * {
@@ -96,11 +99,24 @@
     margin-right: 15px;
 }
 
-.list-tile-comment-form input {
-    box-sizing: border-box;
-    width: 100%;
-}
-
 .red-like-icon {
     color: red;
+}
+
+.list-tile-comment-form {
+    width: 100%;
+    display: flex;
+    column-gap: 10px;
+}
+
+.list-tile-comment-form input {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 5px 0;
+    font-size: inherit;
+}
+
+.list-tile-comment-form button {
+    padding: 5px;
 }

@@ -56,6 +56,54 @@ def seed_list_items():
     li_51 = ListItem(description='New York City', list_id=11, is_complete=True)
     li_52 = ListItem(description='Hawaii', list_id=11)
     li_53 = ListItem(description='New Orleans', list_id=11)
+    li_54 = ListItem(description='a TON of baby\'s breath', list_id=12)
+    li_55 = ListItem(description='bouquet holders for the bridesmaids', list_id=12)
+    li_56 = ListItem(description='boutonniere holders for the suited men', list_id=12)
+    li_57 = ListItem(description='lots of roses ~', list_id=12, is_complete=True)
+    li_58 = ListItem(description='vases for table centerpieces', list_id=12, is_complete=True)
+    li_59 = ListItem(description='flower holders for the pews', list_id=12)
+    li_60 = ListItem(description='lots and lots of loose petals for the flower girls', list_id=12)
+    li_61 = ListItem(description='Sequoia National Park - CA', list_id=13, is_complete=True)
+    li_62 = ListItem(description='Zion National Park - UT ', list_id=13, is_complete=True)
+    li_63 = ListItem(description='Redwood National Park - CA', list_id=13)
+    li_64 = ListItem(description='Everglades National Park - FL', list_id=13)
+    li_65 = ListItem(description='Haleakala National Park - HI', list_id=13)
+    li_66 = ListItem(description='Katmai National Park - AK', list_id=13)
+    li_67 = ListItem(description='Yellowstone National Park - WY', list_id=13)
+    li_68 = ListItem(description='Knife Pleat, Costa Mesa (1 star)', list_id=14)
+    li_69 = ListItem(description='Kato, Los Angeles (1 star)', list_id=14)
+    li_70 = ListItem(description='Hayato, Los Angeles (2 stars)', list_id=14)
+    li_71 = ListItem(description='Providence, Hollywood (2 stars)', list_id=14)
+    li_72 = ListItem(description='Quince, San Francisco (3 stars)', list_id=14)
+    
+    # li_73 = ListItem(description='', list_id=, is_complete=)
+    # li_74 = ListItem(description='', list_id=, is_complete=)
+    # li_75 = ListItem(description='', list_id=, is_complete=)
+    # li_76 = ListItem(description='', list_id=, is_complete=)
+    # li_77 = ListItem(description='', list_id=, is_complete=)
+    # li_78 = ListItem(description='', list_id=, is_complete=)
+    # li_79 = ListItem(description='', list_id=, is_complete=)
+    # li_80 = ListItem(description='', list_id=, is_complete=)
+    # li_81 = ListItem(description='', list_id=, is_complete=)
+    # li_82 = ListItem(description='', list_id=, is_complete=)
+    # li_83 = ListItem(description='', list_id=, is_complete=)
+    # li_84 = ListItem(description='', list_id=, is_complete=)
+    # li_85 = ListItem(description='', list_id=, is_complete=)
+    # li_86 = ListItem(description='', list_id=, is_complete=)
+    # li_87 = ListItem(description='', list_id=, is_complete=)
+    # li_88 = ListItem(description='', list_id=, is_complete=)
+    # li_89 = ListItem(description='', list_id=, is_complete=)
+    # li_90 = ListItem(description='', list_id=, is_complete=)
+    # li_91 = ListItem(description='', list_id=, is_complete=)
+    # li_92 = ListItem(description='', list_id=, is_complete=)
+    # li_93 = ListItem(description='', list_id=, is_complete=)
+    # li_94 = ListItem(description='', list_id=, is_complete=)
+    # li_95 = ListItem(description='', list_id=, is_complete=)
+    # li_96 = ListItem(description='', list_id=, is_complete=)
+    # li_97 = ListItem(description='', list_id=, is_complete=)
+    # li_98 = ListItem(description='', list_id=, is_complete=)
+    # li_99 = ListItem(description='', list_id=, is_complete=)
+    # li_100 = ListItem(description='', list_id=, is_complete=)
 
     db.session.add_all([
         li_1, li_2, li_3, li_4, li_5, li_6, li_7, li_8, li_9, li_10,
@@ -63,7 +111,12 @@ def seed_list_items():
         li_21, li_22, li_23, li_24, li_25, li_26, li_27, li_28, li_29, li_30,
         li_31, li_32, li_33, li_34, li_35, li_36, li_37, li_38, li_39, li_40,
         li_41, li_42, li_43, li_44, li_45, li_46, li_47, li_48, li_49, li_50,
-        li_51, li_52, li_53
+        li_51, li_52, li_53, li_54, li_55, li_56, li_57, li_58, li_59, li_60,
+        li_61, li_62, li_63, li_64, li_65, li_66, li_67, li_68, li_69, li_70,
+        li_71, li_72
+        # , li_73, li_74, li_75, li_76, li_77, li_78, li_79, li_80,
+        # li_81, li_82, li_83, li_84, li_85, li_86, li_87, li_88, li_89, li_90,
+        # li_91, li_92, li_93, li_94, li_95, li_96, li_97, li_98, li_99, li_100
     ])
     db.session.commit()
 

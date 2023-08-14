@@ -3,25 +3,32 @@
     margin: 0 auto;
     display: flex;
     justify-content: center;
-    padding-left: 40px;
+    padding-left: 70px;
 }
 
 #edit-profile-form {
     width: 500px;
     display: flex;
     flex-direction: column;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     margin: 10px;
     padding: 30px 75px;
     row-gap: 10px;
 }
 
 #edit-profile-form-title {
+    font-family: 'Cookie', cursive;
+    font-size: 45px;
     margin-bottom: 10px;
+}
+
+#edit-profile-form-user-image {
+    margin-bottom: 5px;
     display: flex;
     align-items: center;
     column-gap: 10px;
     align-self: center;
+    cursor: pointer;
 }
 
 #edit-profile-form input {

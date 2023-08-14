@@ -60,7 +60,7 @@ function ProfilePage() {
                         </div>
                         <div id="profile-info">
                             <div id="profile-info-header">
-                                <div style={{fontSize: "16pt"}}>{profileUser.username}</div>
+                                <div style={{fontSize: "20px"}}>{profileUser.username}</div>
                                 {(() => {
                                     if (profileUser.id === sessionUser.id) {
                                         return (

@@ -3,14 +3,19 @@
     flex-direction: column;
 }
 
+#delete-list-container #modal-title {
+    font-size: 25px;
+}
+
 #delete-list-container button {
     padding: 10px 0;
     background: none;
     width: 100%;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(202, 202, 202);
     border-left: none;
     border-right: none;
     border-top: none;
+    border-radius: 0;
 }
 
 #delete-list-container button:last-child {

@@ -36,12 +36,14 @@ function ExplorePage() {
         <>
             <Navigation />
             {isPublicListsLoaded ?
-                <div id="list-tile-container">
-                    {(publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
-                        return (
-                            <ListTile listOnly={false} listObj={listObj} />
-                        )
-                    })}
+                <div id="explore-container">
+                    <div id="list-tile-container">
+                        {(publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                            return (
+                                <ListTile listOnly={false} listObj={listObj} />
+                            )
+                        })}
+                    </div>
                 </div>
                 : <LoadingPage />
             }

@@ -106,14 +106,14 @@ function ListTile({ listObj, listOnly }) {
     } else {
         return (
             <div className="list-tile-wrapper">
-                <div className="list-tile-header">
+                <div className="list-tile-header" onClick={() => history.push(`/${listObj.user.id}`)}>
                     <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                         onError={(e) => {
                             e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
                             e.onerror = null;
                         }}
                     />
-                    <div className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</div>
+                    <div className="list-tile-user-name">{listObj.user.username}</div>
                 </div>
                 <div className="list-tile" style={listStyleSettings(listObj.list_style)} onClick={() => history.push(`/lists/${listObj.id}`)} >
                     <div className="list-tile-content">
@@ -149,7 +149,7 @@ function ListTile({ listObj, listOnly }) {
                                 placeholder="Add a comment..."
                                 required
                             />
-
+                            <button className={`primary ${comment.length < 1 ? 'invisible' : ''}`} type="submit">Post</button>
                         </form>
                         {errors.length > 0 && <ul className="error-message-container">
                                 {errors.map((error, idx) => (
