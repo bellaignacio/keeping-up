@@ -9,6 +9,11 @@ def seed_users():
     john = User(email='john@aa.io', username='johnnyrocket', bio='"just do it" -nike', password='password')
     jane = User(email='jane@aa.io', username='jane_doe_oe', name='Jane Doe', bio='hi there', image_url='https://i.ibb.co/Jxh5ZGL/jane.jpg', password='password')
     tyler = User(email='tyler@aa.io', username='tyler_asdfg', image_url='https://i.ibb.co/sJ2RP0G/tyler.jpg', is_public=True, password='password')
+    amelia = User(email='amelia@aa.io', username='i.am.elia', name='Amelia Familia', bio='just your friendly neighborhood florist', image_url='https://i.ibb.co/0CpgYgV/flowers.jpg', is_public=True, password='password')
+    marc = User(email='marc@aa.io', username='marc_the_master', bio='my name is marc', is_public=True, password='password')
+    sadie = User(email='sadie@aa.io', username='happie', name='Sadie', is_public=True, password='password')
+    lisa = User(email='lisa@aa.io', username='not_lalalisa', name='Lalisa', image_url='https://i.ibb.co/g95b3pc/singer.jpg', password='password')
+    caleb = User(email='caleb@aa.io', username='bela.c.aleb', password='password')
 
     demo.followings = [aurora, john, tyler]
     aurora.followings = [demo, tyler]
@@ -17,10 +22,10 @@ def seed_users():
     tyler.followings = [demo, aurora]
 
     db.session.add_all([
-        demo, aurora, john, jane, tyler
+        demo, aurora, john, jane, tyler, amelia, marc, sadie, lisa, caleb
     ])
     db.session.commit()
-    return (demo, aurora, john, jane, tyler)
+    return (demo, aurora, john, jane, tyler, amelia, marc, sadie, lisa, caleb)
 
 
 # Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
