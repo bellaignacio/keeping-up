@@ -22,7 +22,7 @@ def username_exists(form, field):
 
 class SignUpForm(FlaskForm):
     email = StringField('email', validators=[DataRequired(message='Email is required.'), Email(message='Not a valid email address.'), Length(max=255, message='Email cannot be longer than %(max)d characters.'), user_exists])
-    username = StringField('username', validators=[DataRequired(message='Username is required.'), Length(max=50, message='Username cannot be longer than %(max)d characters.'), username_exists])
+    username = StringField('username', validators=[DataRequired(message='Username is required.'), Regexp('^[a-zA-Z0-9._]+$', message='Username can only contain alphanumeric characters, underscores, and dots.'), Length(max=50, message='Username cannot be longer than %(max)d characters.'), username_exists])
     name = StringField('name', validators=[Optional(), Length(max=50, message='Name cannot be longer than %(max)d characters.')])
     bio = StringField('bio', validators=[Optional(), Length(max=150, message='Bio cannot be longer than %(max)d characters.')])
     image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
