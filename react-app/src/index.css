@@ -121,6 +121,10 @@ button.primary:disabled {
     visibility: hidden;
 }
 
+button:disabled {
+    cursor: default;
+}
+
 .keeping-up {
     font-family: 'Cookie', cursive;
 }
