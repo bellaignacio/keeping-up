@@ -27,4 +27,4 @@ class SignUpForm(FlaskForm):
     bio = StringField('bio', validators=[Optional(), Length(max=150, message='Bio cannot be longer than %(max)d characters.')])
     image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
     is_public = BooleanField('is_public')
-    password = StringField('password', validators=[DataRequired(message='Password is required.')])
+    password = StringField('password', validators=[DataRequired(message='Password is required.'), Length(min=8, message='Password must be at least %(min)d characters.')])
