@@ -1,7 +1,7 @@
 #about-container {
     display: flex;
     width: 1000px;
-    justify-content: space-between;
+    justify-content: space-around;
     column-gap: 50px;
     margin: 0 auto;
 }
@@ -10,19 +10,26 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 10px;
+    margin: 50px 10px;
+    /* padding: 10px; */
     text-align: start;
-    font-family: 'Cookie', cursive;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 #site-description > * {
-    margin: 10px 0;
+    margin: 0 0 20px;
+    line-height: 125%;
+}
+
+#list-demo-wrapper {
+    width: 400px;
+    margin: 0 30px;
 }
 
 #list-demo {
     width: 400px;
     height: 400px;
+    box-sizing: border-box;
     border: 1px solid rgb(202, 202, 202);
     background-position: center;
     background-size: cover;
@@ -44,7 +51,7 @@
     align-items: center;
     padding: 5px;
     box-sizing: border-box;
-    width: 500px;
+    width: 400px;
 }
 
 #list-demo-user-image {
@@ -86,10 +93,10 @@
 #list-demo-footer {
     padding: 5px;
     box-sizing: border-box;
-    width: 500px;
+    width: 400px;
 }
 
-#list-demo-footer>* {
+#list-demo-footer > * {
     margin: 5px 0;
 }
 
@@ -104,18 +111,19 @@
 }
 
 #list-demo-popup {
-    width: 300px;
+    width: 225px;
     margin: 50px auto;
     background: rgb(0, 149, 246);;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
     font-weight: 900;
     color: white;
     font-family: "Baskerville";
-    font-size: 25px;
+    font-size: 20px;
     position: relative;
-    left: 80px;
-    bottom: 50px;
+    left: 195px;
+    bottom: 75px;
+    border-radius: 5px;
 }
 
 #list-demo-popup:before {
@@ -128,5 +136,5 @@
     border-top: 10px solid rgb(0, 149, 246);;
     border-bottom: 10px solid transparent;
     right: -20px;
-    top: 6px;
+    top: 15px;
 }
