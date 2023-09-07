@@ -62,16 +62,10 @@ def update_user(user_id):
     form = ProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if form.data['image_url']:
-            image_url = form.data['image_url']
-            image_url.filename = get_unique_filename(image_url.filename)
-            image_url_upload = upload_file_to_s3(image_url)
-
         user.username = form.data['username']
         user.name = form.data['name']
         user.bio = form.data['bio']
-        # user.image_url = form.data['image_url']
-        user.image_url = image_url_upload['url'] if form.data['image_url'] else form.data['image_url']
+        user.image_url = form.data['image_url']
         user.is_public = form.data['is_public']
         db.session.commit()
         return user.to_dict()

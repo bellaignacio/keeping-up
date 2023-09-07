@@ -41,7 +41,7 @@ function EditProfilePage() {
         <>
             <Navigation />
             <div id="edit-profile-container">
-                <form id="edit-profile-form" onSubmit={handleEdit} encType="multipart/form-data">
+                <form id="edit-profile-form" onSubmit={handleEdit}>
                     <div id="edit-profile-form-title">Edit Profile</div>
                     <div id="edit-profile-form-user-image" onClick={() => history.push(`/${sessionUser.id}`)}>
                         <img className="list-tile-user-image" src={sessionUser.image_url} alt={sessionUser.username}
@@ -95,22 +95,15 @@ function EditProfilePage() {
                         <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
                     </div>
 
-                    <label>
-                        Profile Image
-                        {/* <input
+                    {/* <label>
+                        Profile Image URL
+                        <input
                             type="text"
                             value={imgUrl}
                             onChange={(e) => setImgUrl(e.target.value)}
                             placeholder="Profile Image URL"
-                        /> */}
-                        <input
-                            type="file"
-                            // value={imgUrl}
-                            accept=".png, .jpg, .jpeg"
-                            onChange={(e) => setImgUrl(e.target.files[0])}
                         />
-                        <img src={imgUrl} />
-                    </label>
+                    </label> */}
                     <label>
                         Make Account Public?
                         <input
