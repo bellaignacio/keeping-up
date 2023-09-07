@@ -91,7 +91,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>Title Editor</div>
+                    <label>Title Editor</label>
                     <div id="title-settings-container">
                         <select
                             value={titleFont}
@@ -211,7 +211,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>List Editor</div>
+                    <label>List Editor</label>
                     <div id="list-settings-container">
                         <select
                             value={liFont}
@@ -307,7 +307,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>Completed Style Editor</div>
+                    <label>Completed Style Editor</label>
                     <div id="list-completed-settings-container">
                         <button
                             onClick={(e) => {
