@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from app.models import db, User, List, ListItem, ListStyle
 from app.forms import ListForm
 from app.api.auth_routes import validation_errors_to_error_messages
+from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 
 list_routes = Blueprint('lists', __name__)
 
@@ -121,15 +122,9 @@ def update_list(list_id):
     form = ListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        if form.data['image_url']:
-            image_url = form.data['image_url']
-            image_url.filename = get_unique_filename(image_url.filename)
-            image_url_upload = upload_file_to_s3(image_url)
-
-        list.title = form.data['title']
-        list.caption = form.data['caption']
+        list.title=form.data['title']
+        list.caption=form.data['caption']
         form.populate_obj(list_style)
-        list_style.image_url = image_url_upload['url'] if form.data['image_url'] else form.data['image_url']
         db.session.commit()
         return list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

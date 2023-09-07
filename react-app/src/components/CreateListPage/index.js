@@ -72,7 +72,7 @@ function CreateListPage({ listObj, isEdit }) {
                             required
                         />
                     </label>
-                    <label>
+                    {!isEdit && <label>
                         Background Image
                         {/* <input
                             type="text"
@@ -87,7 +87,7 @@ function CreateListPage({ listObj, isEdit }) {
                             onChange={(e) => setImgUrl(e.target.files[0])}
                         />
                         <img src={imgUrl} />
-                    </label>
+                    </label>}
 
                     <br></br>
 
