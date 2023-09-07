@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import db, User, List, ListItem, ListStyle
-from app.forms import ListForm
+from app.forms import ListForm, EditListForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 
@@ -118,7 +118,7 @@ def update_list(list_id):
         return {'errors': f"User is not the creator of list {list_id}."}, 401
     list_style = ListStyle.query.filter(ListStyle.list_id == list_id).first()
     list_items = ListItem.query.filter(ListItem.list_id == list_id).all()
-    form = ListForm()
+    form = EditListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         list.title=form.data['title']
