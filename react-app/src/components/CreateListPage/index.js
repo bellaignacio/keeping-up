@@ -51,8 +51,6 @@ function CreateListPage({ listObj, isEdit }) {
                 formData.append("li_marker", liMarker);
                 formData.append("li_completed_style", liCompStyle);
                 formData.append("li_completed_weight", liCompWeight);
-                console.log(listItems);
-                console.log(formData.get("list_items"))
                 data = await dispatch(listActions.createList(formData));
             }
         }
