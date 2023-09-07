@@ -1,7 +1,9 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired, Optional, Email, Regexp, Length, ValidationError
 from app.models import User
+from app.api.aws_helpers import ALLOWED_EXTENSIONS
 
 
 def user_exists(form, field):
@@ -25,6 +27,6 @@ class SignUpForm(FlaskForm):
     username = StringField('username', validators=[DataRequired(message='Username is required.'), Regexp('^[a-zA-Z0-9._]+$', message='Username can only contain alphanumeric characters, underscores, and dots.'), Length(max=50, message='Username cannot be longer than %(max)d characters.'), username_exists])
     name = StringField('name', validators=[Optional(), Length(max=50, message='Name cannot be longer than %(max)d characters.')])
     bio = StringField('bio', validators=[Optional(), Length(max=150, message='Bio cannot be longer than %(max)d characters.')])
-    image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
+    image_url = FileField('image_url', validators=[Optional(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     is_public = BooleanField('is_public')
     password = StringField('password', validators=[DataRequired(message='Password is required.'), Length(min=8, message='Password must be at least %(min)d characters.')])

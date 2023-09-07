@@ -50,8 +50,7 @@
   border-radius: 5px;
 }
 
-#navigation-container i,
-#navigation-container img {
+#navigation-container i {
   font-size: 24pt;
   width: min-content;
   height: 30px;
@@ -67,7 +66,7 @@
   padding: 10px 20px;
 }
 
-.profile-icon-image {
+#profile-icon-image {
   width: 35px;
   height: 35px;
   border-radius: 50%;

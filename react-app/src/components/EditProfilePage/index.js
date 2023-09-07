@@ -94,16 +94,6 @@ function EditProfilePage() {
                         </label>
                         <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
                     </div>
-
-                    <label>
-                        Profile Image URL
-                        <input
-                            type="text"
-                            value={imgUrl}
-                            onChange={(e) => setImgUrl(e.target.value)}
-                            placeholder="Profile Image URL"
-                        />
-                    </label>
                     <label>
                         Make Account Public?
                         <input

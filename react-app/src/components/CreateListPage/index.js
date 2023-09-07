@@ -40,7 +40,19 @@ function CreateListPage({ listObj, isEdit }) {
             data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
         } else {
             const confirmed = window.confirm("The contents of this list cannot be changed once posted. Please select OK to confirm, or Cancel to continue editing.")
-            if (confirmed) data = await dispatch(listActions.createList(title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+            if (confirmed) {
+                const form = document.getElementById("create-list-form");
+                const formData = new FormData(form);
+                formData.append("title_style", titleStyle);
+                formData.append("title_weight", titleWeight);
+                formData.append("title_align", titleAlign);
+                formData.append("li_style", liStyle);
+                formData.append("li_weight", liWeight);
+                formData.append("li_marker", liMarker);
+                formData.append("li_completed_style", liCompStyle);
+                formData.append("li_completed_weight", liCompWeight);
+                data = await dispatch(listActions.createList(formData));
+            }
         }
         if (data?.id) {
             history.push(`/lists/${data.id}`);
@@ -49,11 +61,25 @@ function CreateListPage({ listObj, isEdit }) {
         }
     };
 
+    const displayFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("list-upload-image");
+        img.src = URL.createObjectURL(e.target.files[0]);
+    };
+
+    const removeFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("list-upload-image");
+        img.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+        const upload = document.getElementById("list-upload");
+        upload.value = "";
+    };
+
     return (
         <>
             <Navigation />
             <div id="create-list-container">
-                <form id="create-list-form" onSubmit={handleSubmit}>
+                <form id="create-list-form" onSubmit={handleSubmit} encType="multipart/form-data">
                     <div id="list-form-title">{isEdit ? "Edit this list" : "Create a list"}</div>
 
                     {errors.length > 0 && <ul className="error-message-container">
@@ -66,27 +92,47 @@ function CreateListPage({ listObj, isEdit }) {
                         Caption
                         <input
                             type="text"
+                            name="caption"
                             value={caption}
                             onChange={(e) => setCaption(e.target.value)}
                             placeholder="Enter caption here"
                             required
                         />
                     </label>
-                    <label>
-                        Background Image URL
+                    {!isEdit && <label>
+                        Background Image
                         <input
-                            type="text"
-                            value={imgUrl}
-                            onChange={(e) => setImgUrl(e.target.value)}
-                            placeholder="Enter background image URL here"
+                            id="list-upload"
+                            type="file"
+                            name="image_url"
+                            accept=".png, .jpg, .jpeg"
+                            onChange={(e) => {
+                                setImgUrl(e.target.files[0]);
+                                displayFile(e);
+                            }}
                         />
-                    </label>
+                        <img id="list-upload-image"
+                            src={"https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png"}
+                            onError={(e) => {
+                                e.target.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+                                e.onerror = null;
+                            }}
+                            alt="list-upload-preview"
+                        />
+                        <button
+                            id="list-upload-remove"
+                            onClick={(e) => {
+                                setImgUrl(null);
+                                removeFile(e);
+                            }}>&#x2715;</button>
+                    </label>}
 
                     <br></br>
 
-                    <div>Title Editor</div>
+                    <label>Title Editor</label>
                     <div id="title-settings-container">
                         <select
+                            name="title_font"
                             value={titleFont}
                             onChange={(e) => {
                                 document.getElementById("title-input").style.fontFamily = e.target.value;
@@ -118,6 +164,7 @@ function CreateListPage({ listObj, isEdit }) {
                             <option value="Verdana">Verdana</option>
                         </select>
                         <select
+                            name="title_size"
                             value={titleSize}
                             onChange={(e) => {
                                 document.getElementById("title-input").style.fontSize = e.target.value;
@@ -175,6 +222,7 @@ function CreateListPage({ listObj, isEdit }) {
                         </button>
                         <input
                             type="color"
+                            name="title_color"
                             value={titleColor}
                             onChange={(e) => {
                                 document.getElementById("title-input").style.color = e.target.value;
@@ -187,6 +235,7 @@ function CreateListPage({ listObj, isEdit }) {
                         <input
                             id="title-input"
                             type="text"
+                            name="title"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             placeholder="Enter list title here"
@@ -204,9 +253,10 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>List Editor</div>
+                    <label>List Editor</label>
                     <div id="list-settings-container">
                         <select
+                            name="li_font"
                             value={liFont}
                             onChange={(e) => {
                                 document.getElementById("list-text-area").style.fontFamily = e.target.value;
@@ -238,6 +288,7 @@ function CreateListPage({ listObj, isEdit }) {
                             <option value="Verdana">Verdana</option>
                         </select>
                         <select
+                            name="li_size"
                             value={liSize}
                             onChange={(e) => {
                                 document.getElementById("list-text-area").style.fontSize = e.target.value;
@@ -271,6 +322,7 @@ function CreateListPage({ listObj, isEdit }) {
                         </button>
                         <input
                             type="color"
+                            name="li_color"
                             value={liColor}
                             onChange={(e) => {
                                 document.getElementById("list-text-area").style.color = e.target.value;
@@ -283,6 +335,7 @@ function CreateListPage({ listObj, isEdit }) {
                         <textarea
                             id="list-text-area"
                             wrap="hard"
+                            name="list_items"
                             value={listItems}
                             onChange={(e) => setListItems(e.target.value)}
                             placeholder="Enter list here"
@@ -300,7 +353,7 @@ function CreateListPage({ listObj, isEdit }) {
 
                     <br></br>
 
-                    <div>Completed Style Editor</div>
+                    <label>Completed Style Editor</label>
                     <div id="list-completed-settings-container">
                         <button
                             onClick={(e) => {
@@ -322,6 +375,7 @@ function CreateListPage({ listObj, isEdit }) {
                         </button>
                         <input
                             type="color"
+                            name="li_completed_color"
                             value={liCompColor}
                             onChange={(e) => {
                                 document.getElementById("list-completed-input").style.color = e.target.value;
@@ -330,6 +384,7 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                         <input
                             type="color"
+                            name="li_completed_decoration"
                             value={liCompDecor}
                             onChange={(e) => {
                                 document.getElementById("list-completed-input").style.textDecoration = `solid line-through ${e.target.value} 3px`
