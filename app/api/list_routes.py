@@ -53,26 +53,25 @@ def create_list():
     form = ListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('**********', form.data['list_items'])
         list_items = form.data['list_items'].split('\n')
-        filtered_list_items = list(filter(lambda li: len(li) > 0, list_items))
         last_li_id = (ListItem.query.order_by(ListItem.id.desc()).first()).id
 
         new_list = List(
             title=form.data['title'],
             caption=form.data['caption'],
-            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(filtered_list_items)))),
+            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(list_items)))),
             user_id=current_user.id
         )
         db.session.add(new_list)
         db.session.commit()
 
-        for li in filtered_list_items:
-            item = ListItem(
-                list_id=new_list.id,
-                description=li
-            )
-            db.session.add(item)
+        for li in list_items:
+            if li != '\r':
+                item = ListItem(
+                    list_id=new_list.id,
+                    description=li
+                )
+                db.session.add(item)
 
         if form.data['image_url']:
             image_url = form.data['image_url']
@@ -81,7 +80,6 @@ def create_list():
 
         list_style = ListStyle(
             list_id=new_list.id,
-            # image_url=form.data['image_url'],
             image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
             title_font=form.data['title_font'],
             title_size=form.data['title_size'],

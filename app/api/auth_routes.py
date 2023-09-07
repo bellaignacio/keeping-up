@@ -72,7 +72,6 @@ def sign_up():
             username=form.data['username'],
             name=form.data['name'],
             bio=form.data['bio'],
-            # image_url=form.data['image_url'],
             image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
             is_public=form.data['is_public'],
             password=form.data['password']
