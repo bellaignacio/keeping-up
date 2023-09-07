@@ -53,6 +53,7 @@ def create_list():
     form = ListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('**********', form.data['list_items'])
         list_items = form.data['list_items'].split('\n')
         filtered_list_items = list(filter(lambda li: len(li) > 0, list_items))
         last_li_id = (ListItem.query.order_by(ListItem.id.desc()).first()).id
