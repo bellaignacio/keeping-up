@@ -125,6 +125,7 @@ function SignupFormPage() {
                 e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
                 e.onerror = null;
               }}
+              alt="signup-upload-preview"
             />
             <button
               id="signup-upload-remove"

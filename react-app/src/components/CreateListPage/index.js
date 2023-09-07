@@ -117,6 +117,7 @@ function CreateListPage({ listObj, isEdit }) {
                                 e.target.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
                                 e.onerror = null;
                             }}
+                            alt="list-upload-preview"
                         />
                         <button
                             id="list-upload-remove"
