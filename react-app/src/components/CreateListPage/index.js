@@ -53,7 +53,7 @@ function CreateListPage({ listObj, isEdit }) {
         <>
             <Navigation />
             <div id="create-list-container">
-                <form id="create-list-form" onSubmit={handleSubmit}>
+                <form id="create-list-form" onSubmit={handleSubmit} encType="multipart/form-data">
                     <div id="list-form-title">{isEdit ? "Edit this list" : "Create a list"}</div>
 
                     {errors.length > 0 && <ul className="error-message-container">
@@ -73,13 +73,20 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                     </label>
                     <label>
-                        Background Image URL
-                        <input
+                        Background Image
+                        {/* <input
                             type="text"
                             value={imgUrl}
                             onChange={(e) => setImgUrl(e.target.value)}
                             placeholder="Enter background image URL here"
+                        /> */}
+                        <input
+                            type="file"
+                            // value={imgUrl}
+                            accept=".png, .jpg, .jpeg"
+                            onChange={(e) => setImgUrl(e.target.files[0])}
                         />
+                        <img src={imgUrl} />
                     </label>
 
                     <br></br>

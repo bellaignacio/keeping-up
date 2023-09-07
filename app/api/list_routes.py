@@ -72,9 +72,15 @@ def create_list():
             )
             db.session.add(item)
 
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+            image_url.filename = get_unique_filename(image_url.filename)
+            image_url_upload = upload_file_to_s3(image_url)
+
         list_style = ListStyle(
             list_id=new_list.id,
-            image_url=form.data['image_url'],
+            # image_url=form.data['image_url'],
+            image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
             title_font=form.data['title_font'],
             title_size=form.data['title_size'],
             title_style=form.data['title_style'],
@@ -115,9 +121,15 @@ def update_list(list_id):
     form = ListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        list.title=form.data['title']
-        list.caption=form.data['caption']
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+            image_url.filename = get_unique_filename(image_url.filename)
+            image_url_upload = upload_file_to_s3(image_url)
+
+        list.title = form.data['title']
+        list.caption = form.data['caption']
         form.populate_obj(list_style)
+        list_style.image_url = image_url_upload['url'] if form.data['image_url'] else form.data['image_url']
         db.session.commit()
         return list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

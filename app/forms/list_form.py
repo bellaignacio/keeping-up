@@ -1,6 +1,8 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired, Optional, Regexp, Length, ValidationError
+from app.api.aws_helpers import ALLOWED_EXTENSIONS
 
 
 def list_item_length(form, field):
@@ -15,7 +17,8 @@ class ListForm(FlaskForm):
     title = StringField('title', validators=[DataRequired(message='Title is required.'), Length(max=255, message='Title cannot be longer than %(max)d characters.')])
     caption = StringField('caption', validators=[DataRequired(message='Caption is required.'), Length(max=255, message='Caption cannot be longer than %(max)d characters.')])
     list_items = TextAreaField('list_items', validators=[DataRequired(message='List is required.'), list_item_length])
-    image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
+    # image_url = StringField('image_url', validators=[Optional(), Regexp('[^\\s]+(.*?)\\.(jpg|jpeg|png)$', message='Image URL must end in .png, .jpg, or .jpeg')])
+    image_url = FileField('image_url', validators=[Optional(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     title_font = StringField('title_font')
     title_size = StringField('title_size')
     title_style = StringField('title_style')

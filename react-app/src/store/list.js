@@ -204,9 +204,9 @@ export const removeComment = (commentId) => async (dispatch) => {
 export const createList = (title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor) => async (dispatch) => {
     const response = await fetch("/api/lists/", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // headers: {
+        //     "Content-Type": "application/json",
+        // },
         body: JSON.stringify({
             title,
             caption,
@@ -247,9 +247,9 @@ export const createList = (title, caption, listItems, imgUrl, titleFont, titleSi
 export const editList = (listId, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor) => async (dispatch) => {
     const response = await fetch(`/api/lists/${listId}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // headers: {
+        //     "Content-Type": "application/json",
+        // },
         body: JSON.stringify({
             title,
             caption,

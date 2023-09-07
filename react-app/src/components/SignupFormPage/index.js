@@ -24,7 +24,9 @@ function SignupFormPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (password === confirmPassword) {
-      const data = await dispatch(signUp(email, username, name, bio, imgUrl, isPublic, password));
+      const form = document.getElementById("signup-form");
+      const formData = new FormData(form);
+      const data = await dispatch(signUp(formData));
       if (data) {
         setErrors(data);
       }
@@ -33,11 +35,25 @@ function SignupFormPage() {
     }
   };
 
+  const displayFile = (e) => {
+    e.preventDefault();
+    const img = document.getElementById("signup-upload-image");
+    img.src = URL.createObjectURL(e.target.files[0]);
+  };
+
+  const removeFile = (e) => {
+    e.preventDefault();
+    const img = document.getElementById("signup-upload-image");
+    img.src = "https://i.ibb.co/jTrn4Vc/default.png";
+    const upload = document.getElementById("signup-upload");
+    upload.value = "";
+  };
+
   return (
     <>
       <Navigation />
       <div id="signup-container">
-        <form id="signup-form" onSubmit={handleSubmit}>
+        <form id="signup-form" onSubmit={handleSubmit} encType="multipart/form-data">
           <NavLink className="keeping-up" id="signup-form-title" to="/about"><img src={logo} alt="keeping-up-logo" />Keeping Up</NavLink>
           {errors.length > 0 && <ul className="error-message-container">
             {errors.map((error, idx) => (
@@ -47,6 +63,7 @@ function SignupFormPage() {
           <label>
             <input
               type="text"
+              name="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
@@ -57,6 +74,7 @@ function SignupFormPage() {
             <label>
               <input
                 type="text"
+                name="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="Username"
@@ -69,6 +87,7 @@ function SignupFormPage() {
             <label>
               <input
                 type="text"
+                name="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Name"
@@ -80,6 +99,7 @@ function SignupFormPage() {
             <label>
               <input
                 type="text"
+                name="bio"
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 placeholder="Bio"
@@ -88,18 +108,37 @@ function SignupFormPage() {
             <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
           </div>
           <label>
+            Profile Image
             <input
-              type="text"
-              value={imgUrl}
-              onChange={(e) => setImgUrl(e.target.value)}
-              placeholder="Profile Image URL"
+              id="signup-upload"
+              type="file"
+              name="image_url"
+              accept=".png, .jpg, .jpeg"
+              onChange={(e) => {
+                setImgUrl(e.target.files[0]);
+                displayFile(e);
+              }}
             />
+            <img id="signup-upload-image"
+              src={"https://i.ibb.co/jTrn4Vc/default.png"}
+              onError={(e) => {
+                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                e.onerror = null;
+              }}
+            />
+            <button
+              id="signup-upload-remove"
+              onClick={(e) => {
+                setImgUrl(null);
+                removeFile(e);
+            }}>&#x2715;</button>
           </label>
           <label>
             Make Account Public?
             <input
               id="checkbox"
               type="checkbox"
+              name="is_public"
               checked={isPublic}
               onChange={(e) => setIsPublic(!isPublic)}
             />
@@ -107,6 +146,7 @@ function SignupFormPage() {
           <label>
             <input
               type="password"
+              name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
@@ -122,7 +162,7 @@ function SignupFormPage() {
               required
             />
           </label>
-          <button className="accent" type="submit">Sign up</button>
+          <button id="signup-form-button" className="accent" type="submit">Sign up</button>
         </form>
         <div id="signup-to-login">
           Have an account? <NavLink to="/login">Log in</NavLink>

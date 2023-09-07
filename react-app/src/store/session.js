@@ -63,21 +63,22 @@ export const logout = () => async (dispatch) => {
 	}
 };
 
-export const signUp = (email, username, name, bio, imgUrl, isPublic, password) => async (dispatch) => {
+export const signUp = (formData) => async (dispatch) => {
 	const response = await fetch("/api/auth/signup", {
 		method: "POST",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({
-			email,
-			username,
-			name,
-			bio,
-			...imgUrl != null && { image_url: imgUrl },
-			is_public: isPublic,
-			password
-		})
+		body: formData
+		// headers: {
+		// 	"Content-Type": "application/json"
+		// },
+		// body: JSON.stringify({
+		// 	email,
+		// 	username,
+		// 	name,
+		// 	bio,
+		// 	...imgUrl != null && { image_url: imgUrl },
+		// 	is_public: isPublic,
+		// 	password
+		// })
 	});
 	if (response.ok) {
 		const data = await response.json();
@@ -96,9 +97,9 @@ export const signUp = (email, username, name, bio, imgUrl, isPublic, password) =
 export const editProfile = (userId, username, name, bio, imgUrl, isPublic, password) => async (dispatch) => {
 	const response = await fetch(`/api/users/${userId}`, {
 		method: "PUT",
-		headers: {
-			"Content-Type": "application/json"
-		},
+		// headers: {
+		// 	"Content-Type": "application/json"
+		// },
 		body: JSON.stringify({
 			username,
 			name,
