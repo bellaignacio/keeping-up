@@ -41,8 +41,8 @@ function CreateListPage({ listObj, isEdit }) {
         if (isEdit) {
             data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
         } else {
-            const confirmed = window.confirm("The contents of this list cannot be changed once posted. Please select OK to confirm, or Cancel to continue editing.")
-            if (confirmed) {
+            // const confirmed = window.confirm("The contents of this list cannot be changed once posted. Please select OK to confirm, or Cancel to continue editing.")
+            // if (confirmed) {
                 const form = document.getElementById("create-list-form");
                 const formData = new FormData(form);
                 formData.append("title_style", titleStyle);
@@ -54,7 +54,7 @@ function CreateListPage({ listObj, isEdit }) {
                 formData.append("li_completed_style", liCompStyle);
                 formData.append("li_completed_weight", liCompWeight);
                 data = await dispatch(listActions.createList(formData));
-            }
+            // }
         }
         if (data?.id) {
             history.push(`/lists/${data.id}`);
