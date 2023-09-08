@@ -138,7 +138,7 @@ function ListPage() {
                             <div className="list-tile-subheader" onClick={() => history.push(`/${listObj.user.id}`)}>
                                 <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                                     onError={(e) => {
-                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                                         e.onerror = null;
                                     }}
                                 />
@@ -153,7 +153,7 @@ function ListPage() {
                             <div className="list-tile-caption">
                                 <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                                     onError={(e) => {
-                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                                         e.onerror = null;
                                     }}
                                 />
@@ -166,7 +166,7 @@ function ListPage() {
                                     <div key={commentObj.id} className="list-tile-comment">
                                         <img className="list-tile-user-image" src={commentObj.user.image_url} alt={commentObj.user.username}
                                             onError={(e) => {
-                                                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                                                 e.onerror = null;
                                             }}
                                         />

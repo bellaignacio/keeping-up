@@ -11,7 +11,7 @@ function FollowingBar({ users }) {
                     <div key={user.id} onClick={() => history.push(`/${user.id}`)} >
                         <img className="following-image" src={user.image_url} alt={user.username}
                             onError={(e) => {
-                                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                                 e.onerror = null;
                             }}
                         />

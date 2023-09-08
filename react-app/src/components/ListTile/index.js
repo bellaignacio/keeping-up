@@ -109,7 +109,7 @@ function ListTile({ listObj, listOnly }) {
                 <div className="list-tile-header" onClick={() => history.push(`/${listObj.user.id}`)}>
                     <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                         onError={(e) => {
-                            e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                            e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                             e.onerror = null;
                         }}
                     />

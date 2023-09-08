@@ -25,7 +25,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(255), nullable=False, unique=True)
     name = db.Column(db.String(255))
     bio = db.Column(db.String(255))
-    image_url = db.Column(db.String(255), nullable=False, default="https://i.ibb.co/jTrn4Vc/default.png")
+    image_url = db.Column(db.String(255), nullable=False, default="https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png")
     is_public = db.Column(db.Boolean, nullable=False, default=False)
     hashed_password = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)

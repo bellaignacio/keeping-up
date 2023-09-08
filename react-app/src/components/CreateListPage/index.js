@@ -72,7 +72,7 @@ function CreateListPage({ listObj, isEdit }) {
     const removeFile = (e) => {
         e.preventDefault();
         const img = document.getElementById("list-upload-image");
-        img.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+        img.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
         const upload = document.getElementById("list-upload");
         upload.value = "";
     };
@@ -114,9 +114,9 @@ function CreateListPage({ listObj, isEdit }) {
                             }}
                         />
                         <img id="list-upload-image"
-                            src={"https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png"}
+                            src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
                             onError={(e) => {
-                                e.target.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
                                 e.onerror = null;
                             }}
                             alt="list-upload-preview"
