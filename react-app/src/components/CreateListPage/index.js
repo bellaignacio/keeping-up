@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useHistory } from "react-router-dom";
 import Navigation from "../Navigation";
+import OpenModalButton from "../OpenModalButton";
+import EditListItemsModal from "../EditListItemsModal";
 import * as listActions from "../../store/list";
 import './CreateList.css';
 
@@ -349,6 +351,11 @@ function CreateListPage({ listObj, isEdit }) {
                                 color: liColor
                             }}
                         />
+                        {isEdit && <OpenModalButton
+                            buttonText="Advanced"
+                            modalComponent={<EditListItemsModal listId={listObj.id} setListItems={setListItems} />}
+                            className="normal"
+                        />}
                     </div>
 
                     <br></br>
