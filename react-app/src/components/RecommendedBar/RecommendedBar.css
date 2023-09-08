@@ -1,0 +1,40 @@
+#recommended-title {
+    margin: 50px 0px 0px;
+}
+
+#recommended-bar-container {
+    display: flex;
+    width: 600px;
+    margin: 0 auto;
+    column-gap: 10px;
+    padding: 20px 0px;
+    overflow-x: scroll;
+}
+
+#recommended-bar-container > div {
+    cursor: pointer;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.recommended-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px double rgb(202, 202, 202);
+}
+
+.recommended-name {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 16px;
+    padding: 5px 3px;
+    text-align: center;
+}

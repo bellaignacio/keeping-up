@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import db, User, List, ListItem, ListStyle
-from app.forms import ListForm
+from app.forms import ListForm, EditListForm
 from app.api.auth_routes import validation_errors_to_error_messages
+from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 
 list_routes = Blueprint('lists', __name__)
 
@@ -53,28 +54,33 @@ def create_list():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         list_items = form.data['list_items'].split('\n')
-        filtered_list_items = list(filter(lambda li: len(li) > 0, list_items))
         last_li_id = (ListItem.query.order_by(ListItem.id.desc()).first()).id
 
         new_list = List(
             title=form.data['title'],
             caption=form.data['caption'],
-            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(filtered_list_items)))),
+            order=",".join(str(n) for n in list(range(last_li_id+1, last_li_id+1+len(list_items)))),
             user_id=current_user.id
         )
         db.session.add(new_list)
         db.session.commit()
 
-        for li in filtered_list_items:
-            item = ListItem(
-                list_id=new_list.id,
-                description=li
-            )
-            db.session.add(item)
+        for li in list_items:
+            if li != '\r':
+                item = ListItem(
+                    list_id=new_list.id,
+                    description=li
+                )
+                db.session.add(item)
+
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+            image_url.filename = get_unique_filename(image_url.filename)
+            image_url_upload = upload_file_to_s3(image_url)
 
         list_style = ListStyle(
             list_id=new_list.id,
-            image_url=form.data['image_url'],
+            image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
             title_font=form.data['title_font'],
             title_size=form.data['title_size'],
             title_style=form.data['title_style'],
@@ -112,7 +118,7 @@ def update_list(list_id):
         return {'errors': f"User is not the creator of list {list_id}."}, 401
     list_style = ListStyle.query.filter(ListStyle.list_id == list_id).first()
     list_items = ListItem.query.filter(ListItem.list_id == list_id).all()
-    form = ListForm()
+    form = EditListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         list.title=form.data['title']

@@ -36,7 +36,7 @@
     align-self: start;
 }
 
-#signup-form button {
+#signup-form-button {
     width: 100%;
     align-self: center;
 }
@@ -51,4 +51,27 @@
 #signup-to-login a {
     color: rgb(0, 149, 246);
     font-weight: bold;
+}
+
+#signup-upload-image {
+    width: 150px;
+    height: 150px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 15px double rgb(202, 202, 202);
+    margin: 10px 0;
+}
+
+#signup-upload-remove {
+    padding: 0;
+    color: red;
+    border: none;
+    background: none;
+    position: absolute;
+    padding: 10px 0;
+}
+
+#signup-upload-remove:hover {
+    text-decoration: underline;
 }

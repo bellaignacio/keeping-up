@@ -59,3 +59,25 @@
 #list-text-area:disabled {
     background-color: rgba(0, 0, 0, 0.1);
 }
+
+#list-upload-image {
+    width: 150px;
+    height: 150px;
+    box-sizing: border-box;
+    object-fit: cover;
+    border: 5px rgb(202, 202, 202);
+    margin: 10px;
+}
+
+#list-upload-remove {
+    padding: 0;
+    color: red;
+    border: none;
+    background: none;
+    position: absolute;
+    padding: 10px 0;
+}
+
+#list-upload-remove:hover {
+    text-decoration: underline;
+}

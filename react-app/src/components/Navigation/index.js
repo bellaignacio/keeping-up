@@ -13,7 +13,7 @@ function Navigation() {
 		return (
 			<div id="navigation-container">
 				<div title="Keeping Up" id="keeping-up-icon" className="nav-icon" onClick={() => history.push('/')}>
-					<img src={logo} alt="keeping-up-logo" />
+					<img id="keeping-up-icon-image" src={logo} alt="keeping-up-logo" />
 					<div className="nav-icon-label">Keeping Up</div>
 				</div>
 				<div title="Home" id="home-icon" className="nav-icon" onClick={() => history.push('/')}>
@@ -29,7 +29,7 @@ function Navigation() {
 					<div className="nav-icon-label">Create</div>
 				</div>
 				<div title="Profile" id="profile-icon" className="nav-icon" onClick={() => history.push(`/${sessionUser?.id}`)}>
-					<img className="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username}
+					<img id="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username}
 						onError={(e) => {
 							e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
 							e.onerror = null;
