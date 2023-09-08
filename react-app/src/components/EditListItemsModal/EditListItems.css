@@ -10,18 +10,12 @@
 #edit-list-items-form > button {
     padding: 10px 0;
     background: none;
-    /* width: 100%; */
-    /* border: 1px solid rgb(202, 202, 202); */
     border-left: none;
     border-right: none;
     border-bottom: none;
     border-top: 1px solid rgb(202, 202, 202);
     border-radius: 0;
 }
-
-/* #edit-list-items-container button:last-child {
-    border-bottom: none;
-} */
 
 .list-item-container {
     display: flex;

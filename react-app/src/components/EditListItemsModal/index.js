@@ -4,7 +4,7 @@ import { useModal } from '../../context/Modal';
 import * as listActions from "../../store/list";
 import './EditListItems.css';
 
-function EditListItemsModal({ listId, setListItems}) {
+function EditListItemsModal({ listId, setListItems }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const listItems = useSelector((state) => state.list.current.list_items);
