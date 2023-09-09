@@ -39,7 +39,7 @@ function FollowModal({ user, method }) {
                 <div className="list-tile-user-name" >{user.username}</div>
             </div>
             <form id="follow-form">
-                <button className="primary" onClick={handleClick}>
+                <button className={method === 'remove' ? "delete" : "primary"} onClick={handleClick}>
                     {method === 'follow' && `Follow?`}
                     {method === 'unfollow' && `Unfollow?`}
                     {method === 'remove' && `Remove follower?`}

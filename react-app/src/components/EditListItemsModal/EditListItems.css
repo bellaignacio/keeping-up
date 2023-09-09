@@ -39,28 +39,24 @@
     align-items: center;
 }
 
-.list-item-buttons > button {
-    width: 15px;
-    font-size: 20px;
-    margin: 10px;
+.list-item-buttons .reset-list-item-button,
+.list-item-buttons .save-list-item-button,
+.list-item-buttons .delete-list-item-button,
+#add-list-item-button {
+    margin: 5px;
     padding: 0;
     vertical-align: center;
     border-radius: 0;
     border: none;
-    background: white;
+    background-color: white;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-#add-list-item-button {
-    font-size: 20px;
-    margin: 10px;
-    padding: 0
+.list-item-buttons .reset-list-item-button {
+    color: rgb(67, 67, 67);
 }
 
-.delete-list-item-button {
-    color: red;
-}
-
-.list-item-buttons > button:hover,
-#add-list-item-button:hover {
-    text-decoration: underline;
+.list-item-buttons .reset-list-item-button:hover {
+    color: black;
 }

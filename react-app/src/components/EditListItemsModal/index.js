@@ -69,9 +69,9 @@ function EditListItemsModal({ listId, setListItems }) {
                                 required
                             />
                             <div className="list-item-buttons">
-                                <button onClick={(e) => handleReset(e, liObj.id, liObj.description)}>&#8634;</button>
-                                <button className="primary" onClick={(e) => handleEdit(e, liObj.id, liObj.is_complete)}>&#10003;</button>
-                                <button className="delete-list-item-button" onClick={(e) => handleDelete(e, liObj.id)}>&#x2715;</button>
+                                <button className="reset-list-item-button" onClick={(e) => handleReset(e, liObj.id, liObj.description)}>Reset</button>
+                                <button className="save-list-item-button primary" onClick={(e) => handleEdit(e, liObj.id, liObj.is_complete)}>Save</button>
+                                <button className="delete-list-item-button delete" onClick={(e) => handleDelete(e, liObj.id)}>Delete</button>
                             </div>
                         </div>
                     );
@@ -82,9 +82,9 @@ function EditListItemsModal({ listId, setListItems }) {
                         className="list-item-input"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder="Add ..."
+                        placeholder="Add list item here"
                     />
-                    <button id="add-list-item-button" className="primary" onClick={handleAdd}>&#65291;</button>
+                    <button id="add-list-item-button" className="primary" onClick={handleAdd}>Add</button>
                 </div>
                 <button type="submit">Go Back</button>
             </form>

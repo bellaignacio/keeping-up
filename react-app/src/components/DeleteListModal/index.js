@@ -20,7 +20,7 @@ function DeleteListModal({ listObj }) {
         <div id="delete-list-container">
             <div id="modal-title">Are you sure you want to delete this list?</div>
             <form id="delete-list-form">
-                <button className="primary" onClick={handleDelete}>Delete</button>
+                <button className="delete" onClick={handleDelete}>Delete</button>
                 <button onClick={closeModal}>Cancel</button>
             </form>
         </div>
