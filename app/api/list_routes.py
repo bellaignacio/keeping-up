@@ -204,4 +204,4 @@ def delete_li(li_id):
     db.session.delete(list_item)
     list.order = list.order.replace(f",{li_id}", '')
     db.session.commit()
-    return {'message': 'Delete successful.'}
+    return list.to_dict()
