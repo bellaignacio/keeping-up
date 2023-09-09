@@ -129,6 +129,7 @@ function SignupFormPage() {
             />
             <button
               id="signup-upload-remove"
+              className="delete"
               onClick={(e) => {
                 setImgUrl(null);
                 removeFile(e);

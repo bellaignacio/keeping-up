@@ -123,6 +123,7 @@ function CreateListPage({ listObj, isEdit }) {
                         />
                         <button
                             id="list-upload-remove"
+                            className="delete"
                             onClick={(e) => {
                                 setImgUrl(null);
                                 removeFile(e);
@@ -343,6 +344,7 @@ function CreateListPage({ listObj, isEdit }) {
                             placeholder="Enter list here"
                             disabled={isEdit}
                             required
+                            rows="5"
                             style={{
                                 fontFamily: liFont,
                                 fontSize: liSize,

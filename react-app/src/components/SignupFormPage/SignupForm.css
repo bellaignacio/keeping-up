@@ -53,6 +53,10 @@
     font-weight: bold;
 }
 
+#signup-to-login a:hover {
+    color: rgb(24, 119, 246);
+}
+
 #signup-upload-image {
     width: 150px;
     height: 150px;
@@ -64,14 +68,6 @@
 }
 
 #signup-upload-remove {
-    padding: 0;
-    color: red;
-    border: none;
-    background: none;
     position: absolute;
     padding: 10px 0;
-}
-
-#signup-upload-remove:hover {
-    text-decoration: underline;
 }
