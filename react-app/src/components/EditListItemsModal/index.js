@@ -37,8 +37,9 @@ function EditListItemsModal({ listId, setListItems }) {
         }
     };
 
-    const handleDelete = async (e) => {
+    const handleDelete = async (e, id) => {
         e.preventDefault();
+        dispatch(listActions.removeListItem(id));
     };
 
     const handleSubmit = async (e) => {
@@ -59,7 +60,7 @@ function EditListItemsModal({ listId, setListItems }) {
                 </ul>}
                 {listItems.map(liObj => {
                     return (
-                        <div className="list-item-container">
+                        <div key={liObj.id} className="list-item-container">
                             <input
                                 id={`li-input-${liObj.id}`}
                                 className="list-item-input"
@@ -70,6 +71,7 @@ function EditListItemsModal({ listId, setListItems }) {
                             <div className="list-item-buttons">
                                 <button onClick={(e) => handleReset(e, liObj.id, liObj.description)}>&#8634;</button>
                                 <button className="primary" onClick={(e) => handleEdit(e, liObj.id, liObj.is_complete)}>&#10003;</button>
+                                <button className="delete-list-item-button" onClick={(e) => handleDelete(e, liObj.id)}>&#x2715;</button>
                             </div>
                         </div>
                     );
