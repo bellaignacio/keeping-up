@@ -195,3 +195,13 @@ def delete_li(li_id):
     """
     Deletes a list item
     """
+    list_item = ListItem.query.get(li_id)
+    if not list_item:
+        return {'errors': f"List item {li_id} does not exist."}, 400
+    list = List.query.get(list_item.list_id)
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list item {li_id}."}, 401
+    db.session.delete(list_item)
+    list.order = list.order.replace(f",{li_id}", '')
+    db.session.commit()
+    return {'message': 'Delete successful.'}
