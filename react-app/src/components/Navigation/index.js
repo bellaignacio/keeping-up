@@ -31,7 +31,7 @@ function Navigation() {
 				<div title="Profile" id="profile-icon" className="nav-icon" onClick={() => history.push(`/${sessionUser?.id}`)}>
 					<img id="profile-icon-image" src={sessionUser?.image_url} alt={sessionUser?.username}
 						onError={(e) => {
-							e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+							e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
 							e.onerror = null;
 						}}
 					/>

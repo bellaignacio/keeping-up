@@ -47,3 +47,7 @@
     color: rgb(0, 149, 246);
     font-weight: bold;
 }
+
+#login-to-signup a:hover {
+    color: rgb(24, 119, 246);
+}

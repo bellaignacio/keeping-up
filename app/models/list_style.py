@@ -10,7 +10,7 @@ class ListStyle(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     list_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('lists.id')), nullable=False)
-    image_url = db.Column(db.String(255), nullable=False, default="https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png")
+    image_url = db.Column(db.String(255), nullable=False, default="https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png")
     title_font = db.Column(db.String(255), nullable=False, default="Arial")
     title_size = db.Column(db.String(255), nullable=False, default="14pt")
     title_style = db.Column(db.String(255), nullable=False, default="normal")

@@ -41,20 +41,17 @@ function CreateListPage({ listObj, isEdit }) {
         if (isEdit) {
             data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
         } else {
-            const confirmed = window.confirm("The contents of this list cannot be changed once posted. Please select OK to confirm, or Cancel to continue editing.")
-            if (confirmed) {
-                const form = document.getElementById("create-list-form");
-                const formData = new FormData(form);
-                formData.append("title_style", titleStyle);
-                formData.append("title_weight", titleWeight);
-                formData.append("title_align", titleAlign);
-                formData.append("li_style", liStyle);
-                formData.append("li_weight", liWeight);
-                formData.append("li_marker", liMarker);
-                formData.append("li_completed_style", liCompStyle);
-                formData.append("li_completed_weight", liCompWeight);
-                data = await dispatch(listActions.createList(formData));
-            }
+            const form = document.getElementById("create-list-form");
+            const formData = new FormData(form);
+            formData.append("title_style", titleStyle);
+            formData.append("title_weight", titleWeight);
+            formData.append("title_align", titleAlign);
+            formData.append("li_style", liStyle);
+            formData.append("li_weight", liWeight);
+            formData.append("li_marker", liMarker);
+            formData.append("li_completed_style", liCompStyle);
+            formData.append("li_completed_weight", liCompWeight);
+            data = await dispatch(listActions.createList(formData));
         }
         if (data?.id) {
             history.push(`/lists/${data.id}`);
@@ -72,7 +69,7 @@ function CreateListPage({ listObj, isEdit }) {
     const removeFile = (e) => {
         e.preventDefault();
         const img = document.getElementById("list-upload-image");
-        img.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+        img.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
         const upload = document.getElementById("list-upload");
         upload.value = "";
     };
@@ -114,15 +111,16 @@ function CreateListPage({ listObj, isEdit }) {
                             }}
                         />
                         <img id="list-upload-image"
-                            src={"https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png"}
+                            src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
                             onError={(e) => {
-                                e.target.src = "https://i.ibb.co/18vQfvN/Nice-Png-torn-paper-texture-png-455986.png";
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
                                 e.onerror = null;
                             }}
                             alt="list-upload-preview"
                         />
                         <button
                             id="list-upload-remove"
+                            className="delete"
                             onClick={(e) => {
                                 setImgUrl(null);
                                 removeFile(e);
@@ -343,6 +341,7 @@ function CreateListPage({ listObj, isEdit }) {
                             placeholder="Enter list here"
                             disabled={isEdit}
                             required
+                            rows="5"
                             style={{
                                 fontFamily: liFont,
                                 fontSize: liSize,

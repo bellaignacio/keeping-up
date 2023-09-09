@@ -93,14 +93,6 @@ function ListTile({ listObj, listOnly }) {
                         ))}
                     </ul>
                 </div>
-                {/* <div className="list-tile-info">
-                    <span>
-                    <i className="fas fa-heart"></i> {listObj.total_likes}
-                    </span>
-                    <span>
-                    <i className="fas fa-comment"></i> {listObj.total_comments}
-                    </span>
-                </div> */}
             </div>
         );
     } else {
@@ -109,7 +101,7 @@ function ListTile({ listObj, listOnly }) {
                 <div className="list-tile-header" onClick={() => history.push(`/${listObj.user.id}`)}>
                     <img className="list-tile-user-image" src={listObj.user.image_url} alt={listObj.user.username}
                         onError={(e) => {
-                            e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                            e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                             e.onerror = null;
                         }}
                     />
