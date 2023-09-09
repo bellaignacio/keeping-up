@@ -25,6 +25,14 @@ function EditListItemsModal({ listId, setListItems }) {
         input.value = defaultDescription;
     };
 
+    const handleAdd = async (e) => {
+        e.preventDefault();
+    };
+
+    const handleDelete = async (e) => {
+        e.preventDefault();
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(listActions.getList(listId))
@@ -46,6 +54,7 @@ function EditListItemsModal({ listId, setListItems }) {
                         <div className="list-item-container">
                             <input
                                 id={`li-input-${liObj.id}`}
+                                className="list-item-input"
                                 type="text"
                                 defaultValue={liObj.description}
                                 required
@@ -57,6 +66,14 @@ function EditListItemsModal({ listId, setListItems }) {
                         </div>
                     );
                 })}
+                <div className="list-item-container">
+                    <input
+                        type="text"
+                        className="list-item-input"
+                        placeholder="Add ..."
+                    />
+                    <button id="add-list-item-button" className="primary" onClick={handleAdd}>&#65291;</button>
+                </div>
                 <button type="submit">Go Back</button>
             </form>
         </div>

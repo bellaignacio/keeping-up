@@ -105,6 +105,29 @@ def create_list():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@list_routes.route('/<int:list_id>/items', methods=['POST'])
+@login_required
+def create_li(list_id):
+    """
+    Creates a new list item
+    """
+    list = List.query.get(list_id)
+    if not list:
+        return {'errors': f"List {list_id} does not exist."}, 400
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list {list_id}."}, 401
+    data = request.json
+    item = ListItem(
+        list_id=list_id,
+        description=data['description']
+    )
+    db.session.add(item)
+    db.session.commit()
+    list.order = list.order + f",{item.id}"
+    db.session.commit()
+    return list.to_dict()
+
+
 @list_routes.route('/<int:list_id>', methods=['PUT'])
 @login_required
 def update_list(list_id):
@@ -164,3 +187,11 @@ def delete_list(list_id):
     db.session.delete(list)
     db.session.commit()
     return {'message': 'Delete successful.'}
+
+
+@list_routes.route('/items/<int:li_id>', methods=['DELETE'])
+@login_required
+def delete_li(li_id):
+    """
+    Deletes a list item
+    """
