@@ -93,14 +93,6 @@ function ListTile({ listObj, listOnly }) {
                         ))}
                     </ul>
                 </div>
-                {/* <div className="list-tile-info">
-                    <span>
-                    <i className="fas fa-heart"></i> {listObj.total_likes}
-                    </span>
-                    <span>
-                    <i className="fas fa-comment"></i> {listObj.total_comments}
-                    </span>
-                </div> */}
             </div>
         );
     } else {
