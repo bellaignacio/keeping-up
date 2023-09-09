@@ -117,6 +117,10 @@ def create_li(list_id):
     if list.user_id != current_user.id:
         return {'errors': f"User is not the creator of list {list_id}."}, 401
     data = request.json
+    if len(data['description']) > 255:
+        return {'errors': ['List items cannot be longer than 255 characters.']}, 400
+    if len(data['description']) < 1:
+        return {'errors': ['List item descriptions are required.']}, 400
     item = ListItem(
         list_id=list_id,
         description=data['description']
@@ -165,6 +169,10 @@ def update_li(li_id):
     if list.user_id != current_user.id:
         return {'errors': f"User is not the creator of list item {li_id}."}, 401
     data = request.json
+    if len(data['description']) > 255:
+        return {'errors': ['List items cannot be longer than 255 characters.']}, 400
+    if len(data['description']) < 1:
+        return {'errors': ['List item descriptions are required.']}, 400
     if 'is_complete' in data:
         list_item.is_complete = data['is_complete']
     if 'description' in data:

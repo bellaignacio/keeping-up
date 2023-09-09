@@ -8,6 +8,7 @@ function EditListItemsModal({ listId, setListItems }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const listItems = useSelector((state) => state.list.current.list_items);
+    const [description, setDescription] = useState("");
     const [errors, setErrors] = useState([]);
 
     const handleEdit = async (e, id, defaultIsComplete) => {
@@ -23,10 +24,17 @@ function EditListItemsModal({ listId, setListItems }) {
         e.preventDefault();
         const input = document.getElementById(`li-input-${id}`);
         input.value = defaultDescription;
+        setErrors([]);
     };
 
     const handleAdd = async (e) => {
         e.preventDefault();
+        const data = await dispatch(listActions.createListItem(listId, description));
+        if (data) {
+            setErrors(data);
+        } else {
+            setDescription("");
+        }
     };
 
     const handleDelete = async (e) => {
@@ -70,6 +78,8 @@ function EditListItemsModal({ listId, setListItems }) {
                     <input
                         type="text"
                         className="list-item-input"
+                        value={description}
+                        onChange={(e) => setDescription(e.target.value)}
                         placeholder="Add ..."
                     />
                     <button id="add-list-item-button" className="primary" onClick={handleAdd}>&#65291;</button>
