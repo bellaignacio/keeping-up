@@ -70,14 +70,6 @@
 }
 
 #list-upload-remove {
-    padding: 0;
-    color: red;
-    border: none;
-    background: none;
     position: absolute;
     padding: 10px 0;
-}
-
-#list-upload-remove:hover {
-    text-decoration: underline;
 }

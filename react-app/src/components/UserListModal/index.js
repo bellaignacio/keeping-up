@@ -37,7 +37,7 @@ function UserListModal({ isSessionUser, title, users }) {
                             <div className="list-tile-header" onClick={() => handleUserClick(user.id)}>
                                 <img className="list-tile-user-image" src={user.image_url} alt={user.username}
                                     onError={(e) => {
-                                        e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                                        e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                                         e.onerror = null;
                                     }}
                                 />

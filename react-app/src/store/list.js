@@ -220,6 +220,29 @@ export const createList = (formData) => async (dispatch) => {
     }
 };
 
+export const createListItem = (listId, description) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${listId}/items`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            description
+        })
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setCurrentList(data));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
 export const editList = (listId, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor) => async (dispatch) => {
     const response = await fetch(`/api/lists/${listId}`, {
         method: "PUT",
@@ -293,6 +316,23 @@ export const removeList = (listId) => async (dispatch) => {
     });
     if (response.ok) {
         dispatch(deleteList(listId));
+    } else if (response.status < 500) {
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+export const removeListItem = (listItemId) => async (dispatch) => {
+    const response = await fetch(`/api/lists/items/${listItemId}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(setCurrentList(data));
     } else if (response.status < 500) {
         const data = await response.json();
         if (data.errors) {

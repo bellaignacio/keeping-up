@@ -105,6 +105,33 @@ def create_list():
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
+@list_routes.route('/<int:list_id>/items', methods=['POST'])
+@login_required
+def create_li(list_id):
+    """
+    Creates a new list item
+    """
+    list = List.query.get(list_id)
+    if not list:
+        return {'errors': f"List {list_id} does not exist."}, 400
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list {list_id}."}, 401
+    data = request.json
+    if len(data['description']) > 255:
+        return {'errors': ['List items cannot be longer than 255 characters.']}, 400
+    if len(data['description']) < 1:
+        return {'errors': ['List item descriptions are required.']}, 400
+    item = ListItem(
+        list_id=list_id,
+        description=data['description']
+    )
+    db.session.add(item)
+    db.session.commit()
+    list.order = list.order + f",{item.id}"
+    db.session.commit()
+    return list.to_dict()
+
+
 @list_routes.route('/<int:list_id>', methods=['PUT'])
 @login_required
 def update_list(list_id):
@@ -142,6 +169,10 @@ def update_li(li_id):
     if list.user_id != current_user.id:
         return {'errors': f"User is not the creator of list item {li_id}."}, 401
     data = request.json
+    if len(data['description']) > 255:
+        return {'errors': ['List items cannot be longer than 255 characters.']}, 400
+    if len(data['description']) < 1:
+        return {'errors': ['List item descriptions are required.']}, 400
     if 'is_complete' in data:
         list_item.is_complete = data['is_complete']
     if 'description' in data:
@@ -164,3 +195,21 @@ def delete_list(list_id):
     db.session.delete(list)
     db.session.commit()
     return {'message': 'Delete successful.'}
+
+
+@list_routes.route('/items/<int:li_id>', methods=['DELETE'])
+@login_required
+def delete_li(li_id):
+    """
+    Deletes a list item
+    """
+    list_item = ListItem.query.get(li_id)
+    if not list_item:
+        return {'errors': f"List item {li_id} does not exist."}, 400
+    list = List.query.get(list_item.list_id)
+    if list.user_id != current_user.id:
+        return {'errors': f"User is not the creator of list item {li_id}."}, 401
+    db.session.delete(list_item)
+    list.order = list.order.replace(f",{li_id}", '')
+    db.session.commit()
+    return list.to_dict()

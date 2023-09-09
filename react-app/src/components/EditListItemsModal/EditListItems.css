@@ -21,9 +21,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-left: 10px;
 }
 
-.list-item-container input {
+.list-item-input {
     width: 90%;
     height: 25px;
     margin: 10px 0;
@@ -38,12 +39,24 @@
     align-items: center;
 }
 
-.list-item-buttons > button {
-    font-size: 20px;
-    margin: 10px;
+.list-item-buttons .reset-list-item-button,
+.list-item-buttons .save-list-item-button,
+.list-item-buttons .delete-list-item-button,
+#add-list-item-button {
+    margin: 5px;
     padding: 0;
     vertical-align: center;
     border-radius: 0;
     border: none;
-    background: white;
+    background-color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.list-item-buttons .reset-list-item-button {
+    color: rgb(67, 67, 67);
+}
+
+.list-item-buttons .reset-list-item-button:hover {
+    color: black;
 }

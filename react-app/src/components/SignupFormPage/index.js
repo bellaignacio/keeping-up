@@ -44,7 +44,7 @@ function SignupFormPage() {
   const removeFile = (e) => {
     e.preventDefault();
     const img = document.getElementById("signup-upload-image");
-    img.src = "https://i.ibb.co/jTrn4Vc/default.png";
+    img.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
     const upload = document.getElementById("signup-upload");
     upload.value = "";
   };
@@ -120,15 +120,16 @@ function SignupFormPage() {
               }}
             />
             <img id="signup-upload-image"
-              src={"https://i.ibb.co/jTrn4Vc/default.png"}
+              src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"}
               onError={(e) => {
-                e.target.src = "https://i.ibb.co/jTrn4Vc/default.png";
+                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
                 e.onerror = null;
               }}
               alt="signup-upload-preview"
             />
             <button
               id="signup-upload-remove"
+              className="delete"
               onClick={(e) => {
                 setImgUrl(null);
                 removeFile(e);
