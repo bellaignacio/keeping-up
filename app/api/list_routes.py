@@ -20,6 +20,16 @@ def l(list_id):
     return list.to_dict()
 
 
+@list_routes.route('/all')
+@login_required
+def all_lists():
+    """
+    Query for all lists and returns them in a list of list dictionaries
+    """
+    lists = List.query.all()
+    return {'lists': [l.to_dict() for l in lists]}
+
+
 @list_routes.route('/public')
 @login_required
 def public_lists():

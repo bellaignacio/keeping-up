@@ -20,6 +20,16 @@ def user(user_id):
     return user.to_dict()
 
 
+@user_routes.route('/all')
+@login_required
+def all_users():
+    """
+    Query for all users and returns them in a list of user dictionaries
+    """
+    users = User.query.all()
+    return {'users': [user.to_dict() for user in users]}
+
+
 @user_routes.route('/public')
 @login_required
 def public_users():
