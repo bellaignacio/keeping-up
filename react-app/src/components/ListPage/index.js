@@ -114,8 +114,18 @@ function ListPage() {
             setErrors(data);
         } else {
             setComment("");
+            setErrors([]);
             document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
+    };
+
+    const sortListItems = (listObj) => {
+        const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+        let items = listObj.list_items.slice();
+        items.sort((a, b) => {
+            return order.indexOf(a.id) - order.indexOf(b.id);
+        });
+        return items;
     };
 
     return (
@@ -127,7 +137,7 @@ function ListPage() {
                         <div className="list-tile-content">
                             <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                             <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                                {listObj.list_items.map(li => (
+                                {(sortListItems(listObj)).map(li => (
                                     <li className={listObj.user_id === sessionUser.id ? 'clickable-li' : ''} key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                                 ))}
                             </ul>

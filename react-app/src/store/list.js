@@ -243,34 +243,10 @@ export const createListItem = (listId, description) => async (dispatch) => {
     }
 };
 
-export const editList = (listId, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor) => async (dispatch) => {
+export const editList = (listId, formData) => async (dispatch) => {
     const response = await fetch(`/api/lists/${listId}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-            title,
-            caption,
-            list_items: listItems,
-            ...imgUrl != null && { image_url: imgUrl },
-            ...titleFont != null && { title_font: titleFont },
-            ...titleSize != null && { title_size: titleSize },
-            ...titleStyle != null && { title_style: titleStyle },
-            ...titleWeight != null && { title_weight: titleWeight },
-            ...titleColor != null && { title_color: titleColor },
-            ...titleAlign != null && { title_align: titleAlign },
-            ...liFont != null && { li_font: liFont },
-            ...liSize != null && { li_size: liSize },
-            ...liStyle != null && { li_style: liStyle },
-            ...liWeight != null && { li_weight: liWeight },
-            ...liColor != null && { li_color: liColor },
-            ...liMarker != null && { li_marker: liMarker },
-            ...liCompStyle != null && { li_completed_style: liCompStyle },
-            ...liCompWeight != null && { li_completed_weight: liCompWeight },
-            ...liCompColor != null && { li_completed_color: liCompColor },
-            ...liCompDecor != null && { li_completed_decoration: liCompDecor }
-        })
+        body: formData
     });
     if (response.ok) {
         const data = await response.json();

@@ -20,6 +20,10 @@ function Navigation() {
 					<div><i className="fas fa-home"></i></div>
 					<div className="nav-icon-label">Home</div>
 				</div>
+				<div title="Search" id="search-icon" className="nav-icon" onClick={() => {}}>
+					<div><i className="fas fa-search"></i></div>
+					<div className="nav-icon-label">Search</div>
+				</div>
 				<div title="Explore" id="explore-icon" className="nav-icon" onClick={() => history.push('/explore')}>
 					<div><i className="far fa-compass"></i></div>
 					<div className="nav-icon-label">Explore</div>

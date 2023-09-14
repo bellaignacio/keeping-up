@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from app.models import db, User, List, ListItem, ListStyle
-from app.forms import ListForm, EditListForm
+from app.forms import ListForm
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 
@@ -80,7 +80,7 @@ def create_list():
 
         list_style = ListStyle(
             list_id=new_list.id,
-            image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
+            image_url=image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png",
             title_font=form.data['title_font'],
             title_size=form.data['title_size'],
             title_style=form.data['title_style'],
@@ -145,12 +145,34 @@ def update_list(list_id):
         return {'errors': f"User is not the creator of list {list_id}."}, 401
     list_style = ListStyle.query.filter(ListStyle.list_id == list_id).first()
     list_items = ListItem.query.filter(ListItem.list_id == list_id).all()
-    form = EditListForm()
+    form = ListForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        list.title=form.data['title']
-        list.caption=form.data['caption']
-        form.populate_obj(list_style)
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+            image_url.filename = get_unique_filename(image_url.filename)
+            image_url_upload = upload_file_to_s3(image_url)
+
+        list.title = form.data['title']
+        list.caption = form.data['caption']
+        list_style.title_font = form.data['title_font']
+        list_style.title_size = form.data['title_size']
+        list_style.title_style = form.data['title_style']
+        list_style.title_weight = form.data['title_weight']
+        list_style.title_color = form.data['title_color']
+        list_style.title_align = form.data['title_align']
+        list_style.li_font = form.data['li_font']
+        list_style.li_size = form.data['li_size']
+        list_style.li_style = form.data['li_style']
+        list_style.li_weight = form.data['li_weight']
+        list_style.li_color = form.data['li_color']
+        list_style.li_marker = form.data['li_marker']
+        list_style.li_completed_style = form.data['li_completed_style']
+        list_style.li_completed_weight = form.data['li_completed_weight']
+        list_style.li_completed_color = form.data['li_completed_color']
+        list_style.li_completed_decoration = form.data['li_completed_decoration']
+        if form.data['is_changed']:
+            list_style.image_url = image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"
         db.session.commit()
         return list.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400

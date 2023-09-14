@@ -79,7 +79,17 @@ function ListTile({ listObj, listOnly }) {
             setErrors(data);
         } else {
             setComment("");
+            setErrors([]);
         }
+    };
+
+    const sortListItems = (listObj) => {
+        const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+        let items = listObj.list_items.slice();
+        items.sort((a, b) => {
+            return order.indexOf(a.id) - order.indexOf(b.id);
+        });
+        return items;
     };
 
     if (listOnly) {
@@ -88,7 +98,7 @@ function ListTile({ listObj, listOnly }) {
                 <div className="list-tile-content">
                     <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                     <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                        {listObj.list_items.map(li => (
+                        {(sortListItems(listObj)).map(li => (
                             <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                         ))}
                     </ul>

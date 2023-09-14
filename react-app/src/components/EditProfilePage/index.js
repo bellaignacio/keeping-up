@@ -15,26 +15,36 @@ function EditProfilePage() {
     const [imgUrl, setImgUrl] = useState(sessionUser.image_url);
     const [isPublic, setIsPublic] = useState(sessionUser.is_public);
     const [password, setPassword] = useState("");
+    const [isChanged, setIsChanged] = useState(false);
     const [errors, setErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/about" />;
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        const data = await dispatch(editProfile(
-            sessionUser.id,
-            username,
-            (name?.length > 0 ? name : null),
-            (bio?.length > 0 ? bio : null),
-            (imgUrl?.length > 0 ? imgUrl : "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"),
-            isPublic,
-            password
-        ));
+        const form = document.getElementById("edit-profile-form");
+        const formData = new FormData(form);
+        formData.append('is_changed', isChanged);
+        const data = await dispatch(editProfile(sessionUser.id, formData));
         if (data) {
             setErrors(data);
         } else {
             history.push(`/${sessionUser.id}`);
         }
+    };
+
+    const displayFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("edit-profile-upload-image");
+        img.src = URL.createObjectURL(e.target.files[0]);
+    };
+
+    const removeFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("edit-profile-upload-image");
+        img.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
+        const upload = document.getElementById("edit-profile-upload");
+        upload.value = "";
     };
 
     return (
@@ -62,6 +72,7 @@ function EditProfilePage() {
                             Username
                             <input
                                 type="text"
+                                name="username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 placeholder="Username"
@@ -75,6 +86,7 @@ function EditProfilePage() {
                             Name
                             <input
                                 type="text"
+                                name="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Name"
@@ -87,6 +99,7 @@ function EditProfilePage() {
                             Bio
                             <input
                                 type="text"
+                                name="bio"
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
                                 placeholder="Bio"
@@ -95,10 +108,44 @@ function EditProfilePage() {
                         <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
                     </div>
                     <label>
+                        Profile Image
+                        <input
+                            id="edit-profile-upload"
+                            type="file"
+                            name="image_url"
+                            accept=".png, .jpg, .jpeg"
+                            onChange={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(e.target.files[0]);
+                                await displayFile(e);
+                            }}
+                        />
+                    </label>
+                    <div>
+                        <img id="edit-profile-upload-image"
+                            src={imgUrl}
+                            onError={(e) => {
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
+                                e.onerror = null;
+                            }}
+                            alt="edit-profile-upload-preview"
+                        />
+                        <button
+                            id="edit-profile-upload-remove"
+                            className="delete"
+                            onClick={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(null);
+                                await removeFile(e);
+                            }}
+                        >&#x2715;</button>
+                    </div>
+                    <label>
                         Make Account Public?
                         <input
                             id="checkbox"
                             type="checkbox"
+                            name="is_public"
                             checked={isPublic}
                             onChange={(e) => setIsPublic(!isPublic)}
                         />
@@ -108,6 +155,7 @@ function EditProfilePage() {
                         Enter Password to Confirm Changes
                         <input
                             type="password"
+                            name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required

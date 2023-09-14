@@ -82,20 +82,10 @@ export const signUp = (formData) => async (dispatch) => {
 	}
 };
 
-export const editProfile = (userId, username, name, bio, imgUrl, isPublic, password) => async (dispatch) => {
+export const editProfile = (userId, formData) => async (dispatch) => {
 	const response = await fetch(`/api/users/${userId}`, {
 		method: "PUT",
-		headers: {
-			"Content-Type": "application/json"
-		},
-		body: JSON.stringify({
-			username,
-			name,
-			bio,
-			image_url: imgUrl ,
-			is_public: isPublic,
-			password
-		})
+		body: formData
 	});
 	if (response.ok) {
 		const data = await response.json();

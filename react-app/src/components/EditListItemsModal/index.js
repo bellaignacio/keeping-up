@@ -4,10 +4,19 @@ import { useModal } from '../../context/Modal';
 import * as listActions from "../../store/list";
 import './EditListItems.css';
 
+const sortListItems = (listObj) => {
+    const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+    let items = listObj.list_items.slice();
+    items.sort((a, b) => {
+        return order.indexOf(a.id) - order.indexOf(b.id);
+    });
+    return items;
+};
+
 function EditListItemsModal({ listId, setListItems }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const listItems = useSelector((state) => state.list.current.list_items);
+    const listItems = useSelector((state) => sortListItems(state.list.current));
     const [description, setDescription] = useState("");
     const [errors, setErrors] = useState([]);
 
@@ -34,6 +43,7 @@ function EditListItemsModal({ listId, setListItems }) {
             setErrors(data);
         } else {
             setDescription("");
+            setErrors([]);
         }
     };
 
