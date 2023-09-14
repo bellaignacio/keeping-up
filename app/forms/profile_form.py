@@ -30,4 +30,5 @@ class ProfileForm(FlaskForm):
     bio = StringField('bio', validators=[Optional(), Length(max=150, message='Bio cannot be longer than %(max)d characters.')])
     image_url = FileField('image_url', validators=[Optional(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     is_public = BooleanField('is_public')
+    is_changed = BooleanField('is_changed')
     password = StringField('password', validators=[DataRequired(message='Password is required.'), password_matches])

@@ -63,6 +63,7 @@ def update_user(user_id):
     form = ProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        print('*+*+*+*+*+*+*+*+**+*+', form.data['image_url'])
         if form.data['image_url']:
             image_url = form.data['image_url']
             image_url.filename = get_unique_filename(image_url.filename)
@@ -71,7 +72,8 @@ def update_user(user_id):
         user.username = form.data['username']
         user.name = form.data['name']
         user.bio = form.data['bio']
-        user.image_url = image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"
+        if form.data['is_changed']:
+            user.image_url = image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"
         user.is_public = form.data['is_public']
         db.session.commit()
         return user.to_dict()

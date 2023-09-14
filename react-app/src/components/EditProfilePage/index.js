@@ -24,7 +24,8 @@ function EditProfilePage() {
         e.preventDefault();
         const form = document.getElementById("edit-profile-form");
         const formData = new FormData(form);
-        const data= await dispatch(editProfile(sessionUser.id, formData));
+        formData.append('is_changed', isChanged);
+        const data = await dispatch(editProfile(sessionUser.id, formData));
         if (data) {
             setErrors(data);
         } else {
