@@ -21,6 +21,9 @@
 
 #search-input {
     width: 100%;
+    line-height: 25px;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 #search-container.search-open {
