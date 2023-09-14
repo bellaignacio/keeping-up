@@ -15,18 +15,23 @@ function EditProfilePage() {
     const [imgUrl, setImgUrl] = useState(sessionUser.image_url);
     const [isPublic, setIsPublic] = useState(sessionUser.is_public);
     const [password, setPassword] = useState("");
+    const [isChanged, setIsChanged] = useState(false);
     const [errors, setErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/about" />;
 
     const handleEdit = async (e) => {
         e.preventDefault();
+        // if (!isChanged) {
+        //     setImgUrl(sessionUser.image_url);
+        // }
         const data = await dispatch(editProfile(
             sessionUser.id,
             username,
             (name?.length > 0 ? name : null),
             (bio?.length > 0 ? bio : null),
-            (imgUrl?.length > 0 ? imgUrl : "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"),
+            (isChanged ? imgUrl : null),
+            // (imgUrl?.length > 0 ? imgUrl : "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"),
             isPublic,
             password
         ));
@@ -35,6 +40,20 @@ function EditProfilePage() {
         } else {
             history.push(`/${sessionUser.id}`);
         }
+    };
+
+    const displayFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("edit-profile-upload-image");
+        img.src = isChanged ? URL.createObjectURL(e.target.files[0]) : sessionUser.image_url;
+    };
+
+    const removeFile = (e) => {
+        e.preventDefault();
+        const img = document.getElementById("edit-profile-upload-image");
+        img.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
+        const upload = document.getElementById("edit-profile-upload");
+        upload.value = "";
     };
 
     return (
@@ -93,6 +112,39 @@ function EditProfilePage() {
                             />
                         </label>
                         <div className={`character-counter ${bio?.length > 150 ? 'character-counter-red' : ''}`}>{bio !== null ? bio.length : 0} / 150</div>
+                    </div>
+                    <label>
+                        Profile Image
+                        <input
+                            id="edit-profile-upload"
+                            type="file"
+                            name="image_url"
+                            accept=".png, .jpg, .jpeg"
+                            onChange={(e) => {
+                                setIsChanged(true);
+                                setImgUrl(e.target.files[0]);
+                                displayFile(e);
+                            }}
+                        />
+                    </label>
+                    <div>
+                        <img id="edit-profile-upload-image"
+                            src={imgUrl}
+                            onError={(e) => {
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png";
+                                e.onerror = null;
+                            }}
+                            alt="edit-profile-upload-preview"
+                        />
+                        <button
+                            id="edit-profile-upload-remove"
+                            className="delete"
+                            onClick={(e) => {
+                                setIsChanged(true);
+                                setImgUrl("https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png");
+                                removeFile(e);
+                            }}
+                        >&#x2715;</button>
                     </div>
                     <label>
                         Make Account Public?

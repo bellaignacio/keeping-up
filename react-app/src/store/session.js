@@ -92,7 +92,7 @@ export const editProfile = (userId, username, name, bio, imgUrl, isPublic, passw
 			username,
 			name,
 			bio,
-			image_url: imgUrl ,
+			image_url: imgUrl,
 			is_public: isPublic,
 			password
 		})

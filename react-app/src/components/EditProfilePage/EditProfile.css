@@ -45,3 +45,19 @@
 #edit-profile-form input#checkbox {
     width: min-content;
 }
+
+#edit-profile-upload-image {
+    width: 150px;
+    height: 150px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 15px double rgb(202, 202, 202);
+    margin: 10px 0;
+}
+
+#edit-profile-form #edit-profile-upload-remove {
+    position: absolute;
+    padding: 10px 0;
+    width: min-content;
+}
