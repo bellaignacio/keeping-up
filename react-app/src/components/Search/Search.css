@@ -1,0 +1,35 @@
+#search-container {
+    height: 100%;
+    width: 350px;
+    position: absolute;
+    z-index: 20;
+    left: 130px;
+    border: 1px solid rgb(202, 202, 202);
+    border-radius: 12px;
+    background: white;
+    padding: 0 20px;
+}
+
+#search-title {
+    font-family: 'Cookie', cursive;
+    font-size: 35px;
+    padding: 5px 0;
+}
+
+#search-input {
+    width: 100%;
+}
+
+#search-container.search-open {
+    transition: width 0.3s ease-in-out;
+}
+
+#search-container.search-closed {
+    transition: width 0.3s ease-in-out;
+    width: 0px;
+    padding: 0;
+}
+
+#search-container.search-closed > * {
+    visibility: hidden;
+}

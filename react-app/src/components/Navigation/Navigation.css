@@ -132,6 +132,24 @@
   width: 50px;
 }
 
+.nav-icon.search-open {
+  width: 40px;
+}
+
+.nav-icon-label.search-open {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+#profile-dropdown.search-open {
+  left: 65px;
+}
+
+#search-container.search-open {
+  left: 70px;
+}
+
 @media screen and (max-width: 1000px) {
 
   .nav-icon {
@@ -148,6 +166,10 @@
     left: 65px;
   }
 
+  #search-container {
+    left: 70px;
+  }
+
 }
 
 @media screen and (min-width: 1001px) {
@@ -156,7 +178,8 @@
     justify-content: flex-start;
   }
 
-  #keeping-up-icon img {
+  #keeping-up-icon img:not(.search-open) {
+    transition: display 0.3s ease-in-out;
     display: none;
     width: 0;
     height: 0;
