@@ -2,10 +2,11 @@
     height: 100%;
     width: 350px;
     position: absolute;
-    z-index: 20;
+    z-index: 5;
     left: 130px;
     border: 1px solid rgb(202, 202, 202);
-    border-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
     background: white;
     padding: 0 20px;
 }
