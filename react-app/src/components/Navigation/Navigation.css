@@ -76,13 +76,12 @@
 
 #profile-dropdown {
   position: absolute;
-  /* z-index: 20; */
   border: 1px solid rgb(202, 202, 202);
   border-radius: 12px;
   bottom: 15px;
   left: 130px;
   padding: 8px;
-  background-color: white;
+  background: white;
   width: 150px;
 }
 

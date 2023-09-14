@@ -29,7 +29,6 @@ function Navigation() {
 						document.querySelectorAll(".nav-icon-label").forEach(el => el.classList.toggle("search-open"));
 						document.getElementById("profile-dropdown").classList.toggle("search-open");
 						document.querySelector("#keeping-up-icon img").classList.toggle("search-open");
-
 					}}>
 						<div><i className="fas fa-search"></i></div>
 						<div className="nav-icon-label">Search</div>
