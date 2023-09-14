@@ -43,6 +43,7 @@ function EditListItemsModal({ listId, setListItems }) {
             setErrors(data);
         } else {
             setDescription("");
+            setErrors([]);
         }
     };
 

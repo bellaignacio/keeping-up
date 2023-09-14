@@ -114,6 +114,7 @@ function ListPage() {
             setErrors(data);
         } else {
             setComment("");
+            setErrors([]);
             document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
     };

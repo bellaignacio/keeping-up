@@ -79,6 +79,7 @@ function ListTile({ listObj, listOnly }) {
             setErrors(data);
         } else {
             setComment("");
+            setErrors([]);
         }
     };
 
