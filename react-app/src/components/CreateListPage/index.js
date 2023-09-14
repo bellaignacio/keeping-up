@@ -111,7 +111,6 @@ function CreateListPage({ listObj, isEdit }) {
                                     displayFile(e);
                                 }}
                             />
-
                         </label>
                         <div>
                             <img id="list-upload-image"

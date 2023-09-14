@@ -80,7 +80,7 @@ def create_list():
 
         list_style = ListStyle(
             list_id=new_list.id,
-            image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
+            image_url=image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png",
             title_font=form.data['title_font'],
             title_size=form.data['title_size'],
             title_style=form.data['title_style'],
