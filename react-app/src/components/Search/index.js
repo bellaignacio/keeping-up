@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import * as sessionActions from "../../store/session";
 import './Search.css';
 
 function Search() {
     const dispatch = useDispatch();
+    const history = useHistory();
     const items = useSelector((state) => [...Object.values(state.session.lists), ...Object.values(state.session.users)])
     const [searchInput, setSearchInput] = useState("");
 
@@ -35,7 +37,16 @@ function Search() {
             {searchInput.length > 0 && <div id="search-result-container">
                 {searchResults.map(obj => {
                     return (
-                        <div className="search-result">
+                        <div className="search-result" onClick={() => {
+                            if (obj.username) history.push(`/${obj.id}`);
+                            else history.push(`/lists/${obj.id}`);
+                            document.getElementById("search-container").classList.add("search-closed");
+                            document.getElementById("search-container").classList.remove("search-open");
+                            document.querySelectorAll(".nav-icon").forEach(el => el.classList.remove("search-open"));
+                            document.querySelectorAll(".nav-icon-label").forEach(el => el.classList.remove("search-open"));
+                            document.getElementById("profile-dropdown").classList.remove("search-open");
+                            document.querySelector("#keeping-up-icon img").classList.remove("search-open");
+                        }}>
                             <div className="search-result-image">
                                 <img
                                     src={obj.image_url || obj.list_style.image_url}
