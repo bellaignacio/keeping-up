@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from app.models import db, User
 from app.forms import ProfileForm
 from app.api.auth_routes import validation_errors_to_error_messages
+from app.api.aws_helpers import get_unique_filename, upload_file_to_s3
 
 user_routes = Blueprint('users', __name__)
 
@@ -62,10 +63,15 @@ def update_user(user_id):
     form = ProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        if form.data['image_url']:
+            image_url = form.data['image_url']
+            image_url.filename = get_unique_filename(image_url.filename)
+            image_url_upload = upload_file_to_s3(image_url)
+
         user.username = form.data['username']
         user.name = form.data['name']
         user.bio = form.data['bio']
-        user.image_url = form.data['image_url']
+        user.image_url = image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"
         user.is_public = form.data['is_public']
         db.session.commit()
         return user.to_dict()

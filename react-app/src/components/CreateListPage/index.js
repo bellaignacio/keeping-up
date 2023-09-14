@@ -98,34 +98,39 @@ function CreateListPage({ listObj, isEdit }) {
                             required
                         />
                     </label>
-                    {!isEdit && <label>
-                        Background Image
-                        <input
-                            id="list-upload"
-                            type="file"
-                            name="image_url"
-                            accept=".png, .jpg, .jpeg"
-                            onChange={(e) => {
-                                setImgUrl(e.target.files[0]);
-                                displayFile(e);
-                            }}
-                        />
-                        <img id="list-upload-image"
-                            src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
-                            onError={(e) => {
-                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
-                                e.onerror = null;
-                            }}
-                            alt="list-upload-preview"
-                        />
-                        <button
-                            id="list-upload-remove"
-                            className="delete"
-                            onClick={(e) => {
-                                setImgUrl(null);
-                                removeFile(e);
-                            }}>&#x2715;</button>
-                    </label>}
+                    {!isEdit && <>
+                        <label>
+                            Background Image
+                            <input
+                                id="list-upload"
+                                type="file"
+                                name="image_url"
+                                accept=".png, .jpg, .jpeg"
+                                onChange={(e) => {
+                                    setImgUrl(e.target.files[0]);
+                                    displayFile(e);
+                                }}
+                            />
+
+                        </label>
+                        <div>
+                            <img id="list-upload-image"
+                                src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
+                                onError={(e) => {
+                                    e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
+                                    e.onerror = null;
+                                }}
+                                alt="list-upload-preview"
+                            />
+                            <button
+                                id="list-upload-remove"
+                                className="delete"
+                                onClick={(e) => {
+                                    setImgUrl(null);
+                                    removeFile(e);
+                                }}>&#x2715;</button>
+                        </div>
+                    </>}
 
                     <br></br>
 

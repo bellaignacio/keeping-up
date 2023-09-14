@@ -22,19 +22,9 @@ function EditProfilePage() {
 
     const handleEdit = async (e) => {
         e.preventDefault();
-        // if (!isChanged) {
-        //     setImgUrl(sessionUser.image_url);
-        // }
-        const data = await dispatch(editProfile(
-            sessionUser.id,
-            username,
-            (name?.length > 0 ? name : null),
-            (bio?.length > 0 ? bio : null),
-            (isChanged ? imgUrl : null),
-            // (imgUrl?.length > 0 ? imgUrl : "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"),
-            isPublic,
-            password
-        ));
+        const form = document.getElementById("edit-profile-form");
+        const formData = new FormData(form);
+        const data= await dispatch(editProfile(sessionUser.id, formData));
         if (data) {
             setErrors(data);
         } else {
@@ -45,7 +35,7 @@ function EditProfilePage() {
     const displayFile = (e) => {
         e.preventDefault();
         const img = document.getElementById("edit-profile-upload-image");
-        img.src = isChanged ? URL.createObjectURL(e.target.files[0]) : sessionUser.image_url;
+        img.src = URL.createObjectURL(e.target.files[0]);
     };
 
     const removeFile = (e) => {
@@ -81,6 +71,7 @@ function EditProfilePage() {
                             Username
                             <input
                                 type="text"
+                                name="username"
                                 value={username}
                                 onChange={(e) => setUsername(e.target.value)}
                                 placeholder="Username"
@@ -94,6 +85,7 @@ function EditProfilePage() {
                             Name
                             <input
                                 type="text"
+                                name="name"
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder="Name"
@@ -106,6 +98,7 @@ function EditProfilePage() {
                             Bio
                             <input
                                 type="text"
+                                name="bio"
                                 value={bio}
                                 onChange={(e) => setBio(e.target.value)}
                                 placeholder="Bio"
@@ -120,10 +113,10 @@ function EditProfilePage() {
                             type="file"
                             name="image_url"
                             accept=".png, .jpg, .jpeg"
-                            onChange={(e) => {
-                                setIsChanged(true);
-                                setImgUrl(e.target.files[0]);
-                                displayFile(e);
+                            onChange={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(e.target.files[0]);
+                                await displayFile(e);
                             }}
                         />
                     </label>
@@ -139,10 +132,10 @@ function EditProfilePage() {
                         <button
                             id="edit-profile-upload-remove"
                             className="delete"
-                            onClick={(e) => {
-                                setIsChanged(true);
-                                setImgUrl("https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png");
-                                removeFile(e);
+                            onClick={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(null);
+                                await removeFile(e);
                             }}
                         >&#x2715;</button>
                     </div>
@@ -151,6 +144,7 @@ function EditProfilePage() {
                         <input
                             id="checkbox"
                             type="checkbox"
+                            name="is_public"
                             checked={isPublic}
                             onChange={(e) => setIsPublic(!isPublic)}
                         />
@@ -160,6 +154,7 @@ function EditProfilePage() {
                         Enter Password to Confirm Changes
                         <input
                             type="password"
+                            name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
