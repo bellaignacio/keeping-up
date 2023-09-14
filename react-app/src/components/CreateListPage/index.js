@@ -31,6 +31,7 @@ function CreateListPage({ listObj, isEdit }) {
     const [liCompWeight, setLiCompWeight] = useState(isEdit ? listObj.list_style.li_completed_weight : "normal");
     const [liCompColor, setLiCompColor] = useState(isEdit ? listObj.list_style.li_completed_color : "#000000");
     const [liCompDecor, setLiCompDecor] = useState(isEdit ? listObj.list_style.li_completed_decoration : "#FF0000");
+    const [isChanged, setIsChanged] = useState(false);
     const [errors, setErrors] = useState([]);
 
     if (!sessionUser) return <Redirect to="/about" />;
@@ -38,19 +39,21 @@ function CreateListPage({ listObj, isEdit }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let data;
+        const form = document.getElementById("create-list-form");
+        const formData = new FormData(form);
+        formData.append("is_changed", isChanged);
+        formData.append("list_items", listItems);
+        formData.append("title_style", titleStyle);
+        formData.append("title_weight", titleWeight);
+        formData.append("title_align", titleAlign);
+        formData.append("li_style", liStyle);
+        formData.append("li_weight", liWeight);
+        formData.append("li_marker", liMarker);
+        formData.append("li_completed_style", liCompStyle);
+        formData.append("li_completed_weight", liCompWeight);
         if (isEdit) {
-            data = await dispatch(listActions.editList(listObj.id, title, caption, listItems, imgUrl, titleFont, titleSize, titleStyle, titleWeight, titleColor, titleAlign, liFont, liSize, liStyle, liWeight, liColor, liMarker, liCompStyle, liCompWeight, liCompColor, liCompDecor));
+            data = await dispatch(listActions.editList(listObj.id, formData));
         } else {
-            const form = document.getElementById("create-list-form");
-            const formData = new FormData(form);
-            formData.append("title_style", titleStyle);
-            formData.append("title_weight", titleWeight);
-            formData.append("title_align", titleAlign);
-            formData.append("li_style", liStyle);
-            formData.append("li_weight", liWeight);
-            formData.append("li_marker", liMarker);
-            formData.append("li_completed_style", liCompStyle);
-            formData.append("li_completed_weight", liCompWeight);
             data = await dispatch(listActions.createList(formData));
         }
         if (data?.id) {
@@ -98,38 +101,39 @@ function CreateListPage({ listObj, isEdit }) {
                             required
                         />
                     </label>
-                    {!isEdit && <>
-                        <label>
-                            Background Image
-                            <input
-                                id="list-upload"
-                                type="file"
-                                name="image_url"
-                                accept=".png, .jpg, .jpeg"
-                                onChange={(e) => {
-                                    setImgUrl(e.target.files[0]);
-                                    displayFile(e);
-                                }}
-                            />
-                        </label>
-                        <div>
-                            <img id="list-upload-image"
-                                src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
-                                onError={(e) => {
-                                    e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
-                                    e.onerror = null;
-                                }}
-                                alt="list-upload-preview"
-                            />
-                            <button
-                                id="list-upload-remove"
-                                className="delete"
-                                onClick={(e) => {
-                                    setImgUrl(null);
-                                    removeFile(e);
-                                }}>&#x2715;</button>
-                        </div>
-                    </>}
+                    <label>
+                        Background Image
+                        <input
+                            id="list-upload"
+                            type="file"
+                            name="image_url"
+                            accept=".png, .jpg, .jpeg"
+                            onChange={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(e.target.files[0]);
+                                await displayFile(e);
+                            }}
+                        />
+                    </label>
+                    <div>
+                        <img id="list-upload-image"
+                            src={isEdit ? imgUrl : "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png"}
+                            onError={(e) => {
+                                e.target.src = "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/torn-paper.png";
+                                e.onerror = null;
+                            }}
+                            alt="list-upload-preview"
+                        />
+                        <button
+                            id="list-upload-remove"
+                            className="delete"
+                            onClick={async (e) => {
+                                await setIsChanged(true);
+                                await setImgUrl(null);
+                                await removeFile(e);
+                            }}
+                        >&#x2715;</button>
+                    </div>
 
                     <br></br>
 

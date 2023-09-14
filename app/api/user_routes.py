@@ -63,7 +63,6 @@ def update_user(user_id):
     form = ProfileForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        print('*+*+*+*+*+*+*+*+**+*+', form.data['image_url'])
         if form.data['image_url']:
             image_url = form.data['image_url']
             image_url.filename = get_unique_filename(image_url.filename)
