@@ -5,7 +5,7 @@ import * as listActions from "../../store/list";
 import './EditListItems.css';
 
 const sortListItems = (listObj) => {
-    const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+    const order = listObj.order.split(",").map((stringIdx) => Number(stringIdx));
     let items = listObj.list_items.slice();
     items.sort((a, b) => {
         return order.indexOf(a.id) - order.indexOf(b.id);
@@ -55,7 +55,7 @@ function EditListItemsModal({ listId, setListItems }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         await dispatch(listActions.getList(listId))
-            .then(() => setListItems((listItems.map(li => li.description)).join('\n')))
+            .then(() => setListItems((listItems.map((li) => li.description)).join('\n')))
             .then(() => closeModal());
     };
 
@@ -68,7 +68,7 @@ function EditListItemsModal({ listId, setListItems }) {
                         <li className="error-message" key={idx}>{error}</li>
                     ))}
                 </ul>}
-                {listItems.map(liObj => {
+                {listItems.map((liObj) => {
                     return (
                         <div key={liObj.id} className="list-item-container">
                             <input

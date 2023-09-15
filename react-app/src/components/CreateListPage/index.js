@@ -8,7 +8,7 @@ import * as listActions from "../../store/list";
 import './CreateList.css';
 
 const sortListItems = (listObj) => {
-    const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+    const order = listObj.order.split(",").map((stringIdx) => Number(stringIdx));
     let items = listObj.list_items.slice();
     items.sort((a, b) => {
         return order.indexOf(a.id) - order.indexOf(b.id);
@@ -22,7 +22,7 @@ function CreateListPage({ listObj, isEdit }) {
     const sessionUser = useSelector((state) => state.session.user);
     const [title, setTitle] = useState(isEdit ? listObj.title : "")
     const [caption, setCaption] = useState(isEdit ? listObj.caption : "")
-    const [listItems, setListItems] = useState(isEdit ? ((sortListItems(listObj)).map(li => li.description)).join('\n') : "")
+    const [listItems, setListItems] = useState(isEdit ? ((sortListItems(listObj)).map((li) => li.description)).join('\n') : "")
     const [imgUrl, setImgUrl] = useState(isEdit ? listObj.list_style.image_url : null);
     const [titleFont, setTitleFont] = useState(isEdit ? listObj.list_style.title_font : "Arial");
     const [titleSize, setTitleSize] = useState(isEdit ? listObj.list_style.title_size : "14pt");

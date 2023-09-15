@@ -122,9 +122,9 @@ function ProfilePage() {
                             })()}
                             <div id="list-tile-container">
                                 {(profileUser.is_public || sessionFollowings.hasOwnProperty(profileUser.id) || profileUser.id === sessionUser.id) &&
-                                    (profileLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                                    (profileLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map((listObj) => {
                                         return (
-                                            <ListTile listOnly={true} listObj={listObj} />
+                                            <ListTile key={listObj.id} listOnly={true} listObj={listObj} />
                                         );
                                     })
                                 }

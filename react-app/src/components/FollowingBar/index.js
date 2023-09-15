@@ -6,7 +6,7 @@ function FollowingBar({ users }) {
 
     return (users.length > 0 &&
         <div id="following-bar-container">
-            {users.map(user => {
+            {users.map((user) => {
                 return (
                     <div key={user.id} onClick={() => history.push(`/${user.id}`)} >
                         <img className="following-image" src={user.image_url} alt={user.username}
