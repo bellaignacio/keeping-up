@@ -68,6 +68,15 @@ function Search() {
         return wordDistances.map((obj) => obj.object);
     };
 
+    const closeSearch = () => {
+        document.getElementById("search-container").classList.add("search-closed");
+        document.getElementById("search-container").classList.remove("search-open");
+        document.querySelectorAll(".nav-icon").forEach((el) => el.classList.remove("search-open"));
+        document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
+        document.getElementById("profile-dropdown").classList.remove("search-open");
+        document.querySelector("#keeping-up-icon img").classList.remove("search-open");
+    };
+
     return (
         <div id="search-container" className="search-closed">
             <h2 id="search-title">Search</h2>
@@ -84,12 +93,7 @@ function Search() {
                         <div key={idx} className="search-result" onClick={() => {
                             if (obj.username) history.push(`/${obj.id}`);
                             else history.push(`/lists/${obj.id}`);
-                            document.getElementById("search-container").classList.add("search-closed");
-                            document.getElementById("search-container").classList.remove("search-open");
-                            document.querySelectorAll(".nav-icon").forEach((el) => el.classList.remove("search-open"));
-                            document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
-                            document.getElementById("profile-dropdown").classList.remove("search-open");
-                            document.querySelector("#keeping-up-icon img").classList.remove("search-open");
+                            closeSearch();
                         }}>
                             <div className="search-result-image">
                                 <img

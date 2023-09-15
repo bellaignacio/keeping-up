@@ -11,15 +11,20 @@ function ProfileButton({ sessionUser }) {
   const history = useHistory();
   const [showMenu, setShowMenu] = useState(false);
 
-  const openMenu = () => {
-    setShowMenu(true);
+  const closeSearch = () => {
     document.getElementById("search-container").classList.add("search-closed");
     document.getElementById("search-container").classList.remove("search-open");
     document.querySelectorAll(".nav-icon").forEach((el) => el.classList.remove("search-open"));
-		document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
-		document.getElementById("profile-dropdown").classList.remove("search-open");
-		document.querySelector("#keeping-up-icon img").classList.remove("search-open");
+    document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
+    document.getElementById("profile-dropdown").classList.remove("search-open");
+    document.querySelector("#keeping-up-icon img").classList.remove("search-open");
   };
+
+  const openMenu = () => {
+    closeSearch();
+    setShowMenu(true);
+  };
+
   const closeMenu = () => setShowMenu(false);
 
   useEffect(() => {
