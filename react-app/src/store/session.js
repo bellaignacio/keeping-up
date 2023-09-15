@@ -147,6 +147,20 @@ export const getAllUsers = () => async (dispatch) => {
 	}
 };
 
+const normalizeLists = (listsList) => {
+    return listsList.reduce((result, listObj) => {
+        result[listObj.id] = listObj;
+        return result;
+    }, {});
+};
+
+const normalizeUsers = (usersList) => {
+    return usersList.reduce((result, userObj) => {
+        result[userObj.id] = userObj;
+        return result;
+    }, {});
+};
+
 export default function sessionReducer(state = initialState, action) {
 	let newState;
 	switch (action.type) {
@@ -154,10 +168,10 @@ export default function sessionReducer(state = initialState, action) {
 			newState = { ...state, user: action.payload };
 			return newState;
 		case SET_LISTS:
-			newState = { ...state, lists: action.payload };
+			newState = { ...state, lists: normalizeLists(action.payload) };
 			return newState;
 		case SET_USERS:
-			newState = { ...state, users: action.payload };
+			newState = { ...state, users: normalizeUsers(action.payload) };
 			return newState;
 		case REMOVE_USER:
 			newState = { ...initialState };

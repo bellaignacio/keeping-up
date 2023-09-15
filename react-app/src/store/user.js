@@ -164,12 +164,12 @@ export const removeFollower = (userId) => async (dispatch) => {
     }
 };
 
-function normalizeUsers(usersList) {
+const normalizeUsers = (usersList) => {
     return usersList.reduce((result, userObj) => {
         result[userObj.id] = userObj;
         return result;
     }, {});
-}
+};
 
 export default function userReducer(state = initialState, action) {
     let newState;

@@ -15,7 +15,7 @@ function Search() {
         dispatch(sessionActions.getAllUsers());
     }, [dispatch]);
 
-    const searchResults = items?.filter(obj => {
+    const searchResults = items?.filter((obj) => {
         return (
             obj.title?.toLowerCase().includes(searchInput.toLowerCase()) ||
             obj.caption?.toLowerCase().includes(searchInput.toLowerCase()) ||
@@ -24,7 +24,7 @@ function Search() {
         );
     });
 
-    function levenshteinDistance(a, b) {
+    const levenshteinDistance = (a, b) => {
         // Create a 2D array to store the distances
         let distances = new Array(a.length + 1);
         for (let i = 0; i <= a.length; i++) {
@@ -52,11 +52,11 @@ function Search() {
 
         // Return the final distance
         return distances[a.length][b.length];
-    }
+    };
 
-    function sortBySimilarity(objList, singleWord) {
+    const sortBySimilarity = (objList, singleWord) => {
         // Create an array of objects to store the words and their distances
-        let wordDistances = objList.map(obj => ({
+        let wordDistances = objList.map((obj) => ({
             object: obj,
             distance: levenshteinDistance(obj.username || obj.name || obj.title || obj.caption, singleWord)
         }));
@@ -65,8 +65,8 @@ function Search() {
         wordDistances.sort((a, b) => a.distance - b.distance);
 
         // Return the sorted list of words
-        return wordDistances.map(obj => obj.object);
-    }
+        return wordDistances.map((obj) => obj.object);
+    };
 
     return (
         <div id="search-container" className="search-closed">
@@ -79,15 +79,15 @@ function Search() {
                 onChange={(e) => setSearchInput(e.target.value)}
             />
             {searchInput.length > 0 && <div id="search-result-container">
-                {sortBySimilarity(searchResults, searchInput).map(obj => {
+                {sortBySimilarity(searchResults, searchInput).map((obj, idx) => {
                     return (
-                        <div className="search-result" onClick={() => {
+                        <div key={idx} className="search-result" onClick={() => {
                             if (obj.username) history.push(`/${obj.id}`);
                             else history.push(`/lists/${obj.id}`);
                             document.getElementById("search-container").classList.add("search-closed");
                             document.getElementById("search-container").classList.remove("search-open");
-                            document.querySelectorAll(".nav-icon").forEach(el => el.classList.remove("search-open"));
-                            document.querySelectorAll(".nav-icon-label").forEach(el => el.classList.remove("search-open"));
+                            document.querySelectorAll(".nav-icon").forEach((el) => el.classList.remove("search-open"));
+                            document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
                             document.getElementById("profile-dropdown").classList.remove("search-open");
                             document.querySelector("#keeping-up-icon img").classList.remove("search-open");
                         }}>

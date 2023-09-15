@@ -319,12 +319,12 @@ export const removeListItem = (listItemId) => async (dispatch) => {
     }
 };
 
-function normalizeLists(listsList) {
+const normalizeLists = (listsList) => {
     return listsList.reduce((result, listObj) => {
         result[listObj.id] = listObj;
         return result;
     }, {});
-}
+};
 
 export default function listReducer(state = initialState, action) {
     let newState;

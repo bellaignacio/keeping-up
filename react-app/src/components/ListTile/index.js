@@ -11,18 +11,18 @@ function ListTile({ listObj, listOnly }) {
     const dispatch = useDispatch();
     const sessionUser = useSelector((state) => state.session.user);
     const [comment, setComment] = useState("");
-    const [isLiked, setIsLiked] = useState((listObj.likes.filter(likeObj => likeObj.user_id === sessionUser.id)).length > 0);
+    const [isLiked, setIsLiked] = useState((listObj.likes.filter((likeObj) => likeObj.user_id === sessionUser.id)).length > 0);
     const [errors, setErrors] = useState([]);
 
-    function listStyleSettings(list_style) {
+    const listStyleSettings = (list_style) => {
         return {
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`,
         };
-    }
+    };
 
-    function titleStyleSettings(list_style) {
+    const titleStyleSettings = (list_style) => {
         return {
             margin: "5px",
             fontFamily: list_style.title_font,
@@ -32,9 +32,9 @@ function ListTile({ listObj, listOnly }) {
             color: list_style.title_color,
             textAlign: list_style.title_align
         };
-    }
+    };
 
-    function liStyleSettings(list_style) {
+    const liStyleSettings = (list_style) => {
         return {
             height: "75%",
             display: "flex",
@@ -47,16 +47,16 @@ function ListTile({ listObj, listOnly }) {
             color: list_style.li_color,
             textAlign: "left"
         };
-    }
+    };
 
-    function liCompStyleSettings(list_style) {
+    const liCompStyleSettings = (list_style) => {
         return {
             fontStyle: list_style.li_completed_style,
             fontWeight: list_style.li_completed_weight,
             color: list_style.li_completed_color,
             textDecoration: `solid line-through ${list_style.li_completed_decoration} 3px`
         };
-    }
+    };
 
     const handleLike = async () => {
         let data;
@@ -84,7 +84,7 @@ function ListTile({ listObj, listOnly }) {
     };
 
     const sortListItems = (listObj) => {
-        const order = listObj.order.split(",").map(stringIdx => Number(stringIdx));
+        const order = listObj.order.split(",").map((stringIdx) => Number(stringIdx));
         let items = listObj.list_items.slice();
         items.sort((a, b) => {
             return order.indexOf(a.id) - order.indexOf(b.id);
@@ -98,7 +98,7 @@ function ListTile({ listObj, listOnly }) {
                 <div className="list-tile-content">
                     <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                     <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                        {(sortListItems(listObj)).map(li => (
+                        {(sortListItems(listObj)).map((li) => (
                             <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                         ))}
                     </ul>
@@ -121,7 +121,7 @@ function ListTile({ listObj, listOnly }) {
                     <div className="list-tile-content">
                         <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                         <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                            {listObj.list_items.map(li => (
+                            {listObj.list_items.map((li) => (
                                 <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                             ))}
                         </ul>
@@ -138,7 +138,7 @@ function ListTile({ listObj, listOnly }) {
                     </div>
                     {listObj.total_likes > 0 && <OpenModalButton
                         buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
-                        modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)} />}
+                        modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map((like) => like.user)} />}
                     />}
                     <div className="list-tile-caption"><span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}</div>
                     {listObj.total_comments > 0 && <NavLink className="list-tile-view-comments" to={`/lists/${listObj.id}`}>View {listObj.total_comments > 1 && 'all'} {listObj.total_comments} comment{listObj.total_comments > 1 && 's'}</NavLink>}

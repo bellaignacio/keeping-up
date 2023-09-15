@@ -8,7 +8,7 @@ import './Navigation.css';
 
 function Navigation() {
 	const history = useHistory();
-	const sessionUser = useSelector(state => state.session.user);
+	const sessionUser = useSelector((state) => state.session.user);
 
 	if (sessionUser) {
 		return (
@@ -25,8 +25,8 @@ function Navigation() {
 					<div title="Search" id="search-icon" className="nav-icon" onClick={() => {
 						document.getElementById("search-container").classList.toggle("search-closed");
 						document.getElementById("search-container").classList.toggle("search-open");
-						document.querySelectorAll(".nav-icon").forEach(el => el.classList.toggle("search-open"));
-						document.querySelectorAll(".nav-icon-label").forEach(el => el.classList.toggle("search-open"));
+						document.querySelectorAll(".nav-icon").forEach((el) => el.classList.toggle("search-open"));
+						document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.toggle("search-open"));
 						document.getElementById("profile-dropdown").classList.toggle("search-open");
 						document.querySelector("#keeping-up-icon img").classList.toggle("search-open");
 					}}>

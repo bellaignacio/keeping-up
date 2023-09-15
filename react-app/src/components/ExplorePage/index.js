@@ -32,7 +32,7 @@ function ExplorePage() {
         );
     }
 
-    const fisherYatesSort = arr => {
+    const fisherYatesSort = (arr) => {
         for (let i = arr.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -46,14 +46,14 @@ function ExplorePage() {
             {isPublicListsLoaded ?
                 <div id="explore-container">
                     <div id="list-tile-container">
-                        {/* {(publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                        {/* {(publicLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map((listObj) => {
                             return (
-                                <ListTile listOnly={false} listObj={listObj} />
+                                <ListTile key={listObj.id} listOnly={false} listObj={listObj} />
                             )
                         })} */}
-                        {(fisherYatesSort(publicLists)).map(listObj => {
+                        {(fisherYatesSort(publicLists)).map((listObj) => {
                             return (
-                                <ListTile listOnly={false} listObj={listObj} />
+                                <ListTile key={listObj.id} listOnly={false} listObj={listObj} />
                             )
                         })}
                     </div>

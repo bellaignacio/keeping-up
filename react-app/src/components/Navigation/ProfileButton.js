@@ -15,8 +15,8 @@ function ProfileButton({ sessionUser }) {
     setShowMenu(true);
     document.getElementById("search-container").classList.add("search-closed");
     document.getElementById("search-container").classList.remove("search-open");
-    document.querySelectorAll(".nav-icon").forEach(el => el.classList.remove("search-open"));
-		document.querySelectorAll(".nav-icon-label").forEach(el => el.classList.remove("search-open"));
+    document.querySelectorAll(".nav-icon").forEach((el) => el.classList.remove("search-open"));
+		document.querySelectorAll(".nav-icon-label").forEach((el) => el.classList.remove("search-open"));
 		document.getElementById("profile-dropdown").classList.remove("search-open");
 		document.querySelector("#keeping-up-icon img").classList.remove("search-open");
   };
