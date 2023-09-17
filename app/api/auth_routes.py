@@ -72,7 +72,7 @@ def sign_up():
             username=form.data['username'],
             name=form.data['name'],
             bio=form.data['bio'],
-            image_url=image_url_upload['url'] if form.data['image_url'] else form.data['image_url'],
+            image_url=image_url_upload['url'] if form.data['image_url'] else "https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png",
             is_public=form.data['is_public'],
             password=form.data['password']
         )

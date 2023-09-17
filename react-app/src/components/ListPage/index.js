@@ -28,7 +28,7 @@ function ListPage() {
     }, [dispatch, listId]);
 
     useEffect(() => {
-        setIsLiked((listObj.likes?.filter(likeObj => likeObj.user_id === sessionUser.id))?.length > 0);
+        setIsLiked((listObj.likes?.filter((likeObj) => likeObj.user_id === sessionUser.id))?.length > 0);
     }, [listObj, sessionUser])
 
     if (!sessionUser) return <Redirect to="/about" />;
@@ -42,15 +42,15 @@ function ListPage() {
         );
     }
 
-    function listStyleSettings(list_style) {
+    const listStyleSettings = (list_style) => {
         return {
             backgroundPosition: "center",
             backgroundSize: "cover",
             backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`,
         };
-    }
+    };
 
-    function titleStyleSettings(list_style) {
+    const titleStyleSettings = (list_style) => {
         return {
             margin: "5px",
             fontFamily: list_style.title_font,
@@ -60,9 +60,9 @@ function ListPage() {
             color: list_style.title_color,
             textAlign: list_style.title_align
         };
-    }
+    };
 
-    function liStyleSettings(list_style) {
+    const liStyleSettings = (list_style) => {
         return {
             height: "75%",
             display: "flex",
@@ -75,16 +75,16 @@ function ListPage() {
             color: list_style.li_color,
             textAlign: "left"
         };
-    }
+    };
 
-    function liCompStyleSettings(list_style) {
+    const liCompStyleSettings = (list_style) => {
         return {
             fontStyle: list_style.li_completed_style,
             fontWeight: list_style.li_completed_weight,
             color: list_style.li_completed_color,
             textDecoration: `solid line-through ${list_style.li_completed_decoration} 3px`
         };
-    }
+    };
 
     const handleLiToggle = async (li) => {
         const data = await dispatch(listActions.editListItem(li.id, li.description, !li.is_complete));
@@ -114,8 +114,18 @@ function ListPage() {
             setErrors(data);
         } else {
             setComment("");
+            setErrors([]);
             document.getElementsByClassName("list-tile-comments")[0].scrollTop = document.getElementsByClassName("list-tile-comments")[0].scrollHeight;
         }
+    };
+
+    const sortListItems = (listObj) => {
+        const order = listObj.order.split(",").map((stringIdx) => Number(stringIdx));
+        let items = listObj.list_items.slice();
+        items.sort((a, b) => {
+            return order.indexOf(a.id) - order.indexOf(b.id);
+        });
+        return items;
     };
 
     return (
@@ -127,7 +137,7 @@ function ListPage() {
                         <div className="list-tile-content">
                             <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
                             <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
-                                {listObj.list_items.map(li => (
+                                {(sortListItems(listObj)).map((li) => (
                                     <li className={listObj.user_id === sessionUser.id ? 'clickable-li' : ''} key={li.id} onClick={listObj.user_id === sessionUser.id ? () => handleLiToggle(li) : null} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
                                 ))}
                             </ul>
@@ -161,7 +171,7 @@ function ListPage() {
                                     <span className="list-tile-user-name" onClick={() => history.push(`/${listObj.user.id}`)}>{listObj.user.username}</span> {listObj.caption}
                                 </div>
                             </div>
-                            {(listObj.comments.sort((e1, e2) => new Date(e1.created_at).getTime() - new Date(e2.created_at).getTime())).map(commentObj => {
+                            {(listObj.comments.sort((e1, e2) => new Date(e1.created_at).getTime() - new Date(e2.created_at).getTime())).map((commentObj) => {
                                 return (
                                     <div key={commentObj.id} className="list-tile-comment">
                                         <img className="list-tile-user-image" src={commentObj.user.image_url} alt={commentObj.user.username}
@@ -192,7 +202,7 @@ function ListPage() {
                             </div>
                             {listObj.total_likes > 0 && <OpenModalButton
                                 buttonText={`${listObj.total_likes} like${listObj.total_likes > 1 ? 's' : ''}`}
-                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map(like => like.user)} />}
+                                modalComponent={<UserListModal isSessionUser={false} title="Likes" users={listObj.likes.map((like) => like.user)} />}
                             />}
                         </div>
                         <div className="list-tile-comment-form-container">

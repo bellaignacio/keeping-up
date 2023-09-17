@@ -36,6 +36,7 @@ input, textarea {
     font-size: 14px;
     text-overflow: ellipsis;
     background-color: rgb(250, 250, 250);
+    resize: none;
 }
 
 button {

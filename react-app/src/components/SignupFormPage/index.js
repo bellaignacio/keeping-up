@@ -119,6 +119,8 @@ function SignupFormPage() {
                 displayFile(e);
               }}
             />
+          </label>
+          <div>
             <img id="signup-upload-image"
               src={"https://keeping-up-aa-ai.s3.us-west-1.amazonaws.com/default.png"}
               onError={(e) => {
@@ -133,8 +135,8 @@ function SignupFormPage() {
               onClick={(e) => {
                 setImgUrl(null);
                 removeFile(e);
-            }}>&#x2715;</button>
-          </label>
+              }}>&#x2715;</button>
+          </div>
           <label>
             Make Account Public?
             <input

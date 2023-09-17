@@ -41,9 +41,9 @@ function HomePage() {
                 <div id="home-container">
                     <FollowingBar users={followings} />
                     <div id="list-tile-container">
-                        {(followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map(listObj => {
+                        {(followingsLists.sort((e1, e2) => new Date(e2.created_at).getTime() - new Date(e1.created_at).getTime())).map((listObj) => {
                             return (
-                                <ListTile listOnly={false} listObj={listObj} />
+                                <ListTile key={listObj.id} listOnly={false} listObj={listObj} />
                             )
                         })}
                     </div>
