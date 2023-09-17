@@ -24,9 +24,11 @@ def l(list_id):
 @login_required
 def all_lists():
     """
-    Query for all lists and returns them in a list of list dictionaries
+    Query for all public lists and returns them in a list of list dictionaries
     """
-    lists = List.query.all()
+    users = User.query.filter((User.is_public == True) | (User.id == current_user.id)).all()
+    public_ids = [user.id for user in users]
+    lists = List.query.filter(List.user_id.in_(public_ids)).all()
     return {'lists': [l.to_dict() for l in lists]}
 
 
