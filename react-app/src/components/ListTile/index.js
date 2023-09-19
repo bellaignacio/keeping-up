@@ -18,7 +18,7 @@ function ListTile({ listObj, listOnly }) {
         return {
             backgroundPosition: "center",
             backgroundSize: "cover",
-            backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`,
+            backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`
         };
     };
 

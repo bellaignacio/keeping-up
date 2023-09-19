@@ -79,7 +79,7 @@ const listStyleSettings = (list_style) => {
     return {
         backgroundPosition: "center",
         backgroundSize: "cover",
-        backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`,
+        backgroundImage: `linear-gradient(to bottom, rgba(169, 169, 169, 0.8), rgba(211, 211, 211, 0.8)), url(${list_style.image_url})`
     };
 };
 
@@ -107,7 +107,7 @@ const liStyleSettings = (list_style) => {
         fontWeight: list_style.li_weight,
         color: list_style.li_color,
         textAlign: "left"
-	};
+    };
 };
 
 const liCompStyleSettings = (list_style) => {
@@ -123,12 +123,12 @@ const liCompStyleSettings = (list_style) => {
 ### Inline Styling
 
 ```javascript
-<div className="list-tile" style={listStyleSettings(listObj.list_style)} onClick={() => history.push(`/lists/${listObj.id}`)}>
+<div className="list-tile" style={listStyleSettings(listObj.list_style)} onClick={() => history.push(`/lists/${listObj.id}`)} >
     <div className="list-tile-content">
-    	<p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
+        <p style={titleStyleSettings(listObj.list_style)}>{listObj.title}</p>
         <ul id={`list-${listObj.id}`} style={liStyleSettings(listObj.list_style)}>
             {listObj.list_items.map((li) => (
-				<li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
+                <li key={li.id} style={li.is_complete ? liCompStyleSettings(listObj.list_style) : null}>{li.description}</li>
             ))}
         </ul>
     </div>
