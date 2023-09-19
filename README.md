@@ -43,7 +43,7 @@ The goal of sharing these lists among your friends, family, or the public (a.k.a
 ## Site Screenshots
 
 ### Sign Up Page
-![signup](https://github.com/bellaignacio/keeping-up/assets/82012357/55ae2083-c418-4cc0-aebb-222786aebbf1)
+![Sign Up Page](/react-app/public/signup.gif)
 
 ### Login Page
 ![Login Page](/react-app/public/login.png)
@@ -52,13 +52,13 @@ The goal of sharing these lists among your friends, family, or the public (a.k.a
 ![Home Page](/react-app/public/home.gif)
 
 ### Search Feature
-![search](https://github.com/bellaignacio/keeping-up/assets/82012357/16195bc4-fc43-4365-8e6a-452d1391741f)
+![Search Feature](/react-app/public/search.gif)
 
 ### Profile Page
 ![Profile Page](/react-app/public/profile.png)
 
 ### List Page
-![list](https://github.com/bellaignacio/keeping-up/assets/82012357/1195aba6-f1ed-44a8-8147-08988598d35b)
+![List Page](/react-app/public/list.gif)
 
 ### Create List Page
 ![Create List Page](/react-app/public/create_list.gif)
