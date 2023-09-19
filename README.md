@@ -43,14 +43,28 @@ The goal of sharing these lists among your friends, family, or the public (a.k.a
 ## Site Screenshots
 
 ### Sign Up Page
+![Sign Up Page](/react-app/public/signup.gif)
+
 ### Login Page
-### Home & Explore Page
+![Login Page](/react-app/public/login.png)
+
+### Home Page
+![Home Page](/react-app/public/home.gif)
+
 ### Search Feature
+![Search Feature](/react-app/public/search.gif)
+
 ### Profile Page
-### Edit Profile Page
+![Profile Page](/react-app/public/profile.png)
+
 ### List Page
+![List Page](/react-app/public/list.gif)
+
 ### Create List Page
+![Create List Page](/react-app/public/create_list.gif)
+
 ### Edit List Page
+![Edit List Page](/react-app/public/edit_list.gif)
 
 ## Implementation Details
 
