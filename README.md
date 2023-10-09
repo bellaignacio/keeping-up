@@ -23,19 +23,19 @@ The goal of sharing these lists among your friends, family, or the public (a.k.a
  1. Clone this GitHub repository [bellaignacio/keeping-up](https://github.com/bellaignacio/keeping-up) onto your local machine.
  2. Set up your own AWS S3 Bucket.
  3. Create a `.env` file inside the root directory with the proper settings for your development environment. See the `example.env` file.
- 4. Inside the root directory, run the following command to install Python dependencies
+ 4. Inside the root directory, run the following command to install Python dependencies.
 	```
 	pipenv install -r requirements.txt
 	```
- 5. Inside the react-app directory, run the following command to install JavaScript dependencies
+ 5. Inside the react-app directory, run the following command to install JavaScript dependencies.
 	```
 	 npm install
 	```
- 6. Inside the root directory, run the following command to create and seed the database, and start up the backend server
+ 6. Inside the root directory, run the following command to create and seed the database, and start up the backend server.
 	```
 	pipenv shell && flask db init && flask db migrate && flask db upgrade && flask seed all && flask run -p 3000
 	```
-7. Inside the react-app directory, run the following command to start up the frontend server
+7. Inside the react-app directory, run the following command to start up the frontend server.
 	```
 	npm start
 	```
