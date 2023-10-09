@@ -29,7 +29,7 @@ The goal of sharing these lists among your friends, family, or the public (a.k.a
 	```
  5. Inside the react-app directory, run the following command to install JavaScript dependencies.
 	```
-	 npm install
+	npm install
 	```
  6. Inside the root directory, run the following command to create and seed the database, and start up the backend server.
 	```
